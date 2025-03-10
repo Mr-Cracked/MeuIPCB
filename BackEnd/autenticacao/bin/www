@@ -1,5 +1,14 @@
 #!/usr/bin/env node
 
+
+/**
+ * Connect to DB
+ */
+const database = require('../database/basedados');
+database()
+
+
+
 /**
  * Module dependencies.
  */
