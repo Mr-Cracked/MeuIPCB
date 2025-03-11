@@ -6,8 +6,7 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://user:amarelo123@meuipc
 const connectDB = async () => {
     try {
         await mongoose.connect(MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
+            dbName: "MeuIPCB",
         });
         console.log("✅ Conectado à base de dados!");
     } catch (err) {
