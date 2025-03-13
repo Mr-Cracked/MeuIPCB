@@ -113,7 +113,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 16,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "04:00",
+                    "limite_faltas": "30:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -123,7 +126,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 14,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -133,7 +139,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 12,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "06:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -143,7 +152,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 18,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "30:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -153,7 +165,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 18,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "06:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -163,7 +178,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 12,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "04:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -173,7 +191,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 13,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "05:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -183,7 +204,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 14,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -193,7 +217,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 14,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -203,7 +230,10 @@
                     "ano_letivo": "2022-23",
                     "nota": 18,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 }
             ],
             "2º Ano": [
@@ -215,7 +245,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 19,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "09:00",
+                    "limite_faltas": "15:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -225,7 +258,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 15,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "08:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -235,7 +271,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 14,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -245,7 +284,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 17,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "2:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -255,7 +297,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 15,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "25:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "10:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -265,7 +310,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 13,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "10:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -275,7 +323,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 17,
                     "qualitativa": 6.5,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "10:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -285,7 +336,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 17,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "12:00",
+                    "limite_faltas": "30:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -295,7 +349,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 16,
                     "qualitativa": 6.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "32:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -305,7 +362,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 15,
                     "qualitativa": 6.5,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "0:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -315,7 +375,10 @@
                     "ano_letivo": "2023-24",
                     "nota": 13,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "06:00",
+                    "limite_faltas": "20:00",
+                    "faltas_justificadas": "00:00"
                 }
             ],
             "3º Ano": [
@@ -327,7 +390,10 @@
                     "ano_letivo": "2024-25",
                     "nota": 19,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "18:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -337,7 +403,10 @@
                     "ano_letivo": "2024-25",
                     "nota": 14,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "04:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -347,7 +416,10 @@
                     "ano_letivo": "2024-25",
                     "nota": 17,
                     "qualitativa": 4.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "14:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -357,7 +429,10 @@
                     "ano_letivo": "2024-25",
                     "nota": 17,
                     "qualitativa": 4.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "14:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -367,7 +442,10 @@
                     "ano_letivo": "2024-25",
                     "nota": 15,
                     "qualitativa": 7.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "00:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "1º Semestre",
@@ -377,7 +455,10 @@
                     "ano_letivo": "2024-25",
                     "nota": 16,
                     "qualitativa": 5.0,
-                    "situacao": "Aprovado"
+                    "situacao": "Aprovado",
+                    "faltas_dadas": "12:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -385,7 +466,10 @@
                     "UC": "Big Data",
                     "ECTS": 4,
                     "ano_letivo": "2024-25",
-                    "situacao": "Inscrito"
+                    "situacao": "Inscrito",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -393,7 +477,10 @@
                     "UC": "Cibersegurança",
                     "ECTS": 6,
                     "ano_letivo": "2024-25",
-                    "situacao": "Inscrito"
+                    "situacao": "Inscrito",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -401,7 +488,10 @@
                     "UC": "Computação em Nuvem",
                     "ECTS": 5,
                     "ano_letivo": "2024-25",
-                    "situacao": "Inscrito"
+                    "situacao": "Inscrito",
+                    "faltas_dadas": "04:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -409,7 +499,10 @@
                     "UC": "Gestão de Projetos em Informática",
                     "ECTS": 6,
                     "ano_letivo": "2024-25",
-                    "situacao": "Inscrito"
+                    "situacao": "Inscrito",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "25:00",
+                    "faltas_justificadas": "00:00"
                 },
                 {
                     "periodo": "2º Semestre",
@@ -417,7 +510,10 @@
                     "UC": "Projeto II",
                     "ECTS": 8,
                     "ano_letivo": "2024-25",
-                    "situacao": "Inscrito"
+                    "situacao": "Inscrito",
+                    "faltas_dadas": "00:00",
+                    "limite_faltas": "00:00",
+                    "faltas_justificadas": "00:00"
                 }
             ]
         },

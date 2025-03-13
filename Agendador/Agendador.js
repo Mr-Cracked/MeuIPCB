@@ -70,8 +70,11 @@ const importData = async () => {
             // Extrair os dados da turma e horário
             const TurmaData = {
                 nome: data.horario.turma_identificadora,
+                curso: data.perfil.curso,
+                ano: data.percurso_academico[data.percurso_academico.length-1].ano_curricular,
                 horario: Array.isArray(data.horario.dias) ? data.horario.dias : []
             };
+
 
             console.log(`📌 Processando turma: ${TurmaData.nome}`);
 
@@ -79,7 +82,7 @@ const importData = async () => {
 
             // Inserir ou atualizar turma no MongoDB
             const resultTurma = await Turma.findOneAndUpdate(
-                { nome: TurmaData.nome },
+                { nome: TurmaData.nome, curso: TurmaData.curso  ,ano: TurmaData.ano},
                 TurmaData,
                 { upsert: true, new: true }
             );
