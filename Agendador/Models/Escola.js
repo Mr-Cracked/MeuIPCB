@@ -4,11 +4,11 @@ const EscolaSchema = new mongoose.Schema({
     nome: { type: String, required: true, unique: true },
     calendarios: [
         {
-            nome: String,    // Nome do ficheiro
+            fileId: { type: mongoose.Schema.Types.ObjectId, ref: 'files' },
             data_download: { type: Date, default: Date.now }
         }
     ]
 }, { collection: "Escola" });
 
-const Escola = mongoose.model("Escola", EscolaSchema);
+const Escola = mongoose.models.Escola || mongoose.model("Escola", EscolaSchema);
 module.exports = Escola;

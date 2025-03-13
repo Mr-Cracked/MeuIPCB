@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const AlunoSchema = new mongoose.Schema({
     numero_aluno: { type: String, required: true, unique: true },
     nome: { type: String, required: true },
+    email: { type: String, required: true },
     curso: { type: String, required: true },
     instituicao: { type: String, required: true },
     grau_conferido: { type: String, required: true },

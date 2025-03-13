@@ -3,12 +3,16 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const Aluno = require("./models/Aluno");
 const Turma = require("./models/Turma");
+const { scrapeCalendarios } = require("./scraper");
+
+
 
 require("dotenv").config();
 
 const importData = async () => {
     try {
-        await database(); // Conectar à base de dados
+        // Conectar à base de dados
+        await database();
         console.log("🔹 Conexão estabelecida. Lendo o JSON...");
 
         // Ler o JSON
@@ -32,6 +36,7 @@ const importData = async () => {
             const AlunoData = {
                 numero_aluno: data.perfil.numero_aluno,
                 nome: data.perfil.nome,
+                email: data.perfil.email,
                 curso: data.perfil.curso,
                 instituicao: data.perfil.instituicao,
                 grau_conferido: data.perfil.grau_conferido,
@@ -83,6 +88,15 @@ const importData = async () => {
         }
 
         console.log("✅ Todos os alunos e turmas foram inseridos/atualizados com sucesso!");
+
+        // CALENDARIOS DAS ESCOLAS
+        await scrapeCalendarios();
+
+        await scrapeCalendarios();
+
+        await scrapeCalendarios();
+
+
 
     } catch (error) {
         console.error("❌ Erro ao importar dados:", error);
