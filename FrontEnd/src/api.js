@@ -18,3 +18,14 @@ export const getUserProfile = async () => {
         return null;
     }
 };
+
+export const isAuthenticated = async () => {
+    try{
+
+        let reponse = await axios.get(`${API_URL}/users/profile`, { withCredentials: true });
+        return reponse.data.isAuthenticated === true;
+    }catch (error){
+        console.error("Erro ao obter perfil:", error);
+        return false;
+    }
+};

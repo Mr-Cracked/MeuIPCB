@@ -1,524 +1,531 @@
-[
-    {
-        "perfil": {
-            "instituicao": "Escola Superior de Tecnologia de Castelo Branco",
-            "numero_aluno": "20220393",
-            "nome": "GUILHERME SERRASQUEIRO ROQUE",
-            "email": "guilherme.roque@ipcbcampus.pt",
+{
+    "alunos": [
+        {
+            "perfil": {
+                "instituicao": "Escola Superior de Tecnologia de Castelo Branco",
+                "numero_aluno": "20220393",
+                "nome": "GUILHERME SERRASQUEIRO ROQUE",
+                "email": "guilherme.roque@ipcbcampus.pt",
+                "curso": "Licenciatura em Engenharia Informática",
+                "grau_conferido": "Licenciado (1º ciclo)",
+                "situacao": "Normal"
+            },
+            "percurso_academico": [
+                {
+                    "ano_letivo": "2022-23",
+                    "plano_estudos": "Plano 2022/2023",
+                    "ramo": "Tronco comum",
+                    "ano_curricular": 1,
+                    "data_inscricao": "13/09/2022",
+                    "ciclo": "1º ciclo",
+                    "regime_estudo": "Tempo inteiro",
+                    "regime_frequencia": "Diurno",
+                    "regime_aluno": "Normal",
+                    "em_mobilidade": "Não",
+                    "tipo_aluno": "Normal",
+                    "situacao_aluno": "Normal"
+                },
+                {
+                    "ano_letivo": "2023-24",
+                    "plano_estudos": "Plano 2022/2023",
+                    "ramo": "Tronco comum",
+                    "ano_curricular": 2,
+                    "data_inscricao": "01/09/2023",
+                    "ciclo": "1º ciclo",
+                    "regime_estudo": "Tempo inteiro",
+                    "regime_frequencia": "Diurno",
+                    "regime_aluno": "Normal",
+                    "em_mobilidade": "Não",
+                    "tipo_aluno": "Normal",
+                    "situacao_aluno": "Normal"
+                },
+                {
+                    "ano_letivo": "2024-25",
+                    "plano_estudos": "Plano 2022/2023",
+                    "ramo": "Tronco comum",
+                    "ano_curricular": 3,
+                    "data_inscricao": "03/09/2024",
+                    "ciclo": "1º ciclo",
+                    "regime_estudo": "Tempo inteiro",
+                    "regime_frequencia": "Diurno",
+                    "regime_aluno": "Normal",
+                    "em_mobilidade": "Não",
+                    "tipo_aluno": "Normal",
+                    "situacao_aluno": "Normal"
+                }
+            ],
+            "totais_por_ano_letivo": {
+                "2022-23": {
+                    "ano_curricular": 1,
+                    "turma_unica": true,
+                    "unidades_curriculares": {
+                        "total": 11,
+                        "inscritas": 0,
+                        "aprovadas": 11,
+                        "reprovadas": 0
+                    },
+                    "ECTS": {
+                        "total": 60,
+                        "inscritos": 0,
+                        "aprovados": 60,
+                        "reprovados": 0
+                    }
+                },
+                "2023-24": {
+                    "ano_curricular": 2,
+                    "turma_unica": true,
+                    "unidades_curriculares": {
+                        "total": 11,
+                        "inscritas": 0,
+                        "aprovadas": 11,
+                        "reprovadas": 0
+                    },
+                    "ECTS": {
+                        "total": 60,
+                        "inscritos": 0,
+                        "aprovados": 60,
+                        "reprovados": 0
+                    }
+                },
+                "2024-25": {
+                    "ano_curricular": 3,
+                    "turma_unica": true,
+                    "unidades_curriculares": {
+                        "total": 11,
+                        "inscritas": 5,
+                        "aprovadas": 6,
+                        "reprovadas": 0
+                    },
+                    "ECTS": {
+                        "total": 60,
+                        "inscritos": 30,
+                        "aprovados": 30,
+                        "reprovados": 0
+                    }
+                }
+            },
+            "plano_de_estudos": {
+                "1º Ano": [
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119001",
+                        "UC": "Introdução à Programação",
+                        "ECTS": 6,
+                        "ano_letivo": "2022-23",
+                        "nota": 16,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "04:00",
+                        "limite_faltas": "30:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119004",
+                        "UC": "Matemática para a Informática",
+                        "ECTS": 6,
+                        "ano_letivo": "2022-23",
+                        "nota": 14,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119002",
+                        "UC": "Probabilidades e Estatística para Engenharia Informática",
+                        "ECTS": 6,
+                        "ano_letivo": "2022-23",
+                        "nota": 12,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "06:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119005",
+                        "UC": "Sistemas Lógicos",
+                        "ECTS": 6,
+                        "ano_letivo": "2022-23",
+                        "nota": 18,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "30:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119003",
+                        "UC": "Álgebra Linear e Geometria Analítica",
+                        "ECTS": 6,
+                        "ano_letivo": "2022-23",
+                        "nota": 18,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "06:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119010",
+                        "UC": "Algoritmos e Estruturas de Dados",
+                        "ECTS": 5,
+                        "ano_letivo": "2022-23",
+                        "nota": 12,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "04:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119007",
+                        "UC": "Bases de Dados",
+                        "ECTS": 5,
+                        "ano_letivo": "2022-23",
+                        "nota": 13,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "05:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119008",
+                        "UC": "Interfaces e Tecnologias Web",
+                        "ECTS": 5,
+                        "ano_letivo": "2022-23",
+                        "nota": 14,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119011",
+                        "UC": "Interfaces Pessoa-Máquina",
+                        "ECTS": 5,
+                        "ano_letivo": "2022-23",
+                        "nota": 14,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119009",
+                        "UC": "Introdução à Teoria da Computação",
+                        "ECTS": 5,
+                        "ano_letivo": "2022-23",
+                        "nota": 18,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    }
+                ],
+                "2º Ano": [
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119012",
+                        "UC": "Arquitetura de Sistemas Computacionais",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 19,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "09:00",
+                        "limite_faltas": "15:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119014",
+                        "UC": "Complementos de Bases de Dados",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 15,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "08:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119016",
+                        "UC": "Inteligência Artificial",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 14,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119017",
+                        "UC": "Modelação de Sistemas Informáticos",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 17,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "2:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119013",
+                        "UC": "Padrões e Desenho de Software",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 15,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "25:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "10:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119015",
+                        "UC": "Redes de Comunicação de Dados",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 13,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "10:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119020",
+                        "UC": "Arquitetura Internet",
+                        "ECTS": 6.5,
+                        "ano_letivo": "2023-24",
+                        "nota": 17,
+                        "qualitativa": 6.5,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "10:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119021",
+                        "UC": "Engenharia de Software",
+                        "ECTS": 6,
+                        "ano_letivo": "2023-24",
+                        "nota": 17,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "12:00",
+                        "limite_faltas": "30:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119019",
+                        "UC": "Informática Móvel",
+                        "ECTS": 6,
+                        "ano_letivo": "2023-24",
+                        "nota": 16,
+                        "qualitativa": 6.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "32:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119018",
+                        "UC": "Linguagens de Programação para a Internet",
+                        "ECTS": 6.5,
+                        "ano_letivo": "2023-24",
+                        "nota": 15,
+                        "qualitativa": 6.5,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "0:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119022",
+                        "UC": "Sistemas Operativos",
+                        "ECTS": 5,
+                        "ano_letivo": "2023-24",
+                        "nota": 13,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "06:00",
+                        "limite_faltas": "20:00",
+                        "faltas_justificadas": "00:00"
+                    }
+                ],
+                "3º Ano": [
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119028",
+                        "UC": "Aplicações Distribuídas",
+                        "ECTS": 5,
+                        "ano_letivo": "2024-25",
+                        "nota": 19,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "18:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119023",
+                        "UC": "Ciência de Dados",
+                        "ECTS": 5,
+                        "ano_letivo": "2024-25",
+                        "nota": 14,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "04:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119027",
+                        "UC": "Engenharia de Sistemas de Informação",
+                        "ECTS": 4,
+                        "ano_letivo": "2024-25",
+                        "nota": 17,
+                        "qualitativa": 4.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "14:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119025",
+                        "UC": "Internet das Coisas",
+                        "ECTS": 4,
+                        "ano_letivo": "2024-25",
+                        "nota": 17,
+                        "qualitativa": 4.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "14:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119024",
+                        "UC": "Projeto I",
+                        "ECTS": 7,
+                        "ano_letivo": "2024-25",
+                        "nota": 15,
+                        "qualitativa": 7.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "00:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "1º Semestre",
+                        "codigo": "9119026",
+                        "UC": "Tecnologias Internet",
+                        "ECTS": 5,
+                        "ano_letivo": "2024-25",
+                        "nota": 16,
+                        "qualitativa": 5.0,
+                        "situacao": "Aprovado",
+                        "faltas_dadas": "12:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119032",
+                        "UC": "Big Data",
+                        "ECTS": 4,
+                        "ano_letivo": "2024-25",
+                        "situacao": "Inscrito",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119030",
+                        "UC": "Cibersegurança",
+                        "ECTS": 6,
+                        "ano_letivo": "2024-25",
+                        "situacao": "Inscrito",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119031",
+                        "UC": "Computação em Nuvem",
+                        "ECTS": 5,
+                        "ano_letivo": "2024-25",
+                        "situacao": "Inscrito",
+                        "faltas_dadas": "04:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119033",
+                        "UC": "Gestão de Projetos em Informática",
+                        "ECTS": 6,
+                        "ano_letivo": "2024-25",
+                        "situacao": "Inscrito",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "25:00",
+                        "faltas_justificadas": "00:00"
+                    },
+                    {
+                        "periodo": "2º Semestre",
+                        "codigo": "9119029",
+                        "UC": "Projeto II",
+                        "ECTS": 8,
+                        "ano_letivo": "2024-25",
+                        "situacao": "Inscrito",
+                        "faltas_dadas": "00:00",
+                        "limite_faltas": "00:00",
+                        "faltas_justificadas": "00:00"
+                    }
+                ]
+            }
+        }
+    ],
+    "horarios": [
+        {
+            "ano": "3º",
+            "semestre": "1º Semestre",
+            "turma": "PLINF2",
             "curso": "Licenciatura em Engenharia Informática",
-            "grau_conferido": "Licenciado (1º ciclo)",
-            "situacao": "Normal"
-        },
-        "percurso_academico": [
-            {
-                "ano_letivo": "2022-23",
-                "plano_estudos": "Plano 2022/2023",
-                "ramo": "Tronco comum",
-                "ano_curricular": 1,
-                "data_inscricao": "13/09/2022",
-                "ciclo": "1º ciclo",
-                "regime_estudo": "Tempo inteiro",
-                "regime_frequencia": "Diurno",
-                "regime_aluno": "Normal",
-                "em_mobilidade": "Não",
-                "tipo_aluno": "Normal",
-                "situacao_aluno": "Normal"
-            },
-            {
-                "ano_letivo": "2023-24",
-                "plano_estudos": "Plano 2022/2023",
-                "ramo": "Tronco comum",
-                "ano_curricular": 2,
-                "data_inscricao": "01/09/2023",
-                "ciclo": "1º ciclo",
-                "regime_estudo": "Tempo inteiro",
-                "regime_frequencia": "Diurno",
-                "regime_aluno": "Normal",
-                "em_mobilidade": "Não",
-                "tipo_aluno": "Normal",
-                "situacao_aluno": "Normal"
-            },
-            {
-                "ano_letivo": "2024-25",
-                "plano_estudos": "Plano 2022/2023",
-                "ramo": "Tronco comum",
-                "ano_curricular": 3,
-                "data_inscricao": "03/09/2024",
-                "ciclo": "1º ciclo",
-                "regime_estudo": "Tempo inteiro",
-                "regime_frequencia": "Diurno",
-                "regime_aluno": "Normal",
-                "em_mobilidade": "Não",
-                "tipo_aluno": "Normal",
-                "situacao_aluno": "Normal"
-            }
-        ],
-        "totais_por_ano_letivo": {
-            "2022-23": {
-                "ano_curricular": 1,
-                "turma_unica": true,
-                "unidades_curriculares": {
-                    "total": 11,
-                    "inscritas": 0,
-                    "aprovadas": 11,
-                    "reprovadas": 0
-                },
-                "ECTS": {
-                    "total": 60,
-                    "inscritos": 0,
-                    "aprovados": 60,
-                    "reprovados": 0
-                }
-            },
-            "2023-24": {
-                "ano_curricular": 2,
-                "turma_unica": true,
-                "unidades_curriculares": {
-                    "total": 11,
-                    "inscritas": 0,
-                    "aprovadas": 11,
-                    "reprovadas": 0
-                },
-                "ECTS": {
-                    "total": 60,
-                    "inscritos": 0,
-                    "aprovados": 60,
-                    "reprovados": 0
-                }
-            },
-            "2024-25": {
-                "ano_curricular": 3,
-                "turma_unica": true,
-                "unidades_curriculares": {
-                    "total": 11,
-                    "inscritas": 5,
-                    "aprovadas": 6,
-                    "reprovadas": 0
-                },
-                "ECTS": {
-                    "total": 60,
-                    "inscritos": 30,
-                    "aprovados": 30,
-                    "reprovados": 0
-                }
-            }
-        },
-        "plano_de_estudos": {
-            "1º Ano": [
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119001",
-                    "UC": "Introdução à Programação",
-                    "ECTS": 6,
-                    "ano_letivo": "2022-23",
-                    "nota": 16,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "04:00",
-                    "limite_faltas": "30:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119004",
-                    "UC": "Matemática para a Informática",
-                    "ECTS": 6,
-                    "ano_letivo": "2022-23",
-                    "nota": 14,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119002",
-                    "UC": "Probabilidades e Estatística para Engenharia Informática",
-                    "ECTS": 6,
-                    "ano_letivo": "2022-23",
-                    "nota": 12,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "06:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119005",
-                    "UC": "Sistemas Lógicos",
-                    "ECTS": 6,
-                    "ano_letivo": "2022-23",
-                    "nota": 18,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "30:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119003",
-                    "UC": "Álgebra Linear e Geometria Analítica",
-                    "ECTS": 6,
-                    "ano_letivo": "2022-23",
-                    "nota": 18,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "06:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119010",
-                    "UC": "Algoritmos e Estruturas de Dados",
-                    "ECTS": 5,
-                    "ano_letivo": "2022-23",
-                    "nota": 12,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "04:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119007",
-                    "UC": "Bases de Dados",
-                    "ECTS": 5,
-                    "ano_letivo": "2022-23",
-                    "nota": 13,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "05:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119008",
-                    "UC": "Interfaces e Tecnologias Web",
-                    "ECTS": 5,
-                    "ano_letivo": "2022-23",
-                    "nota": 14,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119011",
-                    "UC": "Interfaces Pessoa-Máquina",
-                    "ECTS": 5,
-                    "ano_letivo": "2022-23",
-                    "nota": 14,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119009",
-                    "UC": "Introdução à Teoria da Computação",
-                    "ECTS": 5,
-                    "ano_letivo": "2022-23",
-                    "nota": 18,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                }
-            ],
-            "2º Ano": [
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119012",
-                    "UC": "Arquitetura de Sistemas Computacionais",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 19,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "09:00",
-                    "limite_faltas": "15:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119014",
-                    "UC": "Complementos de Bases de Dados",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 15,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "08:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119016",
-                    "UC": "Inteligência Artificial",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 14,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119017",
-                    "UC": "Modelação de Sistemas Informáticos",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 17,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "2:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119013",
-                    "UC": "Padrões e Desenho de Software",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 15,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "25:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "10:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119015",
-                    "UC": "Redes de Comunicação de Dados",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 13,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "10:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119020",
-                    "UC": "Arquitetura Internet",
-                    "ECTS": 6.5,
-                    "ano_letivo": "2023-24",
-                    "nota": 17,
-                    "qualitativa": 6.5,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "10:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119021",
-                    "UC": "Engenharia de Software",
-                    "ECTS": 6,
-                    "ano_letivo": "2023-24",
-                    "nota": 17,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "12:00",
-                    "limite_faltas": "30:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119019",
-                    "UC": "Informática Móvel",
-                    "ECTS": 6,
-                    "ano_letivo": "2023-24",
-                    "nota": 16,
-                    "qualitativa": 6.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "32:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119018",
-                    "UC": "Linguagens de Programação para a Internet",
-                    "ECTS": 6.5,
-                    "ano_letivo": "2023-24",
-                    "nota": 15,
-                    "qualitativa": 6.5,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "0:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119022",
-                    "UC": "Sistemas Operativos",
-                    "ECTS": 5,
-                    "ano_letivo": "2023-24",
-                    "nota": 13,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "06:00",
-                    "limite_faltas": "20:00",
-                    "faltas_justificadas": "00:00"
-                }
-            ],
-            "3º Ano": [
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119028",
-                    "UC": "Aplicações Distribuídas",
-                    "ECTS": 5,
-                    "ano_letivo": "2024-25",
-                    "nota": 19,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "18:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119023",
-                    "UC": "Ciência de Dados",
-                    "ECTS": 5,
-                    "ano_letivo": "2024-25",
-                    "nota": 14,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "04:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119027",
-                    "UC": "Engenharia de Sistemas de Informação",
-                    "ECTS": 4,
-                    "ano_letivo": "2024-25",
-                    "nota": 17,
-                    "qualitativa": 4.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "14:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119025",
-                    "UC": "Internet das Coisas",
-                    "ECTS": 4,
-                    "ano_letivo": "2024-25",
-                    "nota": 17,
-                    "qualitativa": 4.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "14:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119024",
-                    "UC": "Projeto I",
-                    "ECTS": 7,
-                    "ano_letivo": "2024-25",
-                    "nota": 15,
-                    "qualitativa": 7.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "00:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "1º Semestre",
-                    "codigo": "9119026",
-                    "UC": "Tecnologias Internet",
-                    "ECTS": 5,
-                    "ano_letivo": "2024-25",
-                    "nota": 16,
-                    "qualitativa": 5.0,
-                    "situacao": "Aprovado",
-                    "faltas_dadas": "12:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119032",
-                    "UC": "Big Data",
-                    "ECTS": 4,
-                    "ano_letivo": "2024-25",
-                    "situacao": "Inscrito",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119030",
-                    "UC": "Cibersegurança",
-                    "ECTS": 6,
-                    "ano_letivo": "2024-25",
-                    "situacao": "Inscrito",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119031",
-                    "UC": "Computação em Nuvem",
-                    "ECTS": 5,
-                    "ano_letivo": "2024-25",
-                    "situacao": "Inscrito",
-                    "faltas_dadas": "04:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119033",
-                    "UC": "Gestão de Projetos em Informática",
-                    "ECTS": 6,
-                    "ano_letivo": "2024-25",
-                    "situacao": "Inscrito",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "25:00",
-                    "faltas_justificadas": "00:00"
-                },
-                {
-                    "periodo": "2º Semestre",
-                    "codigo": "9119029",
-                    "UC": "Projeto II",
-                    "ECTS": 8,
-                    "ano_letivo": "2024-25",
-                    "situacao": "Inscrito",
-                    "faltas_dadas": "00:00",
-                    "limite_faltas": "00:00",
-                    "faltas_justificadas": "00:00"
-                }
-            ]
-        },
-        "horario": {
-            "turma_identificadora": "PLINF2",
             "dias": [
                 {
                     "dia": "Segunda-feira",
@@ -609,6 +616,110 @@
                     ]
                 }
             ]
+        },
+        {
+            "ano": "3º",
+            "semestre": "1º Semestre",
+            "turma": "PLINF1",
+            "curso": "Licenciatura em Engenharia Informática",
+            "dias": [
+                {
+                    "dia": "Segunda-feira",
+                    "aulas": [
+                        {
+                            "disciplina": "Internet das Coisas",
+                            "hora_inicio": "13:30",
+                            "hora_fim": "15:00",
+                            "sala": "Auditório Bloco A - EST",
+                            "turma": "TPINF"
+                        },
+                        {
+                            "disciplina": "Tecnologias Internet",
+                            "hora_inicio": "16:30",
+                            "hora_fim": "18:00",
+                            "sala": "SA.2",
+                            "turma": "PLINF1"
+                        }
+                    ]
+                },
+                {
+                    "dia": "Terça-feira",
+                    "aulas": [
+                        {
+                            "disciplina": "Engenharia de Sistemas de Informação",
+                            "hora_inicio": "09:30",
+                            "hora_fim": "11:00",
+                            "sala": "SD.5 EST",
+                            "turma": "TPINF"
+                        },
+                        {
+                            "disciplina": "Aplicações Distribuídas",
+                            "hora_inicio": "11:30",
+                            "hora_fim": "13:00",
+                            "sala": "SA.2",
+                            "turma": "PLINF1"
+                        }
+                    ]
+                },
+                {
+                    "dia": "Quarta-feira",
+                    "aulas": [
+                        {
+                            "disciplina": "Engenharia de Sistemas de Informação",
+                            "hora_inicio": "09:30",
+                            "hora_fim": "11:00",
+                            "sala": "SA.7",
+                            "turma": "PLINF1"
+                        },
+                        {
+                            "disciplina": "Aplicações Distribuídas",
+                            "hora_inicio": "11:30",
+                            "hora_fim": "13:00",
+                            "sala": "Auditório Bloco A - EST",
+                            "turma": "TPINF"
+                        },
+                        {
+                            "disciplina": "Internet das Coisas",
+                            "hora_inicio": "14:30",
+                            "hora_fim": "16:00",
+                            "sala": "SA.1",
+                            "turma": "PLINF1"
+                        }
+                    ]
+                },
+                {
+                    "dia": "Quinta-feira",
+                    "aulas": [
+                        {
+                            "disciplina": "Tecnologias Internet",
+                            "hora_inicio": "11:30",
+                            "hora_fim": "13:00",
+                            "sala": "Auditório Bloco A - EST",
+                            "turma": "TPINF"
+                        }
+                    ]
+                },
+                {
+                    "dia": "Sexta-feira",
+                    "aulas": [
+                        {
+                            "disciplina": "Ciência de Dados",
+                            "hora_inicio": "09:30",
+                            "hora_fim": "11:00",
+                            "sala": "Auditório Bloco A - EST",
+                            "turma": "TPINF"
+                        },
+                        {
+                            "disciplina": "Ciência de Dados",
+                            "hora_inicio": "14:30",
+                            "hora_fim": "16:00",
+                            "sala": "SA.2",
+                            "turma": "PLINF1"
+                        }
+                    ]
+                }
+            ]
         }
-    }
-]
+
+    ]
+}

@@ -23,6 +23,7 @@ router.get('/id',
 );
 
 router.get('/profile', isAuthenticated, async function (req, res) {
+    console.log("AYO AQUI CARALHO CVBAHCVAECJA", req.session);
     try {
         if (!req.session.account) {
             console.error("Utilizador não autenticado.");

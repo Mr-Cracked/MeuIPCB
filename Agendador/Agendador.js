@@ -5,8 +5,6 @@ const Aluno = require("./models/Aluno");
 const Turma = require("./models/Turma");
 const { scrapeCalendarios } = require("./scraper");
 
-
-
 require("dotenv").config();
 
 const importData = async () => {
@@ -16,21 +14,25 @@ const importData = async () => {
         console.log("🔹 Conexão estabelecida. Lendo o JSON...");
 
         // Ler o JSON
-        let alunos = JSON.parse(fs.readFileSync("Dados.json", "utf-8"));
+        let jsonData = JSON.parse(fs.readFileSync("Dados.json", "utf-8"));
 
         // Garantir que os dados são um array
-        if (!Array.isArray(alunos)) {
-            alunos = [alunos];
-        }
+        const alunos = Array.isArray(jsonData.alunos) ? jsonData.alunos : [jsonData.alunos];
+        const horarios = Array.isArray(jsonData.horarios) ? jsonData.horarios : [];
 
         console.log(`📌 ${alunos.length} alunos carregados do JSON`);
 
         for (let data of alunos) {
             // Verificar se o JSON tem a estrutura correta
-            if (!data.perfil || !data.horario || !data.perfil.numero_aluno) {
+            if (!data.perfil || !data.perfil.numero_aluno) {
                 console.error("❌ Estrutura inválida, ignorando aluno...");
                 continue;
             }
+
+            // Determinar o último ano curricular do aluno
+            const ultimoAno = data.percurso_academico.length > 0
+                ? data.percurso_academico[data.percurso_academico.length - 1].ano_curricular
+                : "N/A";
 
             // Extrair os dados do aluno
             const AlunoData = {
@@ -41,22 +43,15 @@ const importData = async () => {
                 instituicao: data.perfil.instituicao,
                 grau_conferido: data.perfil.grau_conferido,
                 situacao: data.perfil.situacao,
+                ano_curricular: ultimoAno,
                 nota_final: data.perfil.nota_final || "N/A",
                 percurso_academico: Array.isArray(data.percurso_academico) ? data.percurso_academico : [],
                 totais_por_ano_letivo: data.totais_por_ano_letivo || {},
                 plano_de_estudos: data.plano_de_estudos || {},
-                turma: data.horario.turma_identificadora // Relacionar aluno com a turma
+                turma: data.horario && data.horario.turma_identificadora ? data.horario.turma_identificadora : "N/A"
             };
 
             console.log(`📌 Processando aluno: ${AlunoData.nome} (${AlunoData.numero_aluno})`);
-
-            // Verificar se os dados principais estão presentes
-            if (!AlunoData.numero_aluno || !AlunoData.nome || !AlunoData.curso || !AlunoData.turma) {
-                console.error("❌ Dados principais ausentes, ignorando aluno...");
-                continue;
-            }
-
-            console.log("📌 Inserindo aluno no MongoDB...");
 
             // Inserir ou atualizar aluno no MongoDB
             const resultAluno = await Aluno.findOneAndUpdate(
@@ -66,40 +61,46 @@ const importData = async () => {
             );
 
             console.log(`✅ Aluno ${AlunoData.nome} inserido/atualizado com sucesso!`);
-
-            // Extrair os dados da turma e horário
-            const TurmaData = {
-                nome: data.horario.turma_identificadora,
-                curso: data.perfil.curso,
-                ano: data.percurso_academico[data.percurso_academico.length-1].ano_curricular,
-                horario: Array.isArray(data.horario.dias) ? data.horario.dias : []
-            };
-
-
-            console.log(`📌 Processando turma: ${TurmaData.nome}`);
-
-            console.log("📌 Inserindo turma no MongoDB...");
-
-            // Inserir ou atualizar turma no MongoDB
-            const resultTurma = await Turma.findOneAndUpdate(
-                { nome: TurmaData.nome, curso: TurmaData.curso  ,ano: TurmaData.ano},
-                TurmaData,
-                { upsert: true, new: true }
-            );
-
-            console.log(`✅ Turma ${TurmaData.nome} inserida/atualizada com sucesso!`);
         }
 
-        console.log("✅ Todos os alunos e turmas foram inseridos/atualizados com sucesso!");
+        // Processar os horários
+        for (let horario of horarios) {
+            if (!horario.turma || !horario.dias) {
+                console.warn("⚠️ Horário sem turma ou dias. Pulando...");
+                continue;
+            }
 
-        // CALENDARIOS DAS ESCOLAS
+            const TurmaData = {
+                nome: horario.turma,
+                curso: horario.curso,
+                ano: horario.ano,
+                semestre: horario.semestre,
+                horario: Array.isArray(horario.dias) ? horario.dias : []
+            };
+
+            console.log(`📌 Processando horário da turma: ${TurmaData.nome}`);
+
+            try {
+                // Inserir ou atualizar turma no MongoDB
+                const resultTurma = await Turma.findOneAndUpdate(
+                    { nome: TurmaData.nome, curso: TurmaData.curso, ano: TurmaData.ano, semestre: TurmaData.semestre },
+                    TurmaData,
+                    { upsert: true, new: true }
+                );
+
+                console.log(`✅ Horário da turma ${TurmaData.nome} inserido/atualizado com sucesso!`);
+            } catch (error) {
+                console.error(`❌ Erro ao inserir/atualizar horário da turma ${TurmaData.nome}:`, error);
+            }
+
+        }
+
+        console.log("✅ Todos os alunos e horários foram inseridos/atualizados com sucesso!");
+
+        // Executar scraping dos calendários das escolas
         await scrapeCalendarios();
-
         await scrapeCalendarios();
-
-        await scrapeCalendarios();
-
-
+        // console.log("✅ Calendários importados com sucesso!");
 
     } catch (error) {
         console.error("❌ Erro ao importar dados:", error);

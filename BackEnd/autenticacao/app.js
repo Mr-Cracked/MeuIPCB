@@ -12,6 +12,12 @@ var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
 var authRouter = require('./routes/auth.js');
 
+const alunoRoutes = require('./routes/aluno');
+const anuncioRoutes = require('./routes/anuncio');
+const escolaRoutes = require('./routes/escola');
+const professorRoutes = require('./routes/professor');
+const turmaRoutes = require('./routes/turma');
+
 // initialize express
 var app = express();
 
@@ -45,6 +51,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use("/api/aluno", alunoRoutes);
+app.use("/api/anuncio", anuncioRoutes);
+app.use("/api/escola", escolaRoutes);
+app.use("/api/professor", professorRoutes);
+app.use("/api/turma", turmaRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

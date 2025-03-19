@@ -66,7 +66,7 @@ async function getPdfLinks(schoolUrl) {
 }
 
 //Apagar calendários antigos
-/*async function apagarCalendariosAntigos(nomeEscola) {
+async function apagarCalendariosAntigos(nomeEscola) {
     try {
         const escola = await Escola.findOne({ nome: nomeEscola });
 
@@ -95,7 +95,7 @@ async function getPdfLinks(schoolUrl) {
     } catch (error) {
         console.error('❌ Erro ao apagar calendários antigos:', error);
     }
-}*/
+}
 
 
 async function fazerUploadParaGridFS(gfsBucket, fileBuffer, fileName) {
@@ -131,10 +131,10 @@ async function guardarCalendario(nomeEscola, fileBuffer, fileName) {
             throw new Error('🚨 Erro crítico: GridFSBucket ainda não foi inicializado.');
         }
 
-        // 🛑 Apagar calendários antigos antes de adicionar novos
-        //await apagarCalendariosAntigos(nomeEscola);
+        // Apagar calendários antigos antes de adicionar novos
+        await apagarCalendariosAntigos(nomeEscola);
 
-        // 🛑 Verificar se o ficheiro já existe no GridFS
+        // Verificar se o ficheiro já existe no GridFS
         const existingFiles = await gfsBucket.find({ filename: fileName }).toArray();
         let fileId;
         if (existingFiles.length > 0) {
@@ -154,7 +154,7 @@ async function guardarCalendario(nomeEscola, fileBuffer, fileName) {
             }
         }
 
-        // 🛑 Verifica se o ficheiro já está na escola antes de atualizar
+        // Verifica se o ficheiro já está na escola antes de atualizar
         const escola = await Escola.findOne({ nome: nomeEscola });
         if (escola && escola.calendarios.some(cal => cal.fileId.equals(fileId))) {
             console.log(`⚠️ O ficheiro "${fileName}" já está associado à escola ${nomeEscola}.`);
@@ -174,9 +174,6 @@ async function guardarCalendario(nomeEscola, fileBuffer, fileName) {
         console.error('❌ Erro ao guardar o calendário:', error);
     }
 }
-
-
-
 
 
 //Download do ficheiro PDF

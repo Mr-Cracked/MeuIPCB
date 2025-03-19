@@ -13,6 +13,7 @@ export function PagPrincipal() {
 
     useEffect(() => {
         async function checkLogin() {
+
             const userData = await getUserProfile();
             if (userData) {
                 console.log("Utilizador autenticado, redirecionando para /perfil...");
