@@ -3,7 +3,8 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const Aluno = require("./models/Aluno");
 const Turma = require("./models/Turma");
-const { scrapeCalendarios } = require("./scraper");
+const { scrapeCalendariosEscolas } = require("./scraper");
+const { scrapeCalendariosCursos } = require("./scraper");
 
 require("dotenv").config();
 
@@ -29,10 +30,24 @@ const importData = async () => {
                 continue;
             }
 
-            // Determinar o último ano curricular do aluno
-            const ultimoAno = data.percurso_academico.length > 0
-                ? data.percurso_academico[data.percurso_academico.length - 1].ano_curricular
-                : "N/A";
+
+            //Determinar turmas do aluno
+            const turmas = [];
+            const plano = data.plano_de_estudos;
+
+            // Obter as chaves dos anos (por ex. "1º Ano", "2º Ano", "3º Ano")
+            const anos = Object.keys(plano);
+
+            // Apanhar o último ano (última chave)
+            const ultimoAno = anos[anos.length - 1];
+            const disciplinasUltimoAno = plano[ultimoAno];
+
+            for (let disciplina of disciplinasUltimoAno) {
+                if (disciplina.turma && !turmas.includes(disciplina.turma)) {
+                    turmas.push(disciplina.turma);
+                }
+            }
+            console.log("TURMAS DO ALUNO ",turmas);
 
             // Extrair os dados do aluno
             const AlunoData = {
@@ -48,7 +63,7 @@ const importData = async () => {
                 percurso_academico: Array.isArray(data.percurso_academico) ? data.percurso_academico : [],
                 totais_por_ano_letivo: data.totais_por_ano_letivo || {},
                 plano_de_estudos: data.plano_de_estudos || {},
-                turma: data.horario && data.horario.turma_identificadora ? data.horario.turma_identificadora : "N/A"
+                turma: turmas,
             };
 
             console.log(`📌 Processando aluno: ${AlunoData.nome} (${AlunoData.numero_aluno})`);
@@ -66,7 +81,7 @@ const importData = async () => {
         // Processar os horários
         for (let horario of horarios) {
             if (!horario.turma || !horario.dias) {
-                console.warn("⚠️ Horário sem turma ou dias. Pulando...");
+                console.warn("⚠️ Horário sem turma ou dias. Ignorando...");
                 continue;
             }
 
@@ -98,9 +113,11 @@ const importData = async () => {
         console.log("✅ Todos os alunos e horários foram inseridos/atualizados com sucesso!");
 
         // Executar scraping dos calendários das escolas
-        await scrapeCalendarios();
-        await scrapeCalendarios();
-        // console.log("✅ Calendários importados com sucesso!");
+        await scrapeCalendariosEscolas();
+        console.log("✅ Calendários importados com sucesso!");
+
+        await scrapeCalendariosCursos();
+
 
     } catch (error) {
         console.error("❌ Erro ao importar dados:", error);

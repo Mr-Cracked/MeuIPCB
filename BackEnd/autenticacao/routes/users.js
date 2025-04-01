@@ -17,13 +17,11 @@ function isAuthenticated(req, res, next) {
 router.get('/id',
     isAuthenticated, // check if user is authenticated
     async function (req, res, next) {
-        console.log("OLAAA  ",req);
         res.render('id', { idTokenClaims: req.session.account.idTokenClaims });
     }
 );
 
 router.get('/profile', isAuthenticated, async function (req, res) {
-    console.log("AYO AQUI CARALHO CVBAHCVAECJA", req.session);
     try {
         if (!req.session.account) {
             console.error("Utilizador não autenticado.");

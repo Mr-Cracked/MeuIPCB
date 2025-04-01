@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const database = require('./database/basedados');
 const { getGFSBucket } = require('./models/gridfs');
 const Escola = require('./models/Escola');
+const Curso = require('./models/Curso');
+const puppeteer = require('puppeteer');
 let contadorGuardados = 0;
 
 const BASE_URL = 'https://www.ipcb.pt';
@@ -98,27 +100,31 @@ async function apagarCalendariosAntigos(nomeEscola) {
 }
 
 
-async function fazerUploadParaGridFS(gfsBucket, fileBuffer, fileName) {
+async function fazerUploadParaGridFS(fileBuffer, fileName) {
     return new Promise((resolve, reject) => {
-        console.log(`🔄 Iniciando upload de "${fileName}" para GridFS...`);
-        const uploadStream = gfsBucket.openUploadStream(fileName);
-        uploadStream.end(fileBuffer);
+        const gfs = getGFSBucket();
+        if (!fileBuffer || !Buffer.isBuffer(fileBuffer)) {
+            return reject(new Error("Buffer inválido ou vazio"));
+        }
 
-        uploadStream.on('finish', function (file) {
-            if (!file || !file._id) {
-                console.error(`❌ Erro: Upload do ficheiro "${fileName}" falhou, ID não recebido.`);
-                return reject(null);
+        const uploadStream = gfs.openUploadStream(fileName);
+
+        uploadStream.on("finish", () => {
+            if (!uploadStream.id) {
+                return reject(new Error("ID não recebido após upload"));
             }
-            console.log(`✅ Upload concluído: "${fileName}" - ID: ${file._id}`);
-            resolve(file._id);
+            resolve(uploadStream.id);
         });
 
-        uploadStream.on('error', (error) => {
-            console.error(`❌ Erro ao armazenar o ficheiro "${fileName}" no GridFS:`, error);
-            reject(null);
+        uploadStream.on("error", (err) => {
+            reject(err);
         });
+
+        uploadStream.end(fileBuffer); // ✅ aqui estava o erro
     });
 }
+
+
 
 
 //Guardar ficheiro no MongoDB (GridFS)
@@ -126,54 +132,28 @@ async function guardarCalendario(nomeEscola, fileBuffer, fileName) {
     console.log(`📝 Guardando calendário para ${nomeEscola}: ${fileName}`);
 
     try {
+        await apagarCalendariosAntigos(nomeEscola)
         const gfsBucket = getGFSBucket();
-        if (!gfsBucket) {
-            throw new Error('🚨 Erro crítico: GridFSBucket ainda não foi inicializado.');
+        if (!gfsBucket) throw new Error("GridFSBucket não inicializado");
+
+        if (!fileBuffer || fileBuffer.length === 0) {
+            throw new Error("Buffer inválido ou vazio");
         }
 
-        // Apagar calendários antigos antes de adicionar novos
-        await apagarCalendariosAntigos(nomeEscola);
+        const fileId = await fazerUploadParaGridFS(fileBuffer, fileName);
 
-        // Verificar se o ficheiro já existe no GridFS
-        const existingFiles = await gfsBucket.find({ filename: fileName }).toArray();
-        let fileId;
-        if (existingFiles.length > 0) {
-            console.log(`⚠️ O ficheiro "${fileName}" já existe no GridFS. Não será armazenado novamente.`);
-            fileId = existingFiles[0]._id;
-        } else {
-            // 🔄 Criar um stream de upload para o MongoDB
-            fileId = await fazerUploadParaGridFS(gfsBucket, fileBuffer, fileName);
-
-            if (!fileId) {
-                console.error(`❌ Erro crítico: Upload falhou para "${fileName}". Tentando novamente...`);
-                fileId = await fazerUploadParaGridFS(gfsBucket, fileBuffer, fileName); // Segunda tentativa
-            }
-
-            if (!fileId) {
-                throw new Error(`❌ Falha crítica: Upload do ficheiro "${fileName}" não recebeu um ID mesmo após tentativa extra.`);
-            }
-        }
-
-        // Verifica se o ficheiro já está na escola antes de atualizar
-        const escola = await Escola.findOne({ nome: nomeEscola });
-        if (escola && escola.calendarios.some(cal => cal.fileId.equals(fileId))) {
-            console.log(`⚠️ O ficheiro "${fileName}" já está associado à escola ${nomeEscola}.`);
-            return;
-        }
-
-        // 📝 Atualiza a escola para referenciar o novo ficheiro
         await Escola.findOneAndUpdate(
             { nome: nomeEscola },
-            { $set: { calendarios: [{ fileId, nome: fileName }] } }, // ✅ Usa $set para evitar duplicações
+            { $set: { calendarios: [{ fileId, nome: fileName }] } },
             { upsert: true }
         );
 
-        console.log(`✅ Ficheiro "${fileName}" referenciado na escola ${nomeEscola}`);
-
-    } catch (error) {
-        console.error('❌ Erro ao guardar o calendário:', error);
+        console.log(`✅ Ficheiro "${fileName}" guardado para ${nomeEscola}`);
+    } catch (err) {
+        console.error(`❌ Erro ao guardar o calendário: ${err.message}`);
     }
 }
+
 
 
 //Download do ficheiro PDF
@@ -189,7 +169,7 @@ async function baixarCalendario(nomeEscola, file) {
 }
 
 //Função principal do scraper
-async function scrapeCalendarios() {
+async function scrapeCalendariosEscolas() {
     await database();
     console.log('✅ Conectado ao MongoDB!');
 
@@ -217,19 +197,127 @@ async function scrapeCalendarios() {
 
     console.log('✅ Todos os ficheiros foram processados.');
 
-    // 🛑 Só fechar conexão quando tudo estiver terminado
-    setTimeout(async () => {
-        console.log('🔄 A fechar conexão MongoDB...');
-        try {
-            await mongoose.connection.close();
-            console.log('✅ Conexão com MongoDB fechada com sucesso.');
-        } catch (err) {
-            console.error('❌ Erro ao fechar conexão com MongoDB:', err);
-        }
-    }, 3000);
 }
 
 
 
+// 🛑🛑🛑🛑CURSOS
 
-module.exports = {scrapeCalendarios};
+
+const PAGINA_CURSOS = `${BASE_URL}/escolas/tecnologia/horarios-calendarios/`;
+const ESCOLA_NOME = "Escola Superior de Tecnologia de Castelo Branco";
+
+
+async function getCursosComLinks() {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(PAGINA_CURSOS, { waitUntil: 'domcontentloaded' });
+    await new Promise(res => setTimeout(res, 2000));
+
+    const html = await page.content();
+    const $ = cheerio.load(html);
+    const cursos = [];
+
+    $('.tab-pane').each((_, el) => {
+        const nomeCurso = $(el).find('h3').first().text().trim();
+        const pdfLinks = [];
+
+        $(el).find('a[href$=".pdf"]').each((i, link) => {
+            const href = $(link).attr('href');
+            if (href) {
+                pdfLinks.push({
+                    nome: href.split('/').pop(),
+                    url: href.startsWith('http') ? href : `${BASE_URL}${href}`,
+                    epoca: i === 0 ? 'Normal' : 'Exame'
+                });
+            }
+        });
+
+        if (nomeCurso && pdfLinks.length > 0) {
+            cursos.push({
+                nome: nomeCurso,
+                pdfs: pdfLinks.slice(0, 2) // Apenas 2 por curso: normal e exame
+            });
+        }
+    });
+
+    await browser.close();
+    return cursos;
+}
+
+
+async function apagarCalendariosAntigosCursos(nomeCurso) {
+    try {
+        const curso = await Curso.findOne({ nome: nomeCurso });
+        if (curso && curso.calendarios.length > 0) {
+            const gfsBucket = getGFSBucket();
+            for (const cal of curso.calendarios) {
+                if (cal.fileId) {
+                    try {
+                        await gfsBucket.delete(new mongoose.Types.ObjectId(cal.fileId));
+                        console.log(`🗑️ Apagado antigo: ${cal.fileId}`);
+                    } catch (err) {
+                        console.error(`⚠️ Erro ao apagar antigo ${cal.fileId}: ${err.message}`);
+                    }
+                }
+            }
+            await Curso.updateOne({ nome: nomeCurso }, { $unset: { calendarios: 1 } });
+        }
+    } catch (err) {
+        console.error(`❌ Erro ao apagar antigos de ${nomeCurso}:`, err.message);
+    }
+}
+
+
+async function guardarCalendariosDoCurso(nomeCurso, pdfs) {
+    const gfsBucket = getGFSBucket();
+    const calendarios = [];
+
+    await apagarCalendariosAntigosCursos(nomeCurso);
+
+    for (const cal of pdfs) {
+        try {
+            const res = await axios.get(cal.url, { responseType: "arraybuffer" });
+            const buffer = Buffer.from(res.data);
+            const fileId = await fazerUploadParaGridFS(buffer, cal.nome);
+
+            calendarios.push({
+                epoca: cal.epoca,
+                fileId,
+                data_download: new Date()
+            });
+
+            console.log(`✅ Guardado [${cal.epoca}] ${cal.nome} para ${nomeCurso}`);
+        } catch (err) {
+            console.error(`❌ Erro ao guardar ${cal.nome}: ${err.message}`);
+        }
+    }
+
+    await Curso.findOneAndUpdate(
+        { nome: nomeCurso },
+        {
+            Escola: ESCOLA_NOME,
+            nome: nomeCurso,
+            calendarios
+        },
+        { upsert: true }
+    );
+}
+
+async function scrapeCalendariosCursos() {
+    await database();
+    console.log("✅ Conectado ao MongoDB");
+
+    const cursos = await getCursosComLinks();
+    console.log(`📚 Encontrados ${cursos.length} cursos com calendários.`);
+
+    for (const curso of cursos) {
+        await guardarCalendariosDoCurso(curso.nome, curso.pdfs);
+    }
+
+    console.log("✅ Scraping dos calendários dos cursos concluído");
+    setTimeout(() => mongoose.connection.close(), 3000);
+}
+
+
+module.exports = {scrapeCalendariosEscolas, scrapeCalendariosCursos};
