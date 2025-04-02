@@ -3,8 +3,8 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const Aluno = require("./models/Aluno");
 const Turma = require("./models/Turma");
-const { scrapeCalendariosEscolas } = require("./scraper");
-const { scrapeCalendariosCursos } = require("./scraper");
+const { scrapeCalendariosEscolas } = require("./scraperEscolas");
+const { scrapeCalendariosCursos } = require("./scraperCursos");
 
 require("dotenv").config();
 
@@ -117,6 +117,7 @@ const importData = async () => {
         console.log("✅ Calendários importados com sucesso!");
 
         await scrapeCalendariosCursos();
+        console.log("✅ Calendários importados com sucesso!");
 
 
     } catch (error) {
