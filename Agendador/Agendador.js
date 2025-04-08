@@ -3,6 +3,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const Aluno = require("./models/Aluno");
 const Turma = require("./models/Turma");
+const Professor = require("./models/Professor");
 const { scrapeCalendariosEscolas } = require("./scraperEscolas");
 const { scrapeCalendariosCursos } = require("./scraperCursos");
 
@@ -19,7 +20,8 @@ const importData = async () => {
 
         // Garantir que os dados são um array
         const alunos = Array.isArray(jsonData.alunos) ? jsonData.alunos : [jsonData.alunos];
-        const horarios = Array.isArray(jsonData.horarios) ? jsonData.horarios : [];
+        const horarios = Array.isArray(jsonData.horarios) ? jsonData.horarios : [jsonData.horarios];
+        const professores = Array.isArray(jsonData.professores)? jsonData.professores:[jsonData.professores];
 
         console.log(`📌 ${alunos.length} alunos carregados do JSON`);
 
@@ -120,8 +122,35 @@ const importData = async () => {
         console.log("✅ Calendários importados com sucesso!");
 
 
+        for (let professor of professores) {
+            // Verificar se o JSON tem a estrutura correta
+            if (!professor.escolas || !professor.email) {
+                console.error("❌ Estrutura inválida, ignorando Professor...");
+                continue;
+            }
+
+
+            // Extrair os dados do aluno
+            const ProfessorData = {
+                Escola: professor.escolas,
+                nome: professor.nome,
+                email: professor.email,
+            };
+
+            console.log(`📌 Processando aluno: ${ProfessorData.nome} (${ProfessorData.email})`);
+
+            // Inserir ou atualizar aluno no MongoDB
+            const resultProfessor = await Professor.findOneAndUpdate(
+                { email: ProfessorData.email },
+                ProfessorData,
+                { upsert: true, new: true }
+            );
+
+            console.log(`✅ Professor ${ProfessorData.nome} inserido/atualizado com sucesso!`);
+        }
+
     } catch (error) {
-        console.error("❌ Erro ao importar dados:", error);
+        console.error("❌ Erro a importar dados:", error);
     } finally {
         mongoose.connection.close();
         console.log("🔹 Conexão encerrada.");

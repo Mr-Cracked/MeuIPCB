@@ -3,12 +3,12 @@
 
 - Fazer com que o agendador inicialize o scraper automaticamente - Feito
 
-- Scraper retira os calendarios antigos da bd - FEITO/Acho quenao retira realmente
+- Scraper retira os calendarios antigos da bd - FEITO
 
--NAO SEI RESOLVER, problema no scraper para calendarios de escola, so funciona em condições se for iniciado 2/3 vezes
+-NAO SEI RESOLVER, problema no scraper para calendarios de escola, so funciona em condições se for iniciado 2/3 vezes FEITO
 
--MUDAR O SCRAPER, FAZER COM QUE POSSA FAZER O CURSO E AS ESCOLAS
+-MUDAR O SCRAPER, FAZER COM QUE POSSA FAZER O CURSO E AS ESCOLAS FEITO
 
--atualizar os horarios, fazer com que os horarios sejam à parte em vez de ser juntamente como aluno, Array de alunos e depois um array de horarios
+-atualizar os horarios, fazer com que os horarios sejam à parte em vez de ser juntamente como aluno, Array de alunos e depois um array de horarios FEITO
 
--No aluno verificar se este está no 1º,2º,3º ano
+-No aluno verificar se este está no 1º,2º,3º ano FEITO

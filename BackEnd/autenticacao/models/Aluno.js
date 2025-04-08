@@ -26,7 +26,7 @@ const AlunoSchema = new mongoose.Schema({
     }],
     totais_por_ano_letivo: Object, // Mantemos os totais de ECTS e UCs
     plano_de_estudos: Object, // Estruturado por anos
-    turma: { type: String, required: true } // Nome da turma associada
+    turma: { type: Array, required: true } // Nome da turma associada
 }, { collection: "Aluno" });
 
 const Aluno = mongoose.model("Aluno", AlunoSchema);

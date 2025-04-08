@@ -753,5 +753,103 @@
             ]
         }
 
+    ],
+
+    "professores": [
+        {
+            "nome": "Alexandre Fonte",
+            "email": "adf@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Ana Silva",
+            "email": "dorian@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Ângela Oliveira",
+            "email": "angelaoliveira@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Arlindo Silva",
+            "email": "arlindo@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Arminda Lopes",
+            "email": "aglopes@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Carlos Alves",
+            "email": "cmoa@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Eduardo Valente",
+            "email": "eduardo@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Eurico Lopes",
+            "email": "eurico@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Fernando Ribeiro",
+            "email": "fribeiro@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Fernando Barbosa",
+            "email": "fsergio@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Filipe Fidalgo",
+            "email": "ffidalgo@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "João Caldeira",
+            "email": "jcaldeira@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "José Metrolho",
+            "email": "metrolho@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "José Cruz",
+            "email": "josecruz@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Luis Barata",
+            "email": "luis.barata@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Mónica Costa",
+            "email": "monicac@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Osvaldo Santos",
+            "email": "oas@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Paulo Neves",
+            "email": "pneves@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        },
+        {
+            "nome": "Pedro Silva",
+            "email": "psilva@ipcb.pt",
+            "escolas": ["Escola Superior de Tecnologia de Castelo Branco"]
+        }
     ]
 }
