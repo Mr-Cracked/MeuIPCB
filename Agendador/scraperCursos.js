@@ -18,8 +18,9 @@ function expandirAbreviacoes(nome) {
 }
 
 function normalizarPrefixo(prefixo) {
-    if (/licenciaturas?/i.test(prefixo)) return 'Licenciatura';
-    if (/mestrados?/i.test(prefixo)) return 'Mestrado';
+    if (/licenciaturas?/i.test(prefixo)) return 'Licenciatura em';
+    if (/mestrados?/i.test(prefixo)) return 'Mestrado em';
+    if (/CTeSP?/i.test(prefixo)) return 'Curso Técnico Superior Profissional em';
     return prefixo;
 }
 

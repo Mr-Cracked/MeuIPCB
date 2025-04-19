@@ -17,6 +17,7 @@ const anuncioRoutes = require('./routes/anuncio');
 const escolaRoutes = require('./routes/escola');
 const professorRoutes = require('./routes/professor');
 const turmaRoutes = require('./routes/turma');
+const cursoRoutes = require('./routes/curso');
 
 // initialize express
 var app = express();
@@ -56,6 +57,7 @@ app.use("/api/anuncio", anuncioRoutes);
 app.use("/api/escola", escolaRoutes);
 app.use("/api/professor", professorRoutes);
 app.use("/api/turma", turmaRoutes);
+app.use("/api/curso", cursoRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

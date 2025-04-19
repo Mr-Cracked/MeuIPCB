@@ -13,6 +13,11 @@ function isAuthenticated(req, res, next) {
 
 // Get Horário do aluno
 router.get('/horario', isAuthenticated, async (req, res) => {
+
+    if (!isAuthenticated) {
+        return res.status(401).json({ message: "Utilizador não autenticado" });
+    }
+
     try {
         const email = req.session.account?.username;
 
@@ -31,7 +36,7 @@ router.get('/horario', isAuthenticated, async (req, res) => {
         console.log(ano_curricular);
         console.log(curso);
 
-        const horarios = await Turma.find({ ano: ano_curricular, curso: curso });
+        const horarios = await Turma.find({ ano: ano_curricular, curso: curso, nome: {$in: aluno.turma}});
 
         if (horarios.length === 0) {
             return res.status(404).json({ message: "Horários não encontrados" });

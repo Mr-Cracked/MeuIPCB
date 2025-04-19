@@ -2,11 +2,9 @@ const express = require("express");
 const { getGFSBucket } = require('../models/gridfs');
 const router = express.Router();
 const mongoose = require("mongoose");
-const Aluno = require("../models/Aluno");
-const Turma = require("../models/Turma");
-const Professor = require("../models/Professor");
-const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
+const Aluno = require("../models/Aluno");
+const Escola = require("../models/Escola");
 
 function isAuthenticated(req, res, next) {
     if (!req.session.isAuthenticated) {
@@ -16,20 +14,26 @@ function isAuthenticated(req, res, next) {
     next();
 };
 
-//Get calendário escola da escola do aluno
-router.get('/', async (req, res) => {
+//Get calensarios de curso consoante a época
+router.get('/epoca/:epoca', async (req, res) =>{
     try {
 
         if (!isAuthenticated) {
             return res.status(401).json({ message: "Utilizador não autenticado" });
         }
 
+        const epoca = req.params.epoca;
+
         const aluno = await Aluno.findOne({ email: req.session.account.username });
-        console.log(aluno.instituicao);
+
         const gfs = getGFSBucket();
-        const escola = await Escola.findOne({nome: aluno.instituicao});
-        console.log("escola", escola.nome);
-        const _id = escola.calendarios[0].fileId
+
+        const curso = await Curso.findOne({nome: aluno.curso});
+
+        const index = epoca === 'Normal' ? 0: 1;
+
+        const _id = curso.calendarios[index].fileId;
+
         const file = await gfs.find({ _id }).toArray();
 
         if (!file || file.length === 0) {

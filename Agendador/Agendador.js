@@ -60,7 +60,7 @@ const importData = async () => {
                 instituicao: data.perfil.instituicao,
                 grau_conferido: data.perfil.grau_conferido,
                 situacao: data.perfil.situacao,
-                ano_curricular: ultimoAno,
+                ano_curricular: ultimoAno.slice(0,2),
                 nota_final: data.perfil.nota_final || "N/A",
                 percurso_academico: Array.isArray(data.percurso_academico) ? data.percurso_academico : [],
                 totais_por_ano_letivo: data.totais_por_ano_letivo || {},
