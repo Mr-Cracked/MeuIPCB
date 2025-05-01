@@ -5,22 +5,16 @@ const Turma = require("../models/Turma");
 const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
+const {isAuthenticated} = require("../auth/autheicatorChecker")
 
-function isAuthenticated(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // redirect to sign-in route
-    }
 
-    next();
-};
+
 
 //Seleciona um aluno
 router.get('/', async function (req, res){
     try {
+        isAuthenticated;
 
-        if (!isAuthenticated) {
-            return res.status(401).json({ message: "Utilizador não autenticado" });
-        }
 
         const nome = req.session.account.name;
         const email = req.session.account.username;

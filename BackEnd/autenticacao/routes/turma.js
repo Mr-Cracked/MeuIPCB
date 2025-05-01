@@ -3,20 +3,12 @@ const router = express.Router();
 const Aluno = require("../models/Aluno");
 const Turma = require("../models/Turma");
 
-// Middleware de autenticação
-function isAuthenticated(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // Redireciona para login
-    }
-    next();
-}
+const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 // Get Horário do aluno
-router.get('/horario', isAuthenticated, async (req, res) => {
+router.get('/horario', async (req, res) => {
 
-    if (!isAuthenticated) {
-        return res.status(401).json({ message: "Utilizador não autenticado" });
-    }
+    isAuthenticated;
 
     try {
         const email = req.session.account?.username;
@@ -32,7 +24,7 @@ router.get('/horario', isAuthenticated, async (req, res) => {
             return res.status(404).json({ message: "Aluno não encontrado" });
         }
 
-        const { ano_curricular, curso } = aluno;
+        const ano_curricular=aluno.ano_curricular,curso =aluno.curso;
         console.log(ano_curricular);
         console.log(curso);
 

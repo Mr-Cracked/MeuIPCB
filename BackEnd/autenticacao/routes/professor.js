@@ -5,22 +5,14 @@ const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
 const router = express.Router();
+const {isAuthenticated} = require("../auth/autheicatorChecker")
 
-function isAuthenticated(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // redirect to sign-in route
-    }
-
-    next();
-};
 
 //pesquisar professores da escola do aluno
 router.get('/professores', async (req, res) => {
     try{
 
-        if(!isAuthenticated) {
-            return res.status(401).json({message:"Utilizador não autenticado"})
-        }
+        isAuthenticated;
 
         const aluno = await Aluno.findOne({ email: req.session.account.username });
 
@@ -45,9 +37,7 @@ router.get('/professores', async (req, res) => {
 router.get('/professores/email/:email', async (req, res) => {
     try{
 
-        if(!isAuthenticated) {
-            return res.status(401).json({message:"Utilizador não autenticado"})
-        }
+        isAuthenticated;
 
         const email = req.params.email;
 
@@ -68,12 +58,13 @@ router.get('/professores/email/:email', async (req, res) => {
 
 //pesquisar professores por nome
 router.get('/professores/nome/:nome', async (req, res) => {
+    isAuthenticated;
+    //console.log(isAuthenticated(), req.session.isAuthenticated);
     try{
 
-        if(!isAuthenticated) {
-            return res.status(401).json({message:"Utilizador não autenticado"})
-        }
 
+        console.log("OLAAA", req.session.isAuthenticated);
+        console.log("OLAAA2", req.session);
         const nome = req.params.nome;
 
 
@@ -96,9 +87,7 @@ router.get('/professores/nome/:nome', async (req, res) => {
 router.get('/professores/:email/:nome/:escola', async (req, res) => {
     try{
 
-        if(!isAuthenticated) {
-            return res.status(401).json({message:"Utilizador não autenticado"})
-        }
+        isAuthenticated;
 
         const email = req.params.email;
         const nome = req.params.nome;

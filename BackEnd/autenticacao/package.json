@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
-  "author": "Microsoft",
+  "author": "Guilherme Roque & Tatiana Honorio",
   "license": "MIT",
   "dependencies": {
     "@azure/msal-node": "^1.17.3",
@@ -19,6 +19,8 @@
     "http-errors": "^2.0.0",
     "moongose": "^1.0.0",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.7"
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.7",
+    "openai": "^4.96.0"
   }
 }

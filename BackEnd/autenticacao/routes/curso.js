@@ -5,22 +5,14 @@ const mongoose = require("mongoose");
 const Curso = require("../models/Curso");
 const Aluno = require("../models/Aluno");
 const Escola = require("../models/Escola");
+const {isAuthenticated} = require("../auth/autheicatorChecker")
 
-function isAuthenticated(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // redirect to sign-in route
-    }
-
-    next();
-};
 
 //Get calensarios de curso consoante a época
 router.get('/epoca/:epoca', async (req, res) =>{
     try {
 
-        if (!isAuthenticated) {
-            return res.status(401).json({ message: "Utilizador não autenticado" });
-        }
+        isAuthenticated
 
         const epoca = req.params.epoca;
 
