@@ -24,7 +24,7 @@ router.get('/horario', async (req, res) => {
             return res.status(404).json({ message: "Aluno não encontrado" });
         }
 
-        const ano_curricular=aluno.ano_curricular,curso =aluno.curso;
+        const ano_curricular= aluno.ano_curricular,curso = aluno.curso;
         console.log(ano_curricular);
         console.log(curso);
 

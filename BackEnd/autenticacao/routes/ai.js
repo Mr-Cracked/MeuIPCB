@@ -47,25 +47,24 @@ async function chamarAI(pergunta) {
     return data.choices?.[0]?.message?.content.trim();
 }
 
-router.post('/pergunta',async (req, res, next) => {
+router.post('/pergunta/:pergunta',async (req, res, next) => {
     try{
 
-       /* if(!isAuthenticated) {
+       if(!isAuthenticated) {
             return res.status(401).json({message:"Utilizador não autenticado"})
-        }*/
-        //const email = req.session.account.username
+        }
+        const email = req.session.account.username
 
-        const aluno = await Aluno.find({ email: "guilherme.roque@ipcbcampus.pt" });
+        const aluno = await Aluno.findOne({ email: email });
         console.log(aluno);
 
 
-        const { ano_curricular, curso } = aluno;
-        console.log(ano_curricular);
-        console.log(curso);
+        const ano_curricular = aluno.ano_curricular,curso = aluno.curso;
+        console.log(aluno.ano_curricular);
+        console.log(aluno.curso);
         const horarios = await Turma.find({ ano: ano_curricular, curso: curso, nome: {$in: aluno.turma}});
         console.log(horarios);
-        const pergunta = req.params.pergunta || "calcula a minha média";
-        console.log(pergunta);
+        const pergunta = req.params.pergunta;
 
         console.log("pergunta", pergunta);
         const prompt = criarPrompt(pergunta, horarios, aluno);
