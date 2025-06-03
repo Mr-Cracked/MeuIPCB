@@ -12,9 +12,9 @@ function criarPrompt(pergunta, aluno, horario, professores) {
     return `
 Tu és um assistente virtual académico.
 
-Baseia-te apenas nestes dados do aluno para responder à pergunta:
-
 Responde com clareza e com base apenas nestes dados.
+
+Baseia-te apenas nestes dados do aluno para responder à pergunta:
 
 Assume o dia da semana e do ano atuais, bem como a hora atual quando respondes às perguntas.
 

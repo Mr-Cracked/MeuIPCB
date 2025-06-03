@@ -12,11 +12,11 @@ const BASE_URL = 'https://www.ipcb.pt';
 
 // Mapeamento dos nomes das escolas
 const SCHOOL_NAME_MAP = {
-    "agraria": "Escola Superior Agrária",
-    "artes-aplicadas": "Escola Superior de Artes Aplicadas",
-    "educacao": "Escola Superior de Educação",
-    "gestao": "Escola Superior de Gestão",
-    "saude-dr-lopes-dias": "Escola Superior de Saúde Dr. Lopes Dias",
+    "agraria": "Escola Superior Agrária de Castelo Branco",
+    "artes-aplicadas": "Escola Superior de Artes Aplicadas de Castelo Branco",
+    "educacao": "Escola Superior de Educação de Castelo Branco",
+    "gestao": "Escola Superior de Gestão de Castelo Branco",
+    "saude-dr-lopes-dias": "Escola Superior de Saúde Dr. Lopes Dias de Castelo Branco",
     "tecnologia": "Escola Superior de Tecnologia de Castelo Branco"
 };
 

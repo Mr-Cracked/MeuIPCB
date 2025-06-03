@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Aluno = require("./models/Aluno");
 const Turma = require("./models/Turma");
 const Professor = require("./models/Professor");
+const Escola = require("./models/Escola");
 const { scrapeCalendariosEscolas } = require("./scraperEscolas");
 const { scrapeCalendariosCursos } = require("./scraperCursos");
 
@@ -17,11 +18,13 @@ const importData = async () => {
 
         // Ler o JSON
         let jsonData = JSON.parse(fs.readFileSync("Dados.json", "utf-8"));
+        let jsonDataSalas = JSON.parse(fs.readFileSync("horarios_salas_EST.json", "utf-8"));
 
         // Garantir que os dados são um array
-        const alunos = Array.isArray(jsonData.alunos) ? jsonData.alunos : [jsonData.alunos];
-        const horarios = Array.isArray(jsonData.horarios) ? jsonData.horarios : [jsonData.horarios];
-        const professores = Array.isArray(jsonData.professores)? jsonData.professores:[jsonData.professores];
+        const alunos = jsonData.alunos;
+        const horarios = jsonData.horarios;
+        const professores = jsonData.professores;
+        const horariosSalasEST = jsonDataSalas.salas_EST;
 
         console.log(`📌 ${alunos.length} alunos carregados do JSON`);
 
@@ -71,7 +74,7 @@ const importData = async () => {
             console.log(`📌 Processando aluno: ${AlunoData.nome} (${AlunoData.numero_aluno})`);
 
             // Inserir ou atualizar aluno no MongoDB
-            const resultAluno = await Aluno.findOneAndUpdate(
+            await Aluno.findOneAndUpdate(
                 { numero_aluno: AlunoData.numero_aluno },
                 AlunoData,
                 { upsert: true, new: true }
@@ -99,7 +102,7 @@ const importData = async () => {
 
             try {
                 // Inserir ou atualizar turma no MongoDB
-                const resultTurma = await Turma.findOneAndUpdate(
+                await Turma.findOneAndUpdate(
                     { nome: TurmaData.nome, curso: TurmaData.curso, ano: TurmaData.ano, semestre: TurmaData.semestre },
                     TurmaData,
                     { upsert: true, new: true }
@@ -148,6 +151,28 @@ const importData = async () => {
 
             console.log(`✅ Professor ${ProfessorData.nome} inserido/atualizado com sucesso!`);
         }
+
+        const SalasEST = [];
+
+
+        for (const key in jsonDataSalas) {
+            if (key === "salas_EST" && Array.isArray(jsonDataSalas[key])) {
+                SalasEST.push(...jsonDataSalas[key]); // espalha o array
+            } else if (typeof jsonDataSalas[key] === "object") {
+                SalasEST.push({
+                    sala: key,
+                    horario: jsonDataSalas[key]
+                });
+            }
+        }
+
+        await Escola.updateOne(
+            { nome: "Escola Superior de Tecnologia de Castelo Branco"},
+            { $set: { horariosSalas: SalasEST } },
+            { upsert: true }
+        );
+
+        console.log("✅ Horários das salas da ESTCB inseridos/atualizados com sucesso!");
 
     } catch (error) {
         console.error("❌ Erro a importar dados:", error);
