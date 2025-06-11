@@ -3,12 +3,7 @@ const mongoose = require("mongoose");
 const AnuncioSchema = new mongoose.Schema({
     dono: { type: String, required: true, unique: true },
     titulo: { type: String, required: true},
-    descricao: { type: String, required: true },
-    imagem:[
-    {
-        fileId: { type: mongoose.Schema.Types.ObjectId, ref: 'files' }
-    }
-]
+    descricao: { type: String, required: true }
 
 }, { collection: "Anuncio" });
 
