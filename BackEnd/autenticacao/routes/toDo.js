@@ -133,7 +133,7 @@ router.post("/apagar", async (req, res) => {
     try{
         isAuthenticated;
 
-        const dono = req.session.account?.name;
+
         const id= req.body;
 
 
@@ -154,6 +154,41 @@ router.post("/apagar", async (req, res) => {
         return res.status(500).json({ message: "Erro ao apagado ToDo", error });
     }
 });
-/*UPDATE E DELETE*/
+
+router.get('/velhosdata', async (req, res) => {
+    try {
+        isAuthenticated;
+        const todos = await Todo.find({ dono: req.session.account?.name }).sort({ data_criacao: -1 }); // -1 = descendente, 1 = ascendente
+        res.json(todos);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao obter Todos', error });
+    }
+});
+
+router.get('/novosdata', async (req, res) => {
+    try {
+        isAuthenticated;
+        const todos = await Todo.find().sort({ data_criacao: 1 }); // -1 = descendente, 1 = ascendente
+        res.json(todos);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao obter Todos', error });
+    }
+});
+
+router.get('/busca', async (req, res) => {
+    const query = req.query.query || '';
+    const utilizador = req.session.account?.name
+
+    try {
+        const todos = await ToDo.find({
+            titulo: { $regex: query, $options: 'i' }, // case-insensitive
+            dono: utilizador // garantir que são só do utilizador
+        });
+
+        res.json(todos);
+    } catch (err) {
+        res.status(500).json({ message: 'Erro ao procurar tarefas', err });
+    }
+});
 
 module.exports = router;
