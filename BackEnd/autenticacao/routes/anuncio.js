@@ -15,14 +15,14 @@ router.get("/ver",isAuthenticated, (req, res) => {
     try{
 
 
-        const email = req.session.account.username;
+        const email = req.session.account?.username;
         const role = Roles.findOne({ email: email }).role;
 
         if (role === "Normal"){
             const anuncios = Anuncio.find({email: email});
             res.status(200).json(anuncios);
         }else{
-            const anuncio = Anuncio.find();
+            const anuncios = Anuncio.find();
             res.status(200).json(anuncios);
         }
     }catch (error) {
@@ -35,7 +35,7 @@ router.get("/ver",isAuthenticated, (req, res) => {
 router.post("/inserir",isAuthenticated, async (req, res) => {
     try{
 
-        const dono = req.session.account?.name;
+        const dono = req.session.account?.username;
         const {titulo,descricao, instituicoes } = req.body;
         const data = Date.now();
 
@@ -66,7 +66,7 @@ router.post("/inserir",isAuthenticated, async (req, res) => {
 
 router.put("/atualizar",isAuthenticated, async (req, res) => {
     try{
-        const dono = req.session.account?.name;
+        const dono = req.session.account?.username;
         const { id,titulo,descricao, instituicoes } = req.body;
         const data = Date.now();
 
@@ -102,8 +102,7 @@ router.put("/atualizar",isAuthenticated, async (req, res) => {
 
 router.post("/apagar",isAuthenticated, async (req, res) => {
     try{
-        const id= req.body;
-
+        const {id}= req.body;
 
         if (!id) {
             return res.status(400).json({ message: "Sem ID." });

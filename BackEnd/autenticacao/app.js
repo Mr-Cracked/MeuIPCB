@@ -19,6 +19,7 @@ const professorRoutes = require('./routes/professor');
 const turmaRoutes = require('./routes/turma');
 const cursoRoutes = require('./routes/curso');
 const aiRoutes = require('./routes/ai');
+const todoRoutes = require('./routes/toDo');
 
 // initialize express
 var app = express();
@@ -60,6 +61,7 @@ app.use("/api/professor", professorRoutes);
 app.use("/api/turma", turmaRoutes);
 app.use("/api/curso", cursoRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/todo", todoRoutes);
 
 
 // catch 404 and forward to error handler

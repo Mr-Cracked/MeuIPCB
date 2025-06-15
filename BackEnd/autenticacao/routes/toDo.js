@@ -10,22 +10,22 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 
-router.post("/inserir",isAuthenticated , async (req, res) => {
+router.post("/inserir" , async (req, res) => {
    try{
 
-       const dono = req.session.account?.name;
-       const { nome, prazo, descricao, prioridade } = req.body;
+       const dono = req.body.dono;//req.session.account?.username;
+       const { titulo, prazo, descricao, prioridade } = req.body;
        const data = Date.now();
 
 
-       if (!dono || !nome || !prazo || !descricao) {
+       if (!dono || !titulo || !prazo || !descricao) {
            return res.status(400).json({ message: "Campos em falta." });
        }
 
        const TODO = Todo({
            dono: dono,
-           nome: nome,
-           data: data,
+           titulo: titulo,
+           data_criacao: data,
            prazo: prazo,
            descricao: descricao,
            prioridade: prioridade,
@@ -45,7 +45,7 @@ router.post("/inserir",isAuthenticated , async (req, res) => {
 router.get("/ver",isAuthenticated , async (req, res) => {
     try{
 
-        const dono = req.session.account?.name;
+        const dono = req.session.account?.username;
         const id  = req.body;
 
 
@@ -53,13 +53,13 @@ router.get("/ver",isAuthenticated , async (req, res) => {
             return res.status(400).json({ message: "Campos em falta." });
         }
 
-        const TODO = Todo.findOne({id : id});
+        const TODO = await Todo.findOne({id : id});
 
         if (!TODO) {
             return res.status(404).json({ message: "ToDo não encontrado" });
         }
 
-        res.json(TODO);
+        return res.json(TODO);
     }catch (error) {
         console.error("Erro ao listar ToDo:", error);
         return res.status(500).json({ message: "Erro ao listar ToDo", error });
@@ -70,20 +70,21 @@ router.get("/all",isAuthenticated , async (req, res) => {
     try{
 
 
-        const dono = req.session.account?.name;
+        const dono = req.session.account?.username;
+        console.log("DONO:",dono);
 
 
         if (!dono) {
             return res.status(400).json({ message: "Campos em falta." });
         }
 
-        const TODO = Todo.find({dono: dono});
+        const TODO = await Todo.find({dono: dono});
 
         if (!TODO) {
             return res.status(404).json({ message: "Não encontrado" });
         }
 
-        res.json(TODO);
+        return res.json(TODO);
     }catch (error) {
         console.error("Erro ao listar ToDo:", error);
         return res.status(500).json({ message: "Erro ao listar ToDo", error });
@@ -93,19 +94,19 @@ router.get("/all",isAuthenticated , async (req, res) => {
 router.put("/atualizar",isAuthenticated , async (req, res) => {
     try{
 
-        const dono = req.session.account?.name;
-        const { id, nome, prazo, descricao, prioridade } = req.body;
+        const dono = req.session.account?.username;
+        const { id, titulo, prazo, descricao, prioridade } = req.body;
         const data = Date.now();
 
 
-        if (!dono || !nome || !prazo || !descricao) {
+        if (!dono || !titulo || !prazo || !descricao) {
             return res.status(400).json({ message: "Campos em falta." });
         }
 
         const TODO = {
             dono: dono,
-            nome: nome,
-            data: data,
+            titulo: titulo,
+            data_criacao: data,
             prazo: prazo,
             descricao: descricao,
             prioridade: prioridade,
@@ -128,7 +129,7 @@ router.put("/atualizar",isAuthenticated , async (req, res) => {
 
 router.post("/apagar",isAuthenticated, async (req, res) => {
     try{
-        const id= req.body;
+        const {id} = req.body;
 
 
         if (!id) {
@@ -151,35 +152,35 @@ router.post("/apagar",isAuthenticated, async (req, res) => {
 
 router.get('/velhosdata',isAuthenticated, async (req, res) => {
     try {
-        const todos = await Todo.find({ dono: req.session.account?.name }).sort({ data_criacao: -1 }); // -1 = descendente, 1 = ascendente
-        res.json(todos);
+        const todos = await Todo.find({ dono: req.session.account?.username }).sort({ data_criacao: 1 }); // -1 = descendente, 1 = ascendente
+        return res.json(todos);
     } catch (error) {
-        res.status(500).json({ message: 'Erro ao obter Todos', error });
+        return res.status(500).json({ message: 'Erro ao obter Todos', error });
     }
 });
 
 router.get('/novosdata',isAuthenticated, async (req, res) => {
     try {
-        const todos = await Todo.find().sort({ data_criacao: 1 }); // -1 = descendente, 1 = ascendente
-        res.json(todos);
+        const todos = await Todo.find().sort({ data_criacao: -1 }); // -1 = descendente, 1 = ascendente
+        return res.json(todos);
     } catch (error) {
-        res.status(500).json({ message: 'Erro ao obter Todos', error });
+        return res.status(500).json({ message: 'Erro ao obter Todos', error });
     }
 });
 
 router.get('/busca',isAuthenticated, async (req, res) => {
     const query = req.query.query || '';
-    const utilizador = req.session.account?.name
+    const utilizador = req.session.account?.username
 
     try {
-        const todos = await ToDo.find({
+        const todos = await Todo.find({
             titulo: { $regex: query, $options: 'i' }, // case-insensitive
             dono: utilizador // garantir que são só do utilizador
         });
 
-        res.json(todos);
+        return res.json(todos);
     } catch (err) {
-        res.status(500).json({ message: 'Erro ao procurar tarefas', err });
+        return res.status(500).json({ message: 'Erro ao procurar tarefas', err });
     }
 });
 

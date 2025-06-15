@@ -12,11 +12,7 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 router.get('/professores',isAuthenticated , async (req, res) => {
     try{
 
-
         const aluno = await Aluno.findOne({ email: req.session.account.username });
-
-
-
 
         const professores = await Professor.find({escola: aluno.escola});
 
@@ -36,9 +32,7 @@ router.get('/professores',isAuthenticated , async (req, res) => {
 router.get('/professores/email/:email',isAuthenticated , async (req, res) => {
     try{
 
-
         const email = req.params.email;
-
 
         const professores = await Professor.find({email: {$regex : email, $options: "i" }});
 
@@ -57,14 +51,9 @@ router.get('/professores/email/:email',isAuthenticated , async (req, res) => {
 //pesquisar professores por nome
 router.get('/professores/nome/:nome',isAuthenticated ,async (req, res) => {
 
-    //console.log(isAuthenticated(), req.session.isAuthenticated);
     try{
 
-
-        console.log("OLAAA", req.session.isAuthenticated);
-        console.log("OLAAA2", req.session);
         const nome = req.params.nome;
-
 
         const professores = await Professor.find({nome: {$regex : nome, $options: "i" }});
 
@@ -84,8 +73,6 @@ router.get('/professores/nome/:nome',isAuthenticated ,async (req, res) => {
 //pesquisar professores por email, nome e escola
 router.get('/professores/:email/:nome/:escola',isAuthenticated , async (req, res) => {
     try{
-
-
 
         const email = req.params.email;
         const nome = req.params.nome;
