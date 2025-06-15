@@ -6,9 +6,8 @@ const Turma = require("../models/Turma");
 const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 // Get Horário do aluno
-router.get('/horario', async (req, res) => {
+router.get('/horario',isAuthenticated , async (req, res) => {
 
-    isAuthenticated;
 
     try {
         const email = req.session.account?.username;

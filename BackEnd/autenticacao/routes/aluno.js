@@ -11,13 +11,13 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 //Seleciona um aluno
-router.get('/', async function (req, res){
+router.get('/',isAuthenticated , async function (req, res){
     try {
-        isAuthenticated;
 
 
-        const nome = req.session.account.name;
-        const email = req.session.account.username;
+
+        const nome = req.session.account?.name;
+        const email = req.session.account?.username;
 
         console.log("isAuthenticated:", isAuthenticated);
 

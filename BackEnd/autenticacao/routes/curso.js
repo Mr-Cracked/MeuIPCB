@@ -9,10 +9,10 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 //Get calensarios de curso consoante a época
-router.get('/epoca/:epoca', async (req, res) =>{
+router.get('/epoca/:epoca',isAuthenticated , async (req, res) =>{
     try {
 
-        isAuthenticated
+
 
         const epoca = req.params.epoca;
 

@@ -10,9 +10,8 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 
-router.post("/inserir", async (req, res) => {
+router.post("/inserir",isAuthenticated , async (req, res) => {
    try{
-       isAuthenticated;
 
        const dono = req.session.account?.name;
        const { nome, prazo, descricao, prioridade } = req.body;
@@ -43,9 +42,8 @@ router.post("/inserir", async (req, res) => {
    }
 });
 
-router.get("/ver", async (req, res) => {
+router.get("/ver",isAuthenticated , async (req, res) => {
     try{
-        isAuthenticated;
 
         const dono = req.session.account?.name;
         const id  = req.body;
@@ -68,9 +66,9 @@ router.get("/ver", async (req, res) => {
     }
 });
 
-router.get("/all", async (req, res) => {
+router.get("/all",isAuthenticated , async (req, res) => {
     try{
-        isAuthenticated;
+
 
         const dono = req.session.account?.name;
 
@@ -92,9 +90,8 @@ router.get("/all", async (req, res) => {
     }
 });
 
-router.post("/atualizar", async (req, res) => {
+router.put("/atualizar",isAuthenticated , async (req, res) => {
     try{
-        isAuthenticated;
 
         const dono = req.session.account?.name;
         const { id, nome, prazo, descricao, prioridade } = req.body;

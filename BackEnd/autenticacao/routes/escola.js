@@ -11,10 +11,9 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 //Get calendário escola da escola do aluno
-router.get('/', async (req, res) => {
+router.get('/',isAuthenticated , async (req, res) => {
     try {
 
-        isAuthenticated;
 
         const aluno = await Aluno.findOne({ email: req.session.account.username });
         console.log(aluno.instituicao);

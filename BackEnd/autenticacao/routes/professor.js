@@ -9,10 +9,9 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 //pesquisar professores da escola do aluno
-router.get('/professores', async (req, res) => {
+router.get('/professores',isAuthenticated , async (req, res) => {
     try{
 
-        isAuthenticated;
 
         const aluno = await Aluno.findOne({ email: req.session.account.username });
 
@@ -34,10 +33,9 @@ router.get('/professores', async (req, res) => {
 });
 
 //pesquisar professores por email
-router.get('/professores/email/:email', async (req, res) => {
+router.get('/professores/email/:email',isAuthenticated , async (req, res) => {
     try{
 
-        isAuthenticated;
 
         const email = req.params.email;
 
@@ -57,8 +55,8 @@ router.get('/professores/email/:email', async (req, res) => {
 });
 
 //pesquisar professores por nome
-router.get('/professores/nome/:nome', async (req, res) => {
-    isAuthenticated;
+router.get('/professores/nome/:nome',isAuthenticated ,async (req, res) => {
+
     //console.log(isAuthenticated(), req.session.isAuthenticated);
     try{
 
@@ -84,10 +82,10 @@ router.get('/professores/nome/:nome', async (req, res) => {
 
 
 //pesquisar professores por email, nome e escola
-router.get('/professores/:email/:nome/:escola', async (req, res) => {
+router.get('/professores/:email/:nome/:escola',isAuthenticated , async (req, res) => {
     try{
 
-        isAuthenticated;
+
 
         const email = req.params.email;
         const nome = req.params.nome;

@@ -1,8 +1,8 @@
 function isAuthenticated(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/signin'); // redirect to sign-in route
+    if (!req.session || !req.session.isAuthenticated) {
+        return res.status(401).json({ message: "Utilizador não autenticado" });
     }
 
     next();
-};
-module.exports = isAuthenticated;
+}
+module.exports = { isAuthenticated };
