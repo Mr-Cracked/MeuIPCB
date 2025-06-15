@@ -10,7 +10,7 @@ const {isAuthenticated} = require("../auth/autheicatorChecker")
 
 
 
-router.post("/inserir" , async (req, res) => {
+router.post("/inserir",isAuthenticated , async (req, res) => {
    try{
 
        const dono = req.body.dono;//req.session.account?.username;
