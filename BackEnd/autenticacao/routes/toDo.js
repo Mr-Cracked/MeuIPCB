@@ -126,11 +126,8 @@ router.put("/atualizar",isAuthenticated , async (req, res) => {
     }
 });
 
-router.post("/apagar", async (req, res) => {
+router.post("/apagar",isAuthenticated, async (req, res) => {
     try{
-        isAuthenticated;
-
-
         const id= req.body;
 
 
@@ -152,9 +149,8 @@ router.post("/apagar", async (req, res) => {
     }
 });
 
-router.get('/velhosdata', async (req, res) => {
+router.get('/velhosdata',isAuthenticated, async (req, res) => {
     try {
-        isAuthenticated;
         const todos = await Todo.find({ dono: req.session.account?.name }).sort({ data_criacao: -1 }); // -1 = descendente, 1 = ascendente
         res.json(todos);
     } catch (error) {
@@ -162,9 +158,8 @@ router.get('/velhosdata', async (req, res) => {
     }
 });
 
-router.get('/novosdata', async (req, res) => {
+router.get('/novosdata',isAuthenticated, async (req, res) => {
     try {
-        isAuthenticated;
         const todos = await Todo.find().sort({ data_criacao: 1 }); // -1 = descendente, 1 = ascendente
         res.json(todos);
     } catch (error) {
@@ -172,7 +167,7 @@ router.get('/novosdata', async (req, res) => {
     }
 });
 
-router.get('/busca', async (req, res) => {
+router.get('/busca',isAuthenticated, async (req, res) => {
     const query = req.query.query || '';
     const utilizador = req.session.account?.name
 

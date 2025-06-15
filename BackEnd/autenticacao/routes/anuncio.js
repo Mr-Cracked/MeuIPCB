@@ -8,12 +8,12 @@ const Curso = require("../models/Curso");
 const Anuncio = require("../models/Anuncio");
 const Roles = require("../models/Roles");
 const {isAuthenticated} = require("../auth/autheicatorChecker")
-const Todo = require("../models/ToDo");
 
 
-router.get("/ver", (req, res) => {
+
+router.get("/ver",isAuthenticated, (req, res) => {
     try{
-        isAuthenticated;
+
 
         const email = req.session.account.username;
         const role = Roles.findOne({ email: email }).role;
@@ -32,9 +32,8 @@ router.get("/ver", (req, res) => {
 
 });
 
-router.post("/inserir", async (req, res) => {
+router.post("/inserir",isAuthenticated, async (req, res) => {
     try{
-        isAuthenticated;
 
         const dono = req.session.account?.name;
         const {titulo,descricao, instituicoes } = req.body;
@@ -61,12 +60,12 @@ router.post("/inserir", async (req, res) => {
         console.error("Erro ao inserir Anuncio:", error);
         return res.status(500).json({ message: "Erro ao inserir Anuncio", error });
     }
-})
+});
 
-router.put("/atualizar", async (req, res) => {
+
+
+router.put("/atualizar",isAuthenticated, async (req, res) => {
     try{
-        isAuthenticated;
-
         const dono = req.session.account?.name;
         const { id,titulo,descricao, instituicoes } = req.body;
         const data = Date.now();
@@ -98,6 +97,31 @@ router.put("/atualizar", async (req, res) => {
         console.error("Erro ao atualizar Anuncio:", error);
         return res.status(500).json({ message: "Erro ao atualizar Anuncio", error });
     }
-})
+});
+
+
+router.post("/apagar",isAuthenticated, async (req, res) => {
+    try{
+        const id= req.body;
+
+
+        if (!id) {
+            return res.status(400).json({ message: "Sem ID." });
+        }
+
+        const resultado = await Anuncio.delete(
+            {id:id},
+            { upsert: true, new: true }
+        );
+        return res.status(201).json({
+            message: "Anuncio apagado com sucesso",
+            anuncio: resultado,
+        });
+    }catch (error) {
+        console.error("Erro ao apagar Anuncio:", error);
+        return res.status(500).json({ message: "Erro ao apagar Anuncio", error });
+    }
+});
+
 
 module.exports = router;
