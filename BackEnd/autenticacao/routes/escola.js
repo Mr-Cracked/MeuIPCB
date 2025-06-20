@@ -7,11 +7,12 @@ const Turma = require("../models/Turma");
 const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
-const {isAuthenticated} = require("../auth/autheicatorChecker")
+const {isAuthenticated} = require("../middleware/autheicatorChecker")
+const {isAluno} = require("../middleware/isAluno");
 
 
 //Get calendário escola da escola do aluno
-router.get('/',isAuthenticated , async (req, res) => {
+router.get('/',isAuthenticated, isAluno, async (req, res) => {
     try {
 
 

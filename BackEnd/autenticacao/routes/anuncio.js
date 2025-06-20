@@ -6,33 +6,46 @@ const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
 const Anuncio = require("../models/Anuncio");
-const Roles = require("../models/Roles");
-const {isAuthenticated} = require("../auth/autheicatorChecker")
+const Role = require("../models/Role");
+const {isAuthenticated} = require("../middleware/autheicatorChecker")
+const {isServicoEscolar} = require("../middleware/isServicoEscolar")
 
 
 
-router.get("/ver",isAuthenticated, (req, res) => {
-    try{
+
+router.get("/ver",isAuthenticated, isServicoEscolar, async (req, res) => {
+    try {
 
 
         const email = req.session.account?.username;
-        const role = Roles.findOne({ email: email }).role;
+        const utilizador = Role.findOne({email: email});
 
-        if (role === "Normal"){
+        if (utilizador.role === "professor") {
             const anuncios = Anuncio.find({email: email});
-            res.status(200).json(anuncios);
-        }else{
+            return res.status(200).json(anuncios);
+        } else if (utilizador.role === "entidade escolar") {
+            const anuncios = await Anuncio.find({
+                instituicao: {
+                    $elemMatch: {
+                        $regex: utilizador.instituicao,
+                        $options: "i" // para ignorar maiúsculas/minúsculas
+                    }
+                }
+            });
+
+            return res.status(200).json(anuncios);
+        } else if (utilizador.role === "Admin") {
             const anuncios = Anuncio.find();
-            res.status(200).json(anuncios);
+            return res.status(200).json(anuncios);
         }
-    }catch (error) {
+    } catch (error) {
         console.error("Erro ao visualizar Anuncios:", error);
-        return res.status(500).json({ message: "Erro ao visualizar Anuncios", error });
+        return res.status(500).json({message: "Erro ao visualizar Anuncios", error});
     }
 
 });
 
-router.post("/inserir",isAuthenticated, async (req, res) => {
+router.post("/inserir",isAuthenticated, isServicoEscolar, async (req, res) => {
     try{
 
         const dono = req.session.account?.username;
@@ -64,7 +77,7 @@ router.post("/inserir",isAuthenticated, async (req, res) => {
 
 
 
-router.put("/atualizar",isAuthenticated, async (req, res) => {
+router.put("/atualizar",isAuthenticated, isServicoEscolar, async (req, res) => {
     try{
         const dono = req.session.account?.username;
         const { id,titulo,descricao, instituicoes } = req.body;
@@ -100,7 +113,7 @@ router.put("/atualizar",isAuthenticated, async (req, res) => {
 });
 
 
-router.post("/apagar",isAuthenticated, async (req, res) => {
+router.post("/apagar",isAuthenticated, isServicoEscolar, async (req, res) => {
     try{
         const {id}= req.body;
 

@@ -3,10 +3,11 @@ const router = express.Router();
 const Aluno = require("../models/Aluno");
 const Turma = require("../models/Turma");
 
-const {isAuthenticated} = require("../auth/autheicatorChecker")
+const {isAuthenticated} = require("../middleware/autheicatorChecker")
+const {isAluno} = require("../middleware/isAluno");
 
 // Get Horário do aluno
-router.get('/horario',isAuthenticated , async (req, res) => {
+router.get('/horario',isAuthenticated , isAluno, async (req, res) => {
 
 
     try {

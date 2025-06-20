@@ -5,11 +5,12 @@ const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
 const router = express.Router();
-const {isAuthenticated} = require("../auth/autheicatorChecker")
+const {isAuthenticated} = require("../middleware/autheicatorChecker")
+const {isAluno} = require("../middleware/isAluno");
 
 
 //pesquisar professores da escola do aluno
-router.get('/professores',isAuthenticated , async (req, res) => {
+router.get('/professores',isAuthenticated, isAluno, async (req, res) => {
     try{
 
         const aluno = await Aluno.findOne({ email: req.session.account.username });
@@ -29,7 +30,7 @@ router.get('/professores',isAuthenticated , async (req, res) => {
 });
 
 //pesquisar professores por email
-router.get('/professores/email/:email',isAuthenticated , async (req, res) => {
+router.get('/professores/email/:email',isAuthenticated , isAluno, async (req, res) => {
     try{
 
         const email = req.params.email;
@@ -49,7 +50,7 @@ router.get('/professores/email/:email',isAuthenticated , async (req, res) => {
 });
 
 //pesquisar professores por nome
-router.get('/professores/nome/:nome',isAuthenticated ,async (req, res) => {
+router.get('/professores/nome/:nome',isAuthenticated , isAluno,async (req, res) => {
 
     try{
 
@@ -71,7 +72,7 @@ router.get('/professores/nome/:nome',isAuthenticated ,async (req, res) => {
 
 
 //pesquisar professores por email, nome e escola
-router.get('/professores/:email/:nome/:escola',isAuthenticated , async (req, res) => {
+router.get('/professores/:email/:nome/:escola',isAuthenticated , isAluno, async (req, res) => {
     try{
 
         const email = req.params.email;

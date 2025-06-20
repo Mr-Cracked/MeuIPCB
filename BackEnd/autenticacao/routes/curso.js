@@ -5,11 +5,12 @@ const mongoose = require("mongoose");
 const Curso = require("../models/Curso");
 const Aluno = require("../models/Aluno");
 const Escola = require("../models/Escola");
-const {isAuthenticated} = require("../auth/autheicatorChecker")
+const {isAuthenticated} = require("../middleware/autheicatorChecker")
+const {isAluno} = require("../middleware/isAluno");
 
 
 //Get calensarios de curso consoante a época
-router.get('/epoca/:epoca',isAuthenticated , async (req, res) =>{
+router.get('/epoca/:epoca',isAuthenticated, isAluno, async (req, res) =>{
     try {
 
 
