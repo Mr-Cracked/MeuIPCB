@@ -5,13 +5,11 @@ const Turma = require("../models/Turma");
 const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
-const {isAuthenticated} = require("../auth/autheicatorChecker")
-
-
-
+const {isAuthenticated} = require("../middleware/autheicatorChecker");
+const {isAluno} = require("../middleware/isAluno")
 
 //Seleciona um aluno
-router.get('/',isAuthenticated , async function (req, res){
+router.get('/',isAuthenticated, isAluno, async function (req, res){
     try {
 
 

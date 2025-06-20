@@ -5,7 +5,8 @@ const Aluno = require("../models/Aluno");
 const Turma = require("../models/Turma");
 const Professor = require("../models/Professor");
 const router = express.Router();
-const {isAuthenticated} = require("../auth/autheicatorChecker")
+const {isAuthenticated} = require("../middleware/autheicatorChecker")
+const {isAluno} = require("../middleware/isAluno");
 
 function criarPrompt(pergunta, aluno, horario, professores) {
 
@@ -55,7 +56,7 @@ async function chamarAI(pergunta) {
     return data.choices?.[0]?.message?.content.trim();
 }
 
-router.post('/pergunta',async (req, res, next) => {
+router.post('/pergunta',isAuthenticated, isAluno,async (req, res, next) => {
     try{
 
        /*if(!isAuthenticated) {

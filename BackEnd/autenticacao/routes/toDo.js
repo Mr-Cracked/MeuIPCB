@@ -6,7 +6,8 @@ const Professor = require("../models/Professor");
 const Escola = require("../models/Escola");
 const Curso = require("../models/Curso");
 const Todo = require("../models/ToDo");
-const { isAuthenticated } = require("../auth/autheicatorChecker");
+const { isAuthenticated } = require("../middleware/autheicatorChecker");
+const { isAluno } = require("../middleware/isAluno");
 
 router.post("/inserir", isAuthenticated, async (req, res) => {
   try {
@@ -61,7 +62,7 @@ router.get("/ver", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/all", isAuthenticated, async (req, res) => {
+router.get("/all", isAuthenticated, isAluno, async (req, res) => {
   try {
     const dono = req.session.account?.username;
     console.log("DONO:", dono);
@@ -83,7 +84,7 @@ router.get("/all", isAuthenticated, async (req, res) => {
   }
 });
 
-router.put("/atualizar", isAuthenticated, async (req, res) => {
+router.put("/atualizar", isAuthenticated, isAluno, async (req, res) => {
   try {
     const dono = req.session.account?.username;
     const { id, titulo, prazo, descricao, prioridade, concluido } = req.body;
@@ -124,7 +125,7 @@ router.put("/atualizar", isAuthenticated, async (req, res) => {
   }
 });
 
-router.delete("/:id", isAuthenticated, async (req, res) => {
+router.delete("/:id", isAuthenticated, isAluno, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -145,7 +146,7 @@ router.delete("/:id", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/velhosdata", isAuthenticated, async (req, res) => {
+router.get("/velhosdata", isAuthenticated, isAluno, async (req, res) => {
   try {
     const todos = await Todo.find({
       dono: req.session.account?.username,
@@ -157,7 +158,7 @@ router.get("/velhosdata", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/prazopox", isAuthenticated, async (req, res) => {
+router.get("/prazopox", isAuthenticated, isAluno, async (req, res) => {
   try {
     const todos = await Todo.find({
       dono: req.session.account?.username,
@@ -169,7 +170,7 @@ router.get("/prazopox", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/prazolonge", isAuthenticated, async (req, res) => {
+router.get("/prazolonge", isAuthenticated, isAluno, async (req, res) => {
   try {
     const todos = await Todo.find({
       dono: req.session.account?.username,
@@ -181,7 +182,7 @@ router.get("/prazolonge", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/novosdata", isAuthenticated, async (req, res) => {
+router.get("/novosdata", isAuthenticated, isAluno, async (req, res) => {
   try {
     const todos = await Todo.find({ dono: req.session.account?.username }).sort(
       { data_criacao: -1 }
@@ -192,7 +193,7 @@ router.get("/novosdata", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/feitos", isAuthenticated, async (req, res) => {
+router.get("/feitos", isAuthenticated, isAluno, async (req, res) => {
   try {
     const todos = await Todo.find({ dono: req.session.account?.username }).sort(
       { concluido: true }
@@ -203,7 +204,7 @@ router.get("/feitos", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/prioridadealta", isAuthenticated, async (req, res) => {
+router.get("/prioridadealta", isAuthenticated, isAluno, async (req, res) => {
   try {
     const dono = req.session.account?.username;
     if (!dono) {
@@ -212,7 +213,14 @@ router.get("/prioridadealta", isAuthenticated, async (req, res) => {
 
     const todos = await Todo.find({ dono, concluido: false });
 
-    const todosOrdenados = todos.sort((a, b) => b.prioridade - a.prioridade);
+    const ordemPrioridade = ["Alta", "Média-Alta", "Média", "Baixa"];
+
+    const todosOrdenados = todos.sort((a, b) => {
+      return (
+        ordemPrioridade.indexOf(a.prioridade) -
+        ordemPrioridade.indexOf(b.prioridade)
+      );
+    });
 
     return res.json(todosOrdenados);
   } catch (error) {
@@ -222,7 +230,7 @@ router.get("/prioridadealta", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/prioridadebaixa", isAuthenticated, async (req, res) => {
+router.get("/prioridadebaixa", isAuthenticated, isAluno, async (req, res) => {
   try {
     const dono = req.session.account?.username;
     if (!dono) {
@@ -248,7 +256,7 @@ router.get("/prioridadebaixa", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/busca", isAuthenticated, async (req, res) => {
+router.get("/busca", isAuthenticated, isAluno, async (req, res) => {
   const query = req.query.query || "";
   const utilizador = req.session.account?.username;
 
