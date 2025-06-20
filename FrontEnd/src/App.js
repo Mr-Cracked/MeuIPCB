@@ -5,7 +5,7 @@ import { PagPrincipal } from "./pages/pagprincipal";
 import { Perfil } from "./pages/perfil";
 import { Todo as Todo } from "./pages/todo"; // Corrigido aqui
 import { Escola } from "./pages/escola";
-import { Horario } from "./pages/horario";
+import Horario from "./pages/horario";
 import { Mapa } from "./pages/mapa";
 import { Professores } from "./pages/professores";
 import { Anuncios } from "./pages/anuncios";

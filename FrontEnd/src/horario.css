@@ -1,0 +1,83 @@
+.layout-container {
+  display: flex;
+  height: 100vh;
+  background-color: #dfe3ff;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #2f3b94;
+  color: white;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.sidebar a.ativo {
+  font-weight: bold;
+  opacity: 1;
+}
+
+.main-content {
+  flex: 1;
+  background-color: white;
+  border-radius: 20px 0 0 0;
+  margin: 20px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.horario-box h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.dia-bloco {
+  background-color: #f0f0f0;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.dia-bloco h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sem-aulas {
+  font-style: italic;
+  color: #666;
+}
+
+.aula-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
