@@ -1,0 +1,160 @@
+.todo-box {
+  background-color: white;
+  margin: 20px auto;
+  padding: 40px 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  width: 90%;
+  max-width: 800px;
+}
+
+.todo-box h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-transform: lowercase;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.todo-item {
+  height: 50px; /* ligeiramente maior para dar mais espaço */
+  border-radius: 16px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+  transition: 0.2s;
+}
+
+/* Cores alternadas */
+.cor0 { background-color: #cfd3fb; }   /* Azul claro */
+.cor1 { background-color: #eca2db; }   /* Rosa */
+.cor2 { background-color: #fceaa0; }   /* Amarelo */
+.cor3 { background-color: #bdfca8; }   /* Verde */
+
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: #d3d4fa;
+  border-radius: 50%; /* Agora redondo */
+}
+
+.todo-text {
+  background-color: transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #222;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-actions button {
+  background-color: #d3d4fa;
+  border: none;
+  border-radius: 8px;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 0;
+}
+
+.todo-actions button:hover {
+  background-color: #b8baf6;
+}
+
+.add-todo-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #4040a1;
+  color: white;
+  font-size: 32px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-todo-button:hover {
+  background-color: #2f2f8c;
+}
+
+/* Painel lateral direito */
+.side-panels {
+  position: absolute;
+  right: 40px;
+  top: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Caixas pretas */
+.black-box {
+  width: 90px;
+  height: 90px;
+  background-color: black;
+  border-radius: 16px;
+}
+
+/* Caixa da data */
+.date-box {
+  width: 100px;
+  height: 130px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.big-day {
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.weekday {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.year {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 6px;
+}
