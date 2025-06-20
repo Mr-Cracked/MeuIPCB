@@ -4,11 +4,15 @@ import { useNavigate, NavLink } from "react-router-dom";
 import "../todo.css";
 import IconButton from "../components/iconbutton.js";
 import TopNavbar from "../components/TopNavbar.js";
+import CriarTarefa from "../components/criarTarefa.js";
+import ConfirmarModal from "../components/confirmarApagar.js";
 
-export function Perfil() {
+export function Todo() {
   const [user, setUser] = useState(null);
   const [todos, setTodos] = useState([]);
+  const [mostrarModal, setMostrarModal] = useState(false);
   const navigate = useNavigate();
+  const [tarefaParaApagar, setTarefaParaApagar] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -33,15 +37,11 @@ export function Perfil() {
           setUser(null);
         }
       }
-
-      return () => {
-        isMounted = false;
-      };
     }
 
     async function fetchTodos() {
       try {
-        const res = await axios.get("http://localhost:3000/api/todos", {
+        const res = await axios.get("http://localhost:3000/api/todo/all", {
           withCredentials: true,
         });
         setTodos(res.data);
@@ -52,31 +52,64 @@ export function Perfil() {
 
     fetchUserProfile();
     fetchTodos();
+
+    return () => {
+      isMounted = false;
+    };
   }, [navigate]);
 
-  function apagarTarefa(id) {
-    axios
-      .delete(`http://localhost:3000/api/todos/${id}`, { withCredentials: true })
-      .then(() => setTodos((prev) => prev.filter((todo) => todo._id !== id)))
-      .catch((err) => console.error("Erro ao apagar tarefa:", err));
+  function confirmarApagar(id) {
+    setTarefaParaApagar(id);
   }
 
-  function concluirTarefa(id) {
+  function apagarTarefaConfirmada() {
+    if (!tarefaParaApagar) return;
+
     axios
-      .put(
-        `http://localhost:3000/api/todos/${id}`,
-        { concluido: true },
-        { withCredentials: true }
-      )
-      .then(() => {
-        // opcionalmente atualiza a lista completa
-        setTodos((prev) =>
-          prev.map((todo) =>
-            todo._id === id ? { ...todo, concluido: true } : todo
-          )
-        );
+      .delete(`http://localhost:3000/api/todo/${tarefaParaApagar}`, {
+        withCredentials: true,
       })
-      .catch((err) => console.error("Erro ao concluir tarefa:", err));
+      .then(() => {
+        setTodos((prev) => prev.filter((t) => t._id !== tarefaParaApagar));
+        setTarefaParaApagar(null);
+      })
+      .catch((err) => {
+        console.error("Erro ao apagar tarefa:", err);
+        alert("Erro ao apagar tarefa.");
+        setTarefaParaApagar(null);
+      });
+  }
+
+function concluirTarefa(id) {
+  const tarefa = todos.find((t) => t._id === id);
+  if (!tarefa) return;
+
+  axios
+    .put(
+      `http://localhost:3000/api/todo/atualizar`,
+      {
+        id,
+        titulo: tarefa.titulo,
+        prazo: tarefa.prazo,
+        descricao: tarefa.descricao,
+        prioridade: tarefa.prioridade,
+        concluido: !tarefa.concluido, // alterna o estado
+      },
+      { withCredentials: true }
+    )
+    .then(() => {
+      setTodos((prev) =>
+        prev.map((todo) =>
+          todo._id === id ? { ...todo, concluido: !todo.concluido } : todo
+        )
+      );
+    })
+    .catch((err) => console.error("Erro ao concluir tarefa:", err));
+}
+
+
+  function adicionarTarefa(novaTarefa) {
+    setTodos((prev) => [...prev, novaTarefa.todo]);
   }
 
   return (
@@ -86,38 +119,59 @@ export function Perfil() {
           <h2>MeuIPCB</h2>
           <ul>
             <li>
-              <NavLink to="/perfil" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
+              <NavLink
+                to="/perfil"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
                 Perfil
               </NavLink>
             </li>
             <li>
-              <NavLink to="/horario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
+              <NavLink
+                to="/horario"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
                 Horário
               </NavLink>
             </li>
             <li>
-              <NavLink to="/calendario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
+              <NavLink
+                to="/calendario"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
                 Calendario
               </NavLink>
             </li>
             <li>
-              <NavLink to="/escola" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
-                escola
+              <NavLink
+                to="/escola"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
+                Escola
               </NavLink>
             </li>
             <li>
-              <NavLink to="/todo" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
-                to-do
+              <NavLink
+                to="/todo"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
+                To-Do
               </NavLink>
             </li>
             <li>
-              <NavLink to="/moodle" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
-                moodle
+              <NavLink
+                to="/moodle"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
+                Moodle
               </NavLink>
             </li>
             <li>
-              <NavLink to="/netpa" className={({ isActive }) => (isActive ? "link ativo" : "link")}>
-                netpa
+              <NavLink
+                to="/netpa"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
+                NetPA
               </NavLink>
             </li>
           </ul>
@@ -135,13 +189,32 @@ export function Perfil() {
                 todos.map((item, index) => (
                   <div className={`todo-item cor${index % 4}`} key={item._id}>
                     <div className="todo-left">
-                      <div className="checkbox"></div>
-                      <div className="todo-text">{item.titulo}</div>
+                      <button
+                        className={`checkbox ${
+                          item.concluido ? "concluido" : ""
+                        }`}
+                        onClick={() => concluirTarefa(item._id)}
+                        title={
+                          item.concluido
+                            ? "Tarefa concluída"
+                            : "Marcar como concluída"
+                        }
+                      >
+                        {item.concluido ? "✓" : "○"}
+                      </button>
+                      <div
+                        className={`todo-text ${
+                          item.concluido ? "riscado" : ""
+                        }`}
+                      >
+                        {item.titulo}
+                      </div>
                     </div>
+
                     <div className="todo-actions">
-                      <button onClick={() => concluirTarefa(item._id)}>✓</button>
-                      <button onClick={() => navigate(`/editartarefa/${item._id}`)}>✎</button>
-                      <button onClick={() => apagarTarefa(item._id)}>🗑</button>
+                      <button onClick={() => confirmarApagar(item._id)}>
+                        🗑
+                      </button>
                     </div>
                   </div>
                 ))
@@ -163,10 +236,24 @@ export function Perfil() {
 
           <button
             className="add-todo-button"
-            onClick={() => navigate("/criartarefa")}
+            onClick={() => setMostrarModal(true)}
           >
             ＋
           </button>
+
+          {mostrarModal && (
+            <CriarTarefa
+              onClose={() => setMostrarModal(false)}
+              onTarefaCriada={adicionarTarefa}
+            />
+          )}
+
+          {tarefaParaApagar && (
+            <ConfirmarModal
+              onConfirmar={apagarTarefaConfirmada}
+              onCancelar={() => setTarefaParaApagar(null)}
+            />
+          )}
         </main>
       </div>
     </div>

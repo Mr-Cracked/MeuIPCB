@@ -158,3 +158,25 @@
   font-weight: 700;
   margin-top: 6px;
 }
+
+.checkbox {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: transform 0.2s ease;
+}
+
+.checkbox:hover {
+  transform: scale(1.2);
+}
+
+.checkbox.concluido {
+  color: green;
+}
+
+.todo-text.riscado {
+  text-decoration: line-through;
+  color: gray;
+}
