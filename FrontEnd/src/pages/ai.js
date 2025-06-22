@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../ai.css";
 import SideNavbar from "../components/sideNavbar";
 import ReactMarkdown from "react-markdown";
-
 
 const temas = {
   "Rosa / Azul": { aluno: "#fddde6", ai: "#cce5ff" },
@@ -12,13 +12,52 @@ const temas = {
   "Preto / Branco": { aluno: "#333", ai: "#eee" },
 };
 
-
 const AIChatPage = () => {
+  const [user, setUser] = useState(null);
   const [mensagens, setMensagens] = useState([]);
   const [mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
   const [temaAtual, setTemaAtual] = useState("Rosa / Azul");
   const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate();
+
+  // ✅ Verificação de autenticação
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchUserProfile() {
+      try {
+        const response = await axios.get("http://localhost:3000/api/aluno/", {
+          withCredentials: true,
+        });
+
+        if (isMounted && response.data) {
+          console.log("✅ Dados do Aluno Recebidos:", response.data);
+          setUser(response.data);
+        } else {
+          console.warn("⚠️ Utilizador não autenticado.");
+          setTimeout(() => {
+            if (isMounted) navigate("/");
+          }, 0);
+        }
+      } catch (error) {
+        console.error("❌ Erro ao buscar perfil do aluno:", error);
+        if (isMounted) {
+          if (error.response?.status === 401) {
+            setTimeout(() => navigate("/"), 0);
+          } else {
+            setUser(null);
+          }
+        }
+      }
+
+      return () => {
+        isMounted = false;
+      };
+    }
+
+    fetchUserProfile();
+  }, [navigate]);
 
   useEffect(() => {
     const tema = temas[temaAtual];
@@ -41,9 +80,9 @@ const AIChatPage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/ai/pergunta",
-        { pergunta: mensagem },
-        { withCredentials: true }
+          "http://localhost:3000/api/ai/pergunta",
+          { pergunta: mensagem },
+          { withCredentials: true }
       );
 
       const novaResposta = { autor: "ai", texto: response.data.resposta };
@@ -60,67 +99,67 @@ const AIChatPage = () => {
   };
 
   return (
-    <div className="ai-wrapper">
-      <SideNavbar />
-      <div className={`chat-container ${darkMode ? "dark" : ""}`}>
-        <h2>Drava</h2>
+      <div className="ai-wrapper">
+        <SideNavbar />
+        <div className={`chat-container ${darkMode ? "dark" : ""}`}>
+          <h2>Drava</h2>
 
-        <div style={{ marginBottom: "1rem", textAlign: "center" }}>
-          <label htmlFor="tema">🎨 Tema:&nbsp;</label>
-          <select
-            id="tema"
-            value={temaAtual}
-            onChange={(e) => setTemaAtual(e.target.value)}
-          >
-            {Object.keys(temas).map((tema) => (
-              <option key={tema} value={tema}>
-                {tema}
-              </option>
+          <div style={{ marginBottom: "1rem", textAlign: "center" }}>
+            <label htmlFor="tema">🎨 Tema:&nbsp;</label>
+            <select
+                id="tema"
+                value={temaAtual}
+                onChange={(e) => setTemaAtual(e.target.value)}
+            >
+              {Object.keys(temas).map((tema) => (
+                  <option key={tema} value={tema}>
+                    {tema}
+                  </option>
+              ))}
+            </select>
+            <button
+                onClick={() => setDarkMode((prev) => !prev)}
+                style={{
+                  marginLeft: "1rem",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "0.5rem",
+                  backgroundColor: darkMode ? "#999" : "#333",
+                  color: "#fff",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+            >
+              {darkMode ? "☀️ Claro" : "🌙 Escuro"}
+            </button>
+          </div>
+
+          <div className={`chat-box ${darkMode ? "dark" : ""}`}>
+            {mensagens.map((msg, i) => (
+                <div key={i} className={`mensagem ${msg.autor}`}>
+                  <ReactMarkdown>{msg.texto}</ReactMarkdown>
+                </div>
             ))}
-          </select>
-          <button
-            onClick={() => setDarkMode((prev) => !prev)}
-            style={{
-              marginLeft: "1rem",
-              padding: "0.5rem 1rem",
-              borderRadius: "0.5rem",
-              backgroundColor: darkMode ? "#999" : "#333",
-              color: "#fff",
-              border: "none",
-              cursor: "pointer",
-            }}
+            {loading && (
+                <div className="mensagem ai">
+                  <span>⏳ A escrever...</span>
+                </div>
+            )}
+          </div>
+
+          <form
+              className={`chat-input ${darkMode ? "dark" : ""}`}
+              onSubmit={enviarPergunta}
           >
-            {darkMode ? "☀️ Claro" : "🌙 Escuro"}
-          </button>
+            <input
+                type="text"
+                value={mensagem}
+                onChange={(e) => setMensagem(e.target.value)}
+                placeholder="Escreve a tua pergunta aqui..."
+            />
+            <button type="submit">➤</button>
+          </form>
         </div>
-
-        <div className={`chat-box ${darkMode ? "dark" : ""}`}>
-          {mensagens.map((msg, i) => (
-            <div key={i} className={`mensagem ${msg.autor}`}>
-              <ReactMarkdown>{msg.texto}</ReactMarkdown>
-            </div>
-          ))}
-          {loading && (
-            <div className="mensagem ai">
-              <span>⏳ A escrever...</span>
-            </div>
-          )}
-        </div>
-
-        <form
-          className={`chat-input ${darkMode ? "dark" : ""}`}
-          onSubmit={enviarPergunta}
-        >
-          <input
-            type="text"
-            value={mensagem}
-            onChange={(e) => setMensagem(e.target.value)}
-            placeholder="Escreve a tua pergunta aqui..."
-          />
-          <button type="submit">➤</button>
-        </form>
       </div>
-    </div>
   );
 };
 

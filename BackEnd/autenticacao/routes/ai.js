@@ -1,6 +1,8 @@
 const fect = require("node-fetch");
 const express = require("express");
 const mongoose = require("mongoose");
+const axios = require("axios");
+const pdfParse = require("pdf-parse");
 const Aluno = require("../models/Aluno");
 const Turma = require("../models/Turma");
 const Professor = require("../models/Professor");
@@ -8,7 +10,7 @@ const router = express.Router();
 const {isAuthenticated} = require("../middleware/autheicatorChecker")
 const {isAluno} = require("../middleware/isAluno");
 
-function criarPrompt(pergunta, aluno, horario, professores) {
+function criarPrompt(pergunta, aluno, horario, professores,  textoCalendario = "") {
 
     return `
 Tu és um assistente virtual académico.
@@ -19,16 +21,34 @@ Baseia-te apenas nestes dados do aluno para responder à pergunta:
 
 Assume o dia da semana e do ano atuais, bem como a hora atual quando respondes às perguntas.
 
-A hora é de Portgual Lisboa.
+A hora é de Portugal Lisboa.
 
 Informações do aluno: ${JSON.stringify(aluno)}
 Horarios do aluno: ${JSON.stringify(horario)}
 Professores da instituição: ${JSON.stringify(professores)}
-
+Calendários institucionais: ${textoCalendario || "Sem calendários fornecidos."}
 Pergunta: ${pergunta}
 
 
 `;
+}
+
+async function extrairTextoPDF(url, cookies) {
+    const response = await axios.get(url, {
+        responseType: "stream",
+        headers: {
+            Cookie: cookies
+        }
+    });
+
+    const chunks = [];
+    for await (const chunk of response.data) {
+        chunks.push(chunk);
+    }
+
+    const buffer = Buffer.concat(chunks);
+    const parsed = await pdfParse(buffer);
+    return parsed.text;
 }
 
 
@@ -62,11 +82,23 @@ router.post('/pergunta',isAuthenticated, isAluno,async (req, res, next) => {
        /*if(!isAuthenticated) {
             return res.status(401).json({message:"Utilizador não autenticado"})
        }*/
-        const email = "guilherme.roque@ipcbcampus.pt"//req.session.account.username
+        const email = req.session.account?.username;
         console.log("pergunta", email);
         const aluno = await Aluno.findOne({ email: email });
         console.log(aluno);
 
+        const cookieHeader = req.headers.cookie;
+
+        const textoCalendarioEscola = await extrairTextoPDF(
+            "http://localhost:3000/api/escola", // <- endpoint da escola
+            cookieHeader
+        );
+
+
+        const textoCalendarioCurso = await extrairTextoPDF(
+            "http://localhost:3000/api/curso/epoca/Normal", // ou "Exames"
+            cookieHeader
+        );
 
         const ano_curricular = aluno.ano_curricular,curso = aluno.curso;
         const horarios = await Turma.find({ ano: ano_curricular, curso: curso, nome: {$in: aluno.turma}});
@@ -76,7 +108,7 @@ router.post('/pergunta',isAuthenticated, isAluno,async (req, res, next) => {
         });
 
         console.log("pergunta", pergunta);
-        const prompt = criarPrompt(pergunta, horarios, aluno, professores);
+        const prompt = criarPrompt(pergunta, horarios, aluno, professores, textoCalendarioEscola + "\n\n" + textoCalendarioCurso);
 
         console.log("VOU CHAMAR A AI");
         const resposta = await chamarAI(prompt);

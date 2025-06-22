@@ -26,7 +26,7 @@ function encode(val) {
  *
  * @param {string} url The base of the url (e.g., http://www.google.com)
  * @param {object} [params] The params to be appended
- * @param {?object} options
+ * @param {?(object|Function)} options
  *
  * @returns {string} The formatted url
  */
@@ -35,21 +35,34 @@ export default function buildURL(url, params, options) {
   if (!params) {
     return url;
   }
-
-  const hashmarkIndex = url.indexOf('#');
-
-  if (hashmarkIndex !== -1) {
-    url = url.slice(0, hashmarkIndex);
-  }
-
+  
   const _encode = options && options.encode || encode;
 
-  const serializerParams = utils.isURLSearchParams(params) ?
-    params.toString() :
-    new AxiosURLSearchParams(params, options).toString(_encode);
+  if (utils.isFunction(options)) {
+    options = {
+      serialize: options
+    };
+  } 
 
-  if (serializerParams) {
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializerParams;
+  const serializeFn = options && options.serialize;
+
+  let serializedParams;
+
+  if (serializeFn) {
+    serializedParams = serializeFn(params, options);
+  } else {
+    serializedParams = utils.isURLSearchParams(params) ?
+      params.toString() :
+      new AxiosURLSearchParams(params, options).toString(_encode);
+  }
+
+  if (serializedParams) {
+    const hashmarkIndex = url.indexOf("#");
+
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
   }
 
   return url;
