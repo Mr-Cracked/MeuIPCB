@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 export default function Contactos() {
   const [alunos, setAlunos] = useState([]);
   const [professores, setProfessores] = useState([]);
+  const [filtro, setFiltro] = useState("Todos");
+  const [termoPesquisa, setTermoPesquisa] = useState("");
 
   useEffect(() => {
     async function fetchDados() {
@@ -30,6 +32,16 @@ export default function Contactos() {
     fetchDados();
   }, []);
 
+  const filtrarLista = (lista) =>
+    lista.filter(
+      (pessoa) =>
+        pessoa.nome.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+        pessoa.email.toLowerCase().includes(termoPesquisa.toLowerCase())
+    );
+
+  const alunosFiltrados = filtro === "Todos" || filtro === "Alunos" ? filtrarLista(alunos) : [];
+  const professoresFiltrados = filtro === "Todos" || filtro === "Professores" ? filtrarLista(professores) : [];
+
   return (
     <div className="perfil-container">
       <div className="main-layout">
@@ -38,75 +50,36 @@ export default function Contactos() {
           <h2>MeuIPCB</h2>
           <ul>
             <li>
-              <NavLink
-                to="/perfil"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Perfil
-              </NavLink>
+              <NavLink to="/perfil" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Perfil</NavLink>
             </li>
             <li>
-              <NavLink
-                to="/horario"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Horário
-              </NavLink>
+              <NavLink to="/horario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Horário</NavLink>
             </li>
             <li className="dropdown">
               <span className="dropdown-label">Calendarios ▾</span>
               <ul className="dropdown-content">
-                <li>
-                  <NavLink to="/calendarioescolar">Escolar</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/calendariofrequencia">Frequências</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/calendarioexames">Exame/Recurso</NavLink>
-                </li>
+                <li><NavLink to="/calendarioescolar">Escolar</NavLink></li>
+                <li><NavLink to="/calendariofrequencia">Frequências</NavLink></li>
+                <li><NavLink to="/calendarioexames">Exame/Recurso</NavLink></li>
               </ul>
             </li>
             <li className="dropdown">
               <span className="dropdown-label">escola ▾</span>
               <ul className="dropdown-content">
-                <li>
-                  <NavLink to="/disciplinas">disciplinas</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/contactos" className="ativo">contactos</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/anuncios">anuncios</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mapa">mapa</NavLink>
-                </li>
+                <li><NavLink to="/disciplinas">disciplinas</NavLink></li>
+                <li><NavLink to="/contactos" className="ativo">contactos</NavLink></li>
+                <li><NavLink to="/anuncios">anuncios</NavLink></li>
+                <li><NavLink to="/mapa">mapa</NavLink></li>
               </ul>
             </li>
             <li>
-              <NavLink
-                to="/todo"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                to-do
-              </NavLink>
+              <NavLink to="/todo" className={({ isActive }) => (isActive ? "link ativo" : "link")}>to-do</NavLink>
             </li>
             <li>
-              <NavLink
-                to="/moodle"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                moodle
-              </NavLink>
+              <NavLink to="/moodle" className={({ isActive }) => (isActive ? "link ativo" : "link")}>moodle</NavLink>
             </li>
             <li>
-              <NavLink
-                to="/netpa"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                netpa
-              </NavLink>
+              <NavLink to="/netpa" className={({ isActive }) => (isActive ? "link ativo" : "link")}>netpa</NavLink>
             </li>
           </ul>
         </aside>
@@ -117,23 +90,48 @@ export default function Contactos() {
 
           <div className="contactos-wrapper">
             <h2>Contactos</h2>
+
+            {/* Barra de pesquisa e filtros */}
+            <div className="filtro-pesquisa">
+              <input
+                type="text"
+                className="input-pesquisa-global"
+                placeholder="Pesquisar por nome ou email..."
+                value={termoPesquisa}
+                onChange={(e) => setTermoPesquisa(e.target.value)}
+              />
+              <select
+                className="select-filtro"
+                value={filtro}
+                onChange={(e) => setFiltro(e.target.value)}
+              >
+                <option value="Todos">Todos</option>
+                <option value="Alunos">Alunos</option>
+                <option value="Professores">Professores</option>
+              </select>
+            </div>
+
             <div className="tabela-contactos">
               <div className="coluna">
                 <h3>Alunos</h3>
-                {alunos.map((aluno, i) => (
-                  <p key={i}>
-                    {aluno.nome} — {aluno.email}
-                  </p>
-                ))}
+                {alunosFiltrados.length > 0 ? (
+                  alunosFiltrados.map((aluno, i) => (
+                    <p key={i}>{aluno.nome} — {aluno.email}</p>
+                  ))
+                ) : (
+                  <p>Não há alunos para mostrar.</p>
+                )}
               </div>
 
               <div className="coluna">
                 <h3>Professores</h3>
-                {professores.map((prof, i) => (
-                  <p key={i}>
-                    {prof.nome} — {prof.email}
-                  </p>
-                ))}
+                {professoresFiltrados.length > 0 ? (
+                  professoresFiltrados.map((prof, i) => (
+                    <p key={i}>{prof.nome} — {prof.email}</p>
+                  ))
+                ) : (
+                  <p>Não há professores para mostrar.</p>
+                )}
               </div>
 
               <div className="coluna">
