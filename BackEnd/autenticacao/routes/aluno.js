@@ -48,5 +48,45 @@ router.get("/emails", isAuthenticated, isAluno, async function (req, res) {
   }
 });
 
+router.get('/alunos/email/:email',isAuthenticated , isAluno, async (req, res) => {
+    try{
+
+        const email = req.params.email;
+
+        const alunos = await Aluno.find({email: {$regex : email, $options: "i" }});
+
+        if(!alunos.length) {
+            return res.status(404).json({message:"Não foram encontrados alunos"})
+        }
+
+        return res.json(alunos);
+    }catch(err){
+        console.error("OLHA O ERRO ", err);
+        return res.status(500).json({ message: "Erro ao encontrar alunos", err });
+
+    }
+});
+
+//pesquisar alunos por nome
+router.get('/alunos/nome/:nome',isAuthenticated , isAluno,async (req, res) => {
+
+    try{
+
+        const nome = req.params.nome;
+
+        const alunos = await Aluno.find({nome: {$regex : nome, $options: "i" }});
+
+        if(!alunos.length) {
+            return res.status(404).json({message:"Não foram encontrados alunos"})
+        }
+
+        return res.json(alunos);
+    }catch(err){
+        console.error("OLHA O ERRO ", err);
+        return res.status(500).json({ message: "Erro ao encontrar alunos", err });
+
+    }
+});
+
 
 module.exports = router;
