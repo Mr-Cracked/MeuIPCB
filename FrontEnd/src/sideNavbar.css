@@ -1,0 +1,85 @@
+/* NAVBAR */
+.side-navbar {
+  position: fixed;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  width: 60px;
+  background-color: white;
+  border-radius: 2rem;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 1000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.side-navbar.expandida {
+  width: 180px;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-item .icon {
+  font-size: 1.5rem;
+}
+
+.nav-item span {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+/* BOTÃO FLUTUANTE SEPARADO */
+.toggle-flutuante-separado {
+  position: fixed;
+  left: 2rem;
+  top: calc(50% - 120px); /* 120px acima do centro (ajustável) */
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  z-index: 1100;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  color: #333;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.toggle-flutuante-separado:hover {
+  background-color: #eee;
+  transform: scale(1.05);
+}
+
+/* Modo escuro */
+body.dark .side-navbar {
+  background-color: #2a2a2a;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+}
+
+body.dark .nav-item {
+  color: #ccc;
+}
+
+body.dark .toggle-flutuante-separado {
+  background-color: #333;
+  color: white;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.05);
+}
+
+body.dark .toggle-flutuante-separado:hover {
+  background-color: #444;
+}
