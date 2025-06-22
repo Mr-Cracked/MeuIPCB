@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../ai.css";
 import SideNavbar from "../components/sideNavbar";
+import ReactMarkdown from "react-markdown";
+
 
 const temas = {
   "Rosa / Azul": { aluno: "#fddde6", ai: "#cce5ff" },
@@ -10,9 +12,10 @@ const temas = {
   "Preto / Branco": { aluno: "#333", ai: "#eee" },
 };
 
+
 const AIChatPage = () => {
-  const [mensagem, setMensagem] = useState("");
   const [mensagens, setMensagens] = useState([]);
+  const [mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
   const [temaAtual, setTemaAtual] = useState("Rosa / Azul");
   const [darkMode, setDarkMode] = useState(false);
@@ -38,7 +41,7 @@ const AIChatPage = () => {
 
     try {
       const response = await axios.post(
-        "/ai/pergunta",
+        "http://localhost:3000/api/ai/pergunta",
         { pergunta: mensagem },
         { withCredentials: true }
       );
@@ -94,7 +97,7 @@ const AIChatPage = () => {
         <div className={`chat-box ${darkMode ? "dark" : ""}`}>
           {mensagens.map((msg, i) => (
             <div key={i} className={`mensagem ${msg.autor}`}>
-              <span>{msg.texto}</span>
+              <ReactMarkdown>{msg.texto}</ReactMarkdown>
             </div>
           ))}
           {loading && (
