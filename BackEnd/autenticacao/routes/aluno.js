@@ -11,9 +11,6 @@ const {isAluno} = require("../middleware/isAluno")
 //Seleciona um aluno
 router.get('/',isAuthenticated, isAluno, async function (req, res){
     try {
-
-
-
         const nome = req.session.account?.name;
         const email = req.session.account?.username;
 
@@ -37,7 +34,19 @@ router.get('/',isAuthenticated, isAluno, async function (req, res){
     }
 });
 
+router.get("/emails", isAuthenticated, isAluno, async function (req, res) {
+  try {
+    const alunos = await Aluno.find({}, "nome email");
+    const resultado = alunos.map(aluno => ({
+      nome: aluno.nome,
+      email: aluno.email,
+    }));
+    res.json(resultado);
+  } catch (err) {
+    console.error("Erro ao obter emails dos alunos:", err);
+    res.status(500).json({ message: "Erro ao obter emails dos alunos", err });
+  }
+});
 
 
-
-module.exports = router;                    
+module.exports = router;

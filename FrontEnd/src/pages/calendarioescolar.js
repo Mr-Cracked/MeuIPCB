@@ -1,7 +1,7 @@
 
 
 
-export function Calendarios() {
+export function CalendarioEscolar() {
     return (
         <div>
             <h1>This is AddAnuncio</h1>

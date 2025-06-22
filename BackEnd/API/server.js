@@ -20,9 +20,8 @@ app.use(cors({
 app.use("/api/aluno", alunoRoutes);
 app.use("/api/anuncio", anuncioRoutes);
 app.use("api/escola", escolaRoutes);
-app.use("api/professor", professorRoutes);
-app.use("api/turma", turmaRoutes);
-
+app.use("/api/professor", professorRoutes);
+app.use("/api/turma", turmaRoutes);
 
 
 

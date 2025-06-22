@@ -1,3 +1,4 @@
+/* Base */
 .perfil-container {
   display: flex;
   flex-direction: column;
@@ -6,16 +7,26 @@
   background-color: #e8eaff;
 }
 
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .main-layout {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   flex: 1;
 }
 
 .sidebar {
   width: 180px;
+  min-width: 150px;
   background-color: #4040a1;
   color: white;
   padding: 20px;
+  flex-shrink: 0;
 }
 
 .sidebar ul {
@@ -33,137 +44,144 @@
   padding: 20px;
 }
 
-/* NOVO layout principal das colunas */
+/* Layout principal das colunas */
 .grid-layout {
   display: flex;
+  flex-wrap: wrap;
   gap: 40px;
   align-items: flex-start;
 }
 
-/* Coluna da esquerda: perfil + painel */
 .left-column {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  flex: 1;
+  min-width: 300px;
 }
 
 /* Cartão de perfil */
 .perfil-card {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 30px;
   padding: 30px;
-  box-shadow: 0px 6px 0px #9aa3f8;
-  flex-shrink: 0;
-  max-width: 1150px;
+  box-shadow: 6px 6px 0px #cbd2ff;
   gap: 30px;
+  max-width: 100%;
 }
 
 .avatar-placeholder {
-  width: 250px;
-  height: 250px;
-  background: linear-gradient(145deg, #8d95e4, #5a6cd0);
+  width: 180px;
+  height: 180px;
+  background: linear-gradient(145deg, #aab2f3, #6774da);
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .perfil-conteudo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
+
 .perfil-nome {
-  font-size: 24px;
+  font-size: 22px;
   color: #1e2659;
+  font-weight: bold;
   margin-bottom: 20px;
-  text-align: left;
+  text-align: center;
 }
 
 .perfil-info {
   background-color: #dfe2ff;
-  padding: 20px;
+  padding: 20px 25px;
   border-radius: 15px;
   color: #3a3a3a;
-  font-weight: bold;
-  line-height: 1;
-  font-size: 15px;
-}
-
-.perfil-info h2 {
-  margin: 0 0 20px 0;
-  color: #1e2659;
-  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.6;
+  font-size: 14px;
+  text-align: left;
+  max-width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .perfil-info p {
-  background-color: #dfe2ff;
-  padding: 8px 12px;
-  border-radius: 10px;
-  margin: 5px 0;
-  font-weight: 500;
-  color: #3a3a3a;
+  margin: 8px 0;
 }
 
 /* Painéis por baixo do cartão */
 .painel {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .left-painel {
-  flex: 2;
-  background-color: white;
-  border-radius: 15px;
-  max-height: 375px;
-  max-width: 700px;
-  height: 375px;
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 30px;
+  height: 300px;
+  min-width: 300px;
+  box-shadow: 4px 4px 0px #cbd2ff;
 }
 
 .middle-painel {
-  flex: 1;
+  flex: none;
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  padding: 35px 15px 0px 35px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
   background-color: white;
-  border-radius: 15px;
-  height: 375px;
-  max-width: 200px;
+  border-radius: 20px;
+  width: 130px;
+  height: auto;
+  box-shadow: 4px 4px 0px #cbd2ff;
 }
+
 
 .black-box {
   background-color: black;
-  border-radius: 15px;
-  height: 170px;
-  max-width: 170px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
 }
+
 
 /* Painel de tarefas à direita */
 .todo-painel {
-  width: 350px;
-  height: 832px;
+  width: 100%;
+  max-width: 320px;
   border-radius: 30px;
-  background-color: white;
-  padding: 15px;
+  background-color: #ffffff;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  gap: 10px;
+  box-shadow: 4px 4px 0px #cbd2ff;
 }
 
 .todo-painel h2 {
-  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
   color: #000;
+  margin-bottom: 15px;
 }
 
 .todo-item {
   height: 30px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 10px 0;
 }
 
 .azul {
-  background-color: #a9b8ff;
+  background-color: #bbc9ff;
 }
 .rosa {
   background-color: #f3a3d6;
@@ -175,6 +193,7 @@
   background-color: #a7f5a1;
 }
 
+/* Links e Dropdown */
 .link {
   color: white;
   text-decoration: none;
@@ -189,4 +208,76 @@
   background-color: transparent;
   color: white;
   font-weight: bold;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-label {
+  cursor: pointer;
+  padding: 5px 10px;
+  display: inline-block;
+  color: white;
+}
+
+.dropdown-content {
+  display: none;
+  position: relative;
+  padding-left: 10px;
+  list-style: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li {
+  padding: 3px 0;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1000px) {
+  .grid-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .perfil-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .painel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .middle-painel {
+    padding: 20px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .todo-painel {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .perfil-info {
+    font-size: 13px;
+  }
+
+  .avatar-placeholder {
+    width: 150px;
+    height: 150px;
+  }
 }

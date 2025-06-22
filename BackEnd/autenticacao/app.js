@@ -95,4 +95,6 @@ app.use(function (err, req, res, next) {
   });
 });
 
+app.use("/api/alunos", alunoRoutes);
+
 module.exports = app;

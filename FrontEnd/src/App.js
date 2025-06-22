@@ -9,8 +9,9 @@ import Horario from "./pages/horario";
 import { Mapa } from "./pages/mapa";
 import { Professores } from "./pages/professores";
 import { Anuncios } from "./pages/anuncios";
-import { Calendarios } from "./pages/calendarios";
+import { CalendarioEscolar } from "./pages/calendarioescolar";
 import { Disciplinas } from "./pages/disciplinas";
+import Contactos from "./pages/contactos";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/professores" element={<Professores />} />
         <Route path="/anuncios" element={<Anuncios />} />
-        <Route path="/calendarios" element={<Calendarios />} />
+        <Route path="/calendarioescolar" element={<CalendarioEscolar />} />
         <Route path="/disciplinas" element={<Disciplinas />} />
+        <Route path="/contactos" element={<Contactos />} />
       </Routes>
     </Router>
   );
