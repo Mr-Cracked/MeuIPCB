@@ -14,6 +14,8 @@ import { Disciplinas } from "./pages/disciplinas";
 import Contactos from "./pages/contactos";
 import CalendarioExames from "./pages/calendarioexames";
 import CalendarioFrequencia from "./pages/calendariofrequencia";
+import AIChatPage from "./pages/ai";
+
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
         <Route path="/calendariofrequencia" element={<CalendarioFrequencia />} />
         <Route path="/disciplinas" element={<Disciplinas />} />
         <Route path="/contactos" element={<Contactos />} />
+        <Route path="/ai" element={<AIChatPage />} />
       </Routes>
     </Router>
   );

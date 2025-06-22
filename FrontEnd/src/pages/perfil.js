@@ -101,7 +101,14 @@ export function Perfil() {
                 </li>
               </ul>
             </li>
-
+            <li>
+              <NavLink
+                to="/ai"
+                className={({ isActive }) => (isActive ? "link ativo" : "link")}
+              >
+                AI
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="/todo"
@@ -165,8 +172,6 @@ export function Perfil() {
                   )}
                 </div>
               </div>
-
-              {/* Painéis por baixo do cartão */}
               <div className="painel">
                 <div className="left-painel" />
                 <div className="middle-painel">

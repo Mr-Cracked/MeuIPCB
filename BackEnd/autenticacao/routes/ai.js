@@ -23,7 +23,7 @@ A hora é de Portgual Lisboa.
 
 Informações do aluno: ${JSON.stringify(aluno)}
 Horarios do aluno: ${JSON.stringify(horario)}
-Porfessores da instituição: ${JSON.stringify(professores)}
+Professores da instituição: ${JSON.stringify(professores)}
 
 Pergunta: ${pergunta}
 
