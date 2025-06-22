@@ -1,3 +1,11 @@
+/* Garante que a altura da página não ultrapasse a viewport */
+html, body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 .contactos-wrapper {
   padding: 0rem 2rem 2rem 2rem;
   height: 100%;
@@ -54,25 +62,36 @@
 
 .filtro-pesquisa {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  justify-content: space-between;
   align-items: center;
+  background-color: #f3f3fe;
+  border-radius: 0.75rem;
+  padding: 0.3rem 0.5rem;
+  margin-bottom: 1rem;
+  height: 40px;
 }
 
 .input-pesquisa-global {
   flex: 1;
-  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent;
   font-size: 0.95rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  padding: 0 0.75rem;
+  color: #333;
+  outline: none;
 }
 
 .select-filtro {
-  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent;
   font-size: 0.95rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  margin-left: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  color: #000;
+  font-weight: bold;
+  border-left: 1px solid #ccc;
 }
+
 
 /* Garantir que as colunas apareçam sempre, mesmo com filtro aplicado */
 .coluna p {

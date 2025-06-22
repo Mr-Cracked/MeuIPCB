@@ -12,6 +12,8 @@ import { Anuncios } from "./pages/anuncios";
 import { CalendarioEscolar } from "./pages/calendarioescolar";
 import { Disciplinas } from "./pages/disciplinas";
 import Contactos from "./pages/contactos";
+import CalendarioExames from "./pages/calendarioexames";
+import CalendarioFrequencia from "./pages/calendariofrequencia";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/professores" element={<Professores />} />
         <Route path="/anuncios" element={<Anuncios />} />
         <Route path="/calendarioescolar" element={<CalendarioEscolar />} />
+        <Route path="/calendarioexames" element={<CalendarioExames />} />
+        <Route path="/calendariofrequencia" element={<CalendarioFrequencia />} />
         <Route path="/disciplinas" element={<Disciplinas />} />
         <Route path="/contactos" element={<Contactos />} />
       </Routes>

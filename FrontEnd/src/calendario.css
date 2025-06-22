@@ -1,0 +1,9 @@
+.calendario-wrapper {
+    padding: 2rem;
+}
+
+.pdf-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
