@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../ai.css";
-import SideNavbar from "../components/sideNavbar";
+import SideNavbar from "../components/navbarAI";
 import ReactMarkdown from "react-markdown";
 
 const temas = {

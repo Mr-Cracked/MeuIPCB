@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SideNavbar from "../components/sideNavbar"; // ✅ corrigido
+import TopNavbar from "../components/TopNavbar";
 import "../perfil.css";
-import { NavLink } from "react-router-dom";
-import IconButton from "../components/iconbutton.js";
-import TopNavbar from "../components/TopNavbar.js";
 
 export function Perfil() {
   const [user, setUser] = useState(null);
@@ -51,90 +50,7 @@ export function Perfil() {
   return (
     <div className="perfil-container">
       <div className="main-layout">
-        <aside className="sidebar">
-          <h2>MeuIPCB</h2>
-          <ul>
-            <li>
-              <NavLink
-                to="/perfil"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Perfil
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/horario"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Horário
-              </NavLink>
-            </li>
-            <li className="dropdown">
-              <span className="dropdown-label">Calendarios ▾</span>
-              <ul className="dropdown-content">
-                <li>
-                  <NavLink to="/calendarioescolar">Escolar</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/calendariofrequencia">Frequências</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/calendarioexames">Exame/Recurso</NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="dropdown">
-              <span className="dropdown-label">escola ▾</span>
-              <ul className="dropdown-content">
-                <li>
-                  <NavLink to="/disciplinas">disciplinas</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/contactos">contactos</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/anuncios">anuncios</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/mapa">mapa</NavLink>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <NavLink
-                to="/ai"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                AI
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/todo"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                to-do
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/moodle"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                moodle
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/netpa"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                netpa
-              </NavLink>
-            </li>
-          </ul>
-        </aside>
+        <SideNavbar />
 
         <main className="content">
           <TopNavbar />
@@ -163,7 +79,8 @@ export function Perfil() {
                           <strong>Escola:</strong> {user.instituicao}
                         </p>
                         <p>
-                          <strong>Ano Curricular:</strong> {user.ano_curricular}
+                          <strong>Ano Curricular:</strong>{" "}
+                          {user.ano_curricular}
                         </p>
                       </div>
                     </>
@@ -172,6 +89,7 @@ export function Perfil() {
                   )}
                 </div>
               </div>
+
               <div className="painel">
                 <div className="left-painel" />
                 <div className="middle-painel">

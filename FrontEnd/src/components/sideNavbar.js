@@ -1,54 +1,47 @@
-// src/components/SideNavbar.js
 import React, { useState } from "react";
-import {
-  FaComments,
-  FaUserGraduate,
-  FaCalendarAlt,
-  FaCogs,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-import "../sideNavbar.css";
+import { NavLink } from "react-router-dom";
+import "./sideNavbar.css";
 
-const SideNavbar = () => {
-  const [expandida, setExpandida] = useState(false);
+export default function SideNavbar() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownCalendario, setDropdownCalendario] = useState(false);
 
-  const toggleNavbar = () => {
-    setExpandida(!expandida);
-  };
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDropdownCalendario = () => setDropdownCalendario(!dropdownCalendario);
 
   return (
-    <>
-      {/* Botão flutuante separado */}
-      <button
-        className="toggle-flutuante-separado"
-        onClick={toggleNavbar}
-        title={expandida ? "Fechar menu" : "Abrir menu"}
-      >
-        {expandida ? <FaTimes /> : <FaBars />}
-      </button>
+    <div className="sidebar">
+      <div className="logo"></div>
 
-      {/* NAVBAR */}
-      <div className={`side-navbar ${expandida ? "expandida" : ""}`}>
-        <div className="nav-item">
-          <FaComments className="icon" />
-          {expandida && <span>Chat</span>}
-        </div>
-        <div className="nav-item">
-          <FaUserGraduate className="icon" />
-          {expandida && <span>Alunos</span>}
-        </div>
-        <div className="nav-item">
-          <FaCalendarAlt className="icon" />
-          {expandida && <span>Calendário</span>}
-        </div>
-        <div className="nav-item">
-          <FaCogs className="icon" />
-          {expandida && <span>Definições</span>}
-        </div>
+      <NavLink to="/" className="nav-item">página principal</NavLink>
+      <NavLink to="/perfil" className="nav-item">perfil</NavLink>
+      <NavLink to="/horario" className="nav-item">horario</NavLink>
+
+      <div className={`nav-item dropdown-toggle ${dropdownCalendario ? "open" : ""}`} onClick={toggleDropdownCalendario}>
+        calendario
       </div>
-    </>
-  );
-};
+      {dropdownCalendario && (
+        <div className="dropdown-menu">
+          <NavLink to="/calendario-escolar" className="nav-item subitem">escolar</NavLink>
+          <NavLink to="/calendario-exames" className="nav-item subitem">exames</NavLink>
+        </div>
+      )}
 
-export default SideNavbar;
+      <div className={`nav-item dropdown-toggle ${dropdownOpen ? "open" : ""}`} onClick={toggleDropdown}>
+        escola
+      </div>
+      {dropdownOpen && (
+        <div className="dropdown-menu">
+          <NavLink to="/disciplinas" className="nav-item subitem">disciplinas</NavLink>
+          <NavLink to="/contactos" className="nav-item subitem">contactos</NavLink>
+          <NavLink to="/anuncios" className="nav-item subitem">anuncios</NavLink>
+          <NavLink to="/mapa" className="nav-item subitem">mapa</NavLink>
+        </div>
+      )}
+
+      <NavLink to="/todo" className="nav-item">to-do</NavLink>
+      <NavLink to="/moodle" className="nav-item">moodle</NavLink>
+      <NavLink to="/netpa" className="nav-item">netpa</NavLink>
+    </div>
+  );
+}

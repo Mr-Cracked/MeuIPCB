@@ -6,13 +6,16 @@ import IconButton from "../components/iconbutton.js";
 import TopNavbar from "../components/TopNavbar.js";
 import CriarTarefa from "../components/criarTarefa.js";
 import ConfirmarModal from "../components/confirmarApagar.js";
+import EditarTarefa from "../components/editarTarefa.js";
+import { FaTrashAlt, FaEdit, FaRegCalendarAlt } from "react-icons/fa";
 
 export function Todo() {
   const [user, setUser] = useState(null);
   const [todos, setTodos] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
-  const navigate = useNavigate();
+  const [tarefaParaEditar, setTarefaParaEditar] = useState(null);
   const [tarefaParaApagar, setTarefaParaApagar] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
@@ -80,36 +83,45 @@ export function Todo() {
       });
   }
 
-function concluirTarefa(id) {
-  const tarefa = todos.find((t) => t._id === id);
-  if (!tarefa) return;
+  function concluirTarefa(id) {
+    const tarefa = todos.find((t) => t._id === id);
+    if (!tarefa) return;
 
-  axios
-    .put(
-      `http://localhost:3000/api/todo/atualizar`,
-      {
-        id,
-        titulo: tarefa.titulo,
-        prazo: tarefa.prazo,
-        descricao: tarefa.descricao,
-        prioridade: tarefa.prioridade,
-        concluido: !tarefa.concluido, // alterna o estado
-      },
-      { withCredentials: true }
-    )
-    .then(() => {
-      setTodos((prev) =>
-        prev.map((todo) =>
-          todo._id === id ? { ...todo, concluido: !todo.concluido } : todo
-        )
-      );
-    })
-    .catch((err) => console.error("Erro ao concluir tarefa:", err));
-}
-
+    axios
+      .put(
+        `http://localhost:3000/api/todo/atualizar`,
+        {
+          id,
+          titulo: tarefa.titulo,
+          prazo: tarefa.prazo,
+          descricao: tarefa.descricao,
+          prioridade: tarefa.prioridade,
+          concluido: !tarefa.concluido,
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setTodos((prev) =>
+          prev.map((todo) =>
+            todo._id === id ? { ...todo, concluido: !todo.concluido } : todo
+          )
+        );
+      })
+      .catch((err) => console.error("Erro ao concluir tarefa:", err));
+  }
 
   function adicionarTarefa(novaTarefa) {
     setTodos((prev) => [...prev, novaTarefa.todo]);
+  }
+
+  function getCorPrioridade(p) {
+    if (!p) return "";
+    const prioridade = p.toLowerCase();
+    if (prioridade === "alta") return "prioridade-alta";
+    if (prioridade === "média-alta") return "prioridade-media-alta";
+    if (prioridade === "média") return "prioridade-media";
+    if (prioridade === "baixa") return "prioridade-baixa";
+    return "";
   }
 
   return (
@@ -118,62 +130,13 @@ function concluirTarefa(id) {
         <aside className="sidebar">
           <h2>MeuIPCB</h2>
           <ul>
-            <li>
-              <NavLink
-                to="/perfil"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Perfil
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/horario"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Horário
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/calendario"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Calendario
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/escola"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Escola
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/todo"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                To-Do
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/moodle"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                Moodle
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/netpa"
-                className={({ isActive }) => (isActive ? "link ativo" : "link")}
-              >
-                NetPA
-              </NavLink>
-            </li>
+            <li><NavLink to="/perfil" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Perfil</NavLink></li>
+            <li><NavLink to="/horario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Horário</NavLink></li>
+            <li><NavLink to="/calendario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Calendario</NavLink></li>
+            <li><NavLink to="/escola" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Escola</NavLink></li>
+            <li><NavLink to="/todo" className={({ isActive }) => (isActive ? "link ativo" : "link")}>To-Do</NavLink></li>
+            <li><NavLink to="/moodle" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Moodle</NavLink></li>
+            <li><NavLink to="/netpa" className={({ isActive }) => (isActive ? "link ativo" : "link")}>NetPA</NavLink></li>
           </ul>
         </aside>
 
@@ -186,34 +149,39 @@ function concluirTarefa(id) {
               {todos.length === 0 ? (
                 <p>Sem tarefas.</p>
               ) : (
-                todos.map((item, index) => (
-                  <div className={`todo-item cor${index % 4}`} key={item._id}>
+                todos.map((item) => (
+                  <div className={`todo-item ${getCorPrioridade(item.prioridade)}`} key={item._id}>
                     <div className="todo-left">
                       <button
-                        className={`checkbox ${
-                          item.concluido ? "concluido" : ""
-                        }`}
+                        className={`checkbox ${item.concluido ? "concluido" : ""}`}
                         onClick={() => concluirTarefa(item._id)}
-                        title={
-                          item.concluido
-                            ? "Tarefa concluída"
-                            : "Marcar como concluída"
-                        }
+                        title={item.concluido ? "Tarefa concluída" : "Marcar como concluída"}
                       >
                         {item.concluido ? "✓" : "○"}
                       </button>
-                      <div
-                        className={`todo-text ${
-                          item.concluido ? "riscado" : ""
-                        }`}
-                      >
-                        {item.titulo}
-                      </div>
+                    </div>
+
+                    <div className={`todo-text ${item.concluido ? "riscado" : ""}`}>
+                      {item.titulo}
                     </div>
 
                     <div className="todo-actions">
-                      <button onClick={() => confirmarApagar(item._id)}>
-                        🗑
+                      <div className={`tag-prazo ${getCorPrioridade(item.prioridade)}`} title="Prazo">
+                        <FaRegCalendarAlt size={14} />
+                      </div>
+                      <button
+                        className={`botao-editar ${getCorPrioridade(item.prioridade)}`}
+                        title="Editar"
+                        onClick={() => setTarefaParaEditar(item)}
+                      >
+                        <FaEdit size={14} />
+                      </button>
+                      <button
+                        className={`botao-apagar ${getCorPrioridade(item.prioridade)}`}
+                        title="Apagar"
+                        onClick={() => confirmarApagar(item._id)}
+                      >
+                        <FaTrashAlt size={14} />
                       </button>
                     </div>
                   </div>
@@ -227,24 +195,30 @@ function concluirTarefa(id) {
             <div className="black-box"></div>
             <div className="date-box">
               <div className="big-day">{new Date().getDate()}</div>
-              <div className="weekday">
-                {new Date().toLocaleDateString("pt-PT", { weekday: "long" })}
-              </div>
+              <div className="weekday">{new Date().toLocaleDateString("pt-PT", { weekday: "long" })}</div>
               <div className="year">{new Date().getFullYear()}</div>
             </div>
           </div>
 
-          <button
-            className="add-todo-button"
-            onClick={() => setMostrarModal(true)}
-          >
-            ＋
-          </button>
+          <button className="add-todo-button" onClick={() => setMostrarModal(true)}>＋</button>
 
           {mostrarModal && (
             <CriarTarefa
               onClose={() => setMostrarModal(false)}
               onTarefaCriada={adicionarTarefa}
+            />
+          )}
+
+          {tarefaParaEditar && (
+            <EditarTarefa
+              tarefa={tarefaParaEditar}
+              onFechar={() => setTarefaParaEditar(null)}
+              onAtualizada={(tAtualizada) => {
+                setTodos((prev) =>
+                  prev.map((t) => (t._id === tAtualizada._id ? tAtualizada : t))
+                );
+                setTarefaParaEditar(null);
+              }}
             />
           )}
 

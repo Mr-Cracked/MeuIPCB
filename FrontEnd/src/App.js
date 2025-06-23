@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route} from "react-router-dom";
 
 import { PagPrincipal } from "./pages/pagprincipal";
 import { Perfil } from "./pages/perfil";
@@ -10,7 +10,7 @@ import { Mapa } from "./pages/mapa";
 import { Professores } from "./pages/professores";
 import { Anuncios } from "./pages/anuncios";
 import { CalendarioEscolar } from "./pages/calendarioescolar";
-import { Disciplinas } from "./pages/disciplinas";
+import Disciplinas  from "./pages/disciplinas";
 import Contactos from "./pages/contactos";
 import CalendarioExames from "./pages/calendarioexames";
 import CalendarioFrequencia from "./pages/calendariofrequencia";
@@ -19,6 +19,7 @@ import AIChatPage from "./pages/ai";
 
 function App() {
   return (
+  
     <Router>
       <Routes>
         <Route path="/" element={<PagPrincipal />} />

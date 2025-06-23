@@ -2,93 +2,78 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 50, 0.4);
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000;
 }
 
-.card-tarefa {
-  background-color: #e3e8ff;
-  border-radius: 20px;
-  padding: 1.5rem;
-  width: 600px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  position: relative;
+.modal {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-.titulo-card {
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
   text-align: center;
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #1a1a1a;
 }
 
-.fechar-card {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: #3c459f;
-  cursor: pointer;
-}
-
-.conteudo-card {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.esquerda {
+.form-tarefa {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  flex: 1;
+  gap: 15px;
 }
 
-.campo {
-  background-color: #cbd5ff;
-  border-radius: 10px;
-  height: 30px;
-  padding: 0.5rem;
+.form-tarefa label {
   font-weight: bold;
-  color: #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 14px;
 }
 
-.campo-input {
-  background-color: #cbd5ff;
-  border: none;
-  border-radius: 10px;
-  padding: 0.5rem;
-  font-size: 1rem;
-  color: #1a1a1a;
-}
-
-.campo.editar {
-  margin-top: 1rem;
-  background-color: #3c459f;
-  color: white;
-  cursor: pointer;
-  border: none;
-}
-
-.descricao-box {
-  background-color: #cbd5ff;
-  border: none;
-  border-radius: 10px;
-  padding: 1rem;
-  font-size: 1rem;
+.form-tarefa input,
+.form-tarefa textarea,
+.form-tarefa select {
   width: 100%;
-  height: 180px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
   resize: none;
-  color: #1a1a1a;
-  box-sizing: border-box;
+}
+
+.form-tarefa textarea {
+  height: 80px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botoes button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.botoes button[type="submit"] {
+  background-color: #4040a1;
+  color: white;
+}
+
+.botoes .cancelar {
+  background-color: #ddd;
+  color: #333;
 }

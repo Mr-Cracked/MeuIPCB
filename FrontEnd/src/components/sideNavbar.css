@@ -1,0 +1,87 @@
+.perfil-container .sidebar {
+  background-color: red !important;
+  width: 200px;
+  height: 100vh;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  height: 80px;
+ /* background-image: url("/logo-placeholder.svg");*/
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50px;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+
+.nav-item {
+  padding: 0.9rem 1.2rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-left: 4px solid transparent;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #f5c242;
+  transform: translateX(2px);
+}
+
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 4px solid #f5c242;
+}
+
+.dropdown-toggle::after {
+  content: " ▾";
+  float: right;
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+
+.dropdown-toggle.open::after {
+  content: " ▴";
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-in-out;
+  padding-left: 0.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  margin-left: 1rem;
+}
+
+.subitem {
+  padding: 0.5rem 1.2rem;
+  font-weight: 400;
+  font-size: 0.92rem;
+  color: #ddddff;
+  transition: background 0.2s ease-in-out;
+}
+
+.subitem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.4rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -3,7 +3,6 @@
   margin: 20px auto;
   padding: 40px 20px;
   border-radius: 16px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   width: 90%;
   max-width: 800px;
 }
@@ -24,67 +23,106 @@
 }
 
 .todo-item {
-  height: 50px; /* ligeiramente maior para dar mais espaço */
-  border-radius: 16px;
-  padding: 0 20px;
+  height: 50px;
+  border-radius: 12px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
   color: black;
-  transition: 0.2s;
+  border: none;
 }
-
-/* Cores alternadas */
-.cor0 { background-color: #cfd3fb; }   /* Azul claro */
-.cor1 { background-color: #eca2db; }   /* Rosa */
-.cor2 { background-color: #fceaa0; }   /* Amarelo */
-.cor3 { background-color: #bdfca8; }   /* Verde */
 
 .todo-left {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex: 1;
+  justify-content: center;
+  width: 40px;
 }
 
 .checkbox {
-  width: 20px;
-  height: 20px;
-  background-color: #d3d4fa;
-  border-radius: 50%; /* Agora redondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 18px;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checkbox:hover {
+  transform: scale(1.2);
+}
+
+.checkbox.concluido {
+  color: green;
 }
 
 .todo-text {
-  background-color: transparent;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 15px;
-  color: #222;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.todo-text.riscado {
+  text-decoration: line-through;
+  color: gray;
 }
 
 .todo-actions {
   display: flex;
-  gap: 10px;
+  gap: 6px;
+  align-items: center;
+  padding-right: 10px;
 }
 
-.todo-actions button {
-  background-color: #d3d4fa;
+.botao-editar,
+.botao-apagar,
+.tag-prazo {
   border: none;
-  border-radius: 8px;
-  width: 22px;
-  height: 22px;
-  font-size: 12px;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  padding: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
-.todo-actions button:hover {
-  background-color: #b8baf6;
+.tag-prazo {
+  width: auto;
+  padding: 0 8px;
 }
 
+/* Cores por prioridade (com 62% de opacidade) */
+.prioridade-alta {
+  background-color: rgba(217, 75, 82, 0.62);
+}
+
+.prioridade-media-alta {
+  background-color: rgba(246, 154, 88, 0.62);
+}
+
+.prioridade-media {
+  background-color: rgba(246, 217, 88, 0.62);
+}
+
+.prioridade-baixa {
+  background-color: rgba(145, 240, 90, 0.62);
+}
+
+/* Botão adicionar tarefa */
 .add-todo-button {
   position: fixed;
   bottom: 30px;
@@ -119,7 +157,6 @@
   gap: 25px;
 }
 
-/* Caixas pretas */
 .black-box {
   width: 90px;
   height: 90px;
@@ -127,7 +164,6 @@
   border-radius: 16px;
 }
 
-/* Caixa da data */
 .date-box {
   width: 100px;
   height: 130px;
@@ -157,26 +193,4 @@
   font-size: 18px;
   font-weight: 700;
   margin-top: 6px;
-}
-
-.checkbox {
-  border: none;
-  background: transparent;
-  font-size: 18px;
-  cursor: pointer;
-  padding: 4px 8px;
-  transition: transform 0.2s ease;
-}
-
-.checkbox:hover {
-  transform: scale(1.2);
-}
-
-.checkbox.concluido {
-  color: green;
-}
-
-.todo-text.riscado {
-  text-decoration: line-through;
-  color: gray;
 }

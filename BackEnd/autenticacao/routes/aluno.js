@@ -88,5 +88,25 @@ router.get('/alunos/nome/:nome',isAuthenticated , isAluno,async (req, res) => {
     }
 });
 
+// GET disciplinas e notas por ano curricular
+router.get("/disciplinas-por-ano/:ano", isAuthenticated, isAluno, async (req, res) => {
+    try {
+        const email = req.session.account?.username;
+        const ano = parseInt(req.params.ano);
+
+        const aluno = await Aluno.findOne({ email });
+
+        if (!aluno) {
+            return res.status(404).json({ message: "Aluno não encontrado" });
+        }
+
+        const disciplinas = (aluno.notas || []).filter(d => d.anoCurricular === ano);
+        return res.json(disciplinas);
+    } catch (error) {
+        console.error("Erro ao obter disciplinas:", error);
+        return res.status(500).json({ message: "Erro interno" });
+    }
+});
+
 
 module.exports = router;
