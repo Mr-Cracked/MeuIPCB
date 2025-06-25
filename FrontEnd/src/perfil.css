@@ -1,3 +1,4 @@
+/* === Layout global === */
 .perfil-container {
   display: flex;
   flex-direction: column;
@@ -40,6 +41,7 @@ html {
   min-width: 300px;
 }
 
+/* === Cartão do perfil === */
 .perfil-card {
   display: flex;
   flex-direction: row;
@@ -92,51 +94,96 @@ html {
   margin: 8px 0;
 }
 
+/* === Painéis === */
 .painel {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
 }
 
+/* Painel grande — anúncio + atalhos pretos */
 .left-painel {
+  position: relative;
   flex: 1;
-  background-color: #ffffff;
-  border-radius: 30px;
-  height: 300px;
   min-width: 300px;
-  box-shadow: 4px 4px 0px #cbd2ff;
+  min-height: 240px;
+  background: #fff;
+  border-radius: 30px;
+  padding: 1.75rem 2rem 3.5rem; /* espaço extra em baixo para o mini‑painel */
+  box-shadow: 0 0 6px rgba(0,0,0,.06);
+  overflow: visible; /* deixa conteúdo crescer sem cortar as bordas */
 }
 
-.middle-painel {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 20px;
-  width: 130px;
-  height: 220px;
-  box-shadow: 4px 4px 0px #cbd2ff;
+/* Anúncio mais recente - largura limitada para não colidir com mini‑painel */
+.anuncio-recente{
+  max-width: calc(100% - 140px); /* 110 px (mini‑painel) + 30 px folga */
+  word-wrap: break-word;         /* quebra palavras demasiado longas   */
 }
 
-.black-box {
-  background-color: black;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 16px;
+.anuncio-recente h3{
+  margin:0 0 .5rem;
+  font-size:1.1rem;
+  color:#1e2659;
 }
 
-.black-box:hover {
-  outline: 2px solid #1e2659;
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
+.anuncio-recente .meta{
+  font-size:.85rem;
+  color:#666;
+  margin-bottom:.75rem;
 }
 
-/* TO DO */
+.descricao-limitada{
+  word-break: break-word;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  margin-bottom:1rem;
+}
 
+.ver-todos-btn{
+  background:#1e2659;
+  color:#fff;
+  border:none;
+  padding:.45rem 1.2rem;
+  border-radius:.5rem;
+  cursor:pointer;
+  transition:opacity .15s;
+}
+
+.ver-todos-btn:hover{opacity:.85}
+
+/* Mini‑painel com atalhos pretos */
+.mini-painel{
+  position:absolute;
+  right:1.25rem;
+  top:1.25rem;
+  width:110px;
+  padding:1rem .75rem;
+  background:#fff;
+  border-radius:1rem;
+  box-shadow:0 0 6px rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.black-box{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#000;
+  border-radius:.8rem;
+  cursor:pointer;
+  word-break: break-word;
+}
+
+.black-box:hover{
+  outline:2px solid #1e2659;
+  transform:scale(1.05);
+  transition:transform .2s ease;
+}
+
+/* === Painel “To Do” === */
 .todo-painel {
   width: 100%;
   max-width: 320px;
@@ -148,7 +195,7 @@ html {
   gap: 10px;
   box-shadow: 4px 4px 0px #cbd2ff;
   min-height: 555px;
-  overflow: hidden; /* este pode ficar ou sair — o importante é o grow do filho */
+  overflow: hidden;
 }
 
 .todo-painel h2 {
@@ -157,7 +204,6 @@ html {
   color: #000;
   margin-bottom: 15px;
 }
-
 
 .todo-list {
   flex-grow: 1;
@@ -169,8 +215,6 @@ html {
   justify-content: flex-start;
 }
 
-
-
 .todo-item {
   min-height: 40px;
   border-radius: 16px;
@@ -181,8 +225,6 @@ html {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .todo-text {
   font-size: 15px;
   font-weight: 600;
@@ -190,105 +232,67 @@ html {
   text-align: left;
 }
 
-
 .todo-text.riscado {
   text-decoration: line-through;
   color: gray;
 }
 
 /* Cores por prioridade */
-
-.azul {
-  background-color: #bbc9ff;
-}
-
-.rosa {
-  background-color: #f3a3d6;
-}
-
-.amarelo {
-  background-color: #f8ec77;
-}
-
-.verde {
-  background-color: #a7f5a1;
-}
-
-.prioridade-alta {
-  background-color: rgba(217, 75, 82, 0.62);
-}
-
-.prioridade-media-alta {
-  background-color: rgba(246, 154, 88, 0.62);
-}
-
-.prioridade-media {
-  background-color: rgba(246, 217, 88, 0.62);
-}
-
-.prioridade-baixa {
-  background-color: rgba(145, 240, 90, 0.62);
-}
+.azul             { background-color:#bbc9ff; }
+.rosa             { background-color:#f3a3d6; }
+.amarelo          { background-color:#f8ec77; }
+.verde            { background-color:#a7f5a1; }
+.prioridade-alta        { background-color:rgba(217,75,82,.62); }
+.prioridade-media-alta  { background-color:rgba(246,154,88,.62); }
+.prioridade-media       { background-color:rgba(246,217,88,.62); }
+.prioridade-baixa       { background-color:rgba(145,240,90,.62); }
 
 /* Scrollbar moderna */
-
-.todo-list::-webkit-scrollbar {
-  width: 6px;
+.todo-list::-webkit-scrollbar{
+  width:6px;
 }
 
-.todo-list::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+.todo-list::-webkit-scrollbar-thumb{
+  background-color:rgba(0,0,0,.3);
+  border-radius:4px;
 }
 
-.todo-list::-webkit-scrollbar-track {
-  background-color: transparent;
+.todo-list::-webkit-scrollbar-track{
+  background-color:transparent;
 }
 
 /* Responsividade */
-
-@media (max-width: 1000px) {
-  .grid-layout {
-    flex-direction: column;
+@media (max-width:1000px){
+  .grid-layout{ flex-direction:column; }
+  .sidebar{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
   }
-
-  .sidebar {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  .perfil-card{
+    flex-direction:column;
+    align-items:center;
   }
-
-  .perfil-card {
-    flex-direction: column;
-    align-items: center;
+  .painel{
+    flex-direction:column;
+    align-items:stretch;
   }
-
-  .painel {
-    flex-direction: column;
-    align-items: stretch;
+  .middle-painel{
+    padding:20px;
+    max-width:100%;
+    height:auto;
   }
-
-  .middle-painel {
-    padding: 20px;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .todo-painel {
-    width: 100%;
-    max-width: 100%;
+  .todo-painel{
+    width:100%;
+    max-width:100%;
   }
 }
 
-@media (max-width: 600px) {
-  .perfil-info {
-    font-size: 13px;
-  }
-
-  .avatar-placeholder {
-    width: 150px;
-    height: 150px;
+@media (max-width:600px){
+  .perfil-info{ font-size:13px; }
+  .avatar-placeholder{
+    width:150px;
+    height:150px;
   }
 }
-
