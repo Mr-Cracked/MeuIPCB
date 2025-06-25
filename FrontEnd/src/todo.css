@@ -1,24 +1,44 @@
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #dee0ff;
+  font-family: Arial, sans-serif;
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
 .todo-box {
   background-color: white;
-  margin: 40px auto;
-  padding: 40px 40px;
+  padding: 30px 25px;
   border-radius: 20px;
-  width: 90%;
   max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .todo-box h2 {
   text-align: center;
   font-size: 30px;
-  margin-bottom: 30px;
   font-weight: 800;
+  margin-bottom: 30px;
   text-transform: lowercase;
 }
 
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   max-height: 500px;
   overflow-y: auto;
 }
@@ -27,8 +47,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  gap: 10px;
+  gap: 8px;
+  height: 48px;
   background: transparent;
 }
 
@@ -40,7 +60,6 @@
   border: 2px solid #bbb;
   cursor: pointer;
   position: relative;
-  transition: 0.2s ease-in-out;
   flex-shrink: 0;
 }
 
@@ -76,6 +95,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 600;
 }
 
 .todo-text.riscado {
@@ -90,33 +110,32 @@
   font-weight: 500;
   text-align: center;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .todo-actions {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
+  gap: 8px;
 }
 
 .botao-editar,
 .botao-apagar {
   border: none;
-  border-radius: 12px;
-  width: 38px;
-  height: 38px;
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
   font-size: 14px;
   cursor: pointer;
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   color: black;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  background-color: white;
 }
 
-/* Cores por prioridade */
+/* Cores de prioridade */
 .prioridade-alta {
   background-color: rgba(217, 75, 82, 0.62);
 }
@@ -130,6 +149,7 @@
   background-color: rgba(145, 240, 90, 0.62);
 }
 
+/* Botão adicionar */
 .add-todo-button {
   position: fixed;
   bottom: 30px;
@@ -143,12 +163,42 @@
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.add-todo-button:hover {
-  background-color: #2f2f8c;
+/* Painel lateral (versão antiga) */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 10px;
+  width: 110px;
+  align-items: center;
+  background-color: #dee0ff;
+  border-radius: 20px;
+}
+
+.black-box {
+  width: 90px;
+  height: 90px;
+  background-color: black;
+  border-radius: 16px;
+}
+
+.date-box {
+  background-color: white;
+  width: 90px;
+  height: 130px;
+  padding: 12px 10px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.big-text {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.small-text {
+  font-size: 14px;
+  font-weight: 500;
 }

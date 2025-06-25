@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../todo.css";
-import TopNavbar from "../components/TopNavbar.js";
-import CriarTarefa from "../components/criarTarefa.js";
-import ConfirmarModal from "../components/confirmarApagar.js";
-import EditarTarefa from "../components/editarTarefa.js";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import TopNavbar from "../components/TopNavbar";
+import CriarTarefa from "../components/criarTarefa";
+import ConfirmarModal from "../components/confirmarApagar";
+import EditarTarefa from "../components/editarTarefa";
+import { FaTrashAlt, FaEdit, FaRegCalendarAlt } from "react-icons/fa";
 
 export function Todo() {
   const [user, setUser] = useState(null);
@@ -128,7 +128,6 @@ export function Todo() {
       <div className="main-layout">
         <main className="content">
           <TopNavbar />
-
           <div className="todo-box">
             <h2>to do</h2>
             <div className="todo-list">
@@ -138,33 +137,31 @@ export function Todo() {
                 todos.map((item) => (
                   <div className="todo-item" key={item._id}>
                     <button
-                      className={`checkbox ${item.concluido ? "concluido" : ""} ${getCorPrioridade(item.prioridade)}`}
+                      className={`checkbox ${item.concluido ? "concluido" : ""}`}
                       onClick={() => concluirTarefa(item._id)}
                       title={item.concluido ? "Tarefa concluída" : "Marcar como concluída"}
                     />
-
                     <div className={`todo-text ${item.concluido ? "riscado" : ""} ${getCorPrioridade(item.prioridade)}`}>
                       {item.titulo}
                     </div>
-
                     <div className={`prazo-box ${getCorPrioridade(item.prioridade)}`}>
+                      <FaRegCalendarAlt size={14} />{" "}
                       {new Date(item.prazo).toLocaleDateString("pt-PT")}
                     </div>
-
                     <div className="todo-actions">
                       <button
                         className={`botao-editar ${getCorPrioridade(item.prioridade)}`}
                         title="Editar"
                         onClick={() => setTarefaParaEditar(item)}
                       >
-                        <FaEdit size={16} />
+                        <FaEdit size={14} />
                       </button>
                       <button
                         className={`botao-apagar ${getCorPrioridade(item.prioridade)}`}
                         title="Apagar"
                         onClick={() => confirmarApagar(item._id)}
                       >
-                        <FaTrashAlt size={16} />
+                        <FaTrashAlt size={14} />
                       </button>
                     </div>
                   </div>
@@ -173,9 +170,7 @@ export function Todo() {
             </div>
           </div>
 
-          <button className="add-todo-button" onClick={() => setMostrarModal(true)}>
-            ＋
-          </button>
+          <button className="add-todo-button" onClick={() => setMostrarModal(true)}>＋</button>
 
           {mostrarModal && (
             <CriarTarefa
@@ -206,6 +201,19 @@ export function Todo() {
             />
           )}
         </main>
+
+        {/* Painel lateral (versão antiga) */}
+        <div className="side-panel">
+          <div className="black-box"></div>
+          <div className="black-box"></div>
+          <div className="date-box">
+            <div className="big-text">{new Date().getDate()}</div>
+            <div className="small-text">
+              {new Date().toLocaleDateString("pt-PT", { weekday: "long" })}
+            </div>
+            <div className="small-text">{new Date().getFullYear()}</div>
+          </div>
+        </div>
       </div>
     </div>
   );
