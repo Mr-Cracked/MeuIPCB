@@ -20,8 +20,6 @@ html {
   flex: 1;
 }
 
-/* REMOVIDO .sidebar PARA NÃO CONFLITAR COM sideNavbar.css */
-
 .content {
   flex: 1;
   padding: 20px;
@@ -120,7 +118,7 @@ html {
   background-color: white;
   border-radius: 20px;
   width: 130px;
-  height: auto;
+  height: 220px;
   box-shadow: 4px 4px 0px #cbd2ff;
 }
 
@@ -130,6 +128,14 @@ html {
   aspect-ratio: 1 / 1;
   border-radius: 16px;
 }
+
+.black-box:hover {
+  outline: 2px solid #1e2659;
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* TO DO */
 
 .todo-painel {
   width: 100%;
@@ -141,6 +147,8 @@ html {
   flex-direction: column;
   gap: 10px;
   box-shadow: 4px 4px 0px #cbd2ff;
+  min-height: 555px;
+  overflow: hidden; /* este pode ficar ou sair — o importante é o grow do filho */
 }
 
 .todo-painel h2 {
@@ -150,27 +158,95 @@ html {
   margin-bottom: 15px;
 }
 
-.todo-item {
-  height: 30px;
-  border-radius: 12px;
-  margin: 10px 0;
+
+.todo-list {
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
+
+
+
+.todo-item {
+  min-height: 40px;
+  border-radius: 16px;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.todo-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  text-align: left;
+}
+
+
+.todo-text.riscado {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Cores por prioridade */
 
 .azul {
   background-color: #bbc9ff;
 }
+
 .rosa {
   background-color: #f3a3d6;
 }
+
 .amarelo {
   background-color: #f8ec77;
 }
+
 .verde {
   background-color: #a7f5a1;
 }
 
+.prioridade-alta {
+  background-color: rgba(217, 75, 82, 0.62);
+}
+
+.prioridade-media-alta {
+  background-color: rgba(246, 154, 88, 0.62);
+}
+
+.prioridade-media {
+  background-color: rgba(246, 217, 88, 0.62);
+}
+
+.prioridade-baixa {
+  background-color: rgba(145, 240, 90, 0.62);
+}
+
+/* Scrollbar moderna */
+
+.todo-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 
 /* Responsividade */
+
 @media (max-width: 1000px) {
   .grid-layout {
     flex-direction: column;
@@ -215,3 +291,4 @@ html {
     height: 150px;
   }
 }
+

@@ -1,96 +1,110 @@
 .todo-box {
   background-color: white;
-  margin: 20px auto;
-  padding: 40px 20px;
-  border-radius: 16px;
+  margin: 40px auto;
+  padding: 40px 40px;
+  border-radius: 20px;
   width: 90%;
   max-width: 800px;
 }
 
 .todo-box h2 {
   text-align: center;
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 30px;
+  font-weight: 800;
   text-transform: lowercase;
 }
 
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   max-height: 500px;
   overflow-y: auto;
 }
 
 .todo-item {
-  height: 50px;
-  border-radius: 12px;
-  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: bold;
-  font-size: 15px;
-  color: black;
-  border: none;
-}
-
-.todo-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
+  height: 56px;
+  gap: 10px;
+  background: transparent;
 }
 
 .checkbox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  font-size: 18px;
-  background-color: transparent;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: white;
+  border: 2px solid #bbb;
   cursor: pointer;
-  border: none;
-  padding: 0;
-  margin: 0;
+  position: relative;
+  transition: 0.2s ease-in-out;
+  flex-shrink: 0;
 }
 
-.checkbox:hover {
-  transform: scale(1.2);
+.checkbox:hover::after {
+  content: "✓";
+  font-weight: bold;
+  color: #333;
+  font-size: 20px;
+  position: absolute;
+  top: 4px;
+  left: 11px;
 }
 
 .checkbox.concluido {
-  color: green;
+  background-color: #333;
+  border-color: #333;
+}
+
+.checkbox.concluido::after {
+  content: "✓";
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 4px;
+  left: 11px;
 }
 
 .todo-text {
   flex: 1;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .todo-text.riscado {
   text-decoration: line-through;
-  color: gray;
+  color: #888;
+}
+
+.prazo-box {
+  min-width: 100px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 12px;
 }
 
 .todo-actions {
   display: flex;
-  gap: 6px;
   align-items: center;
-  padding-right: 10px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .botao-editar,
-.botao-apagar,
-.tag-prazo {
+.botao-apagar {
   border: none;
-  border-radius: 6px;
-  width: 28px;
-  height: 28px;
+  border-radius: 12px;
+  width: 38px;
+  height: 38px;
   font-size: 14px;
   cursor: pointer;
   text-align: center;
@@ -98,37 +112,30 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  color: black;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-.tag-prazo {
-  width: auto;
-  padding: 0 8px;
-}
-
-/* Cores por prioridade (com 62% de opacidade) */
+/* Cores por prioridade */
 .prioridade-alta {
   background-color: rgba(217, 75, 82, 0.62);
 }
-
 .prioridade-media-alta {
   background-color: rgba(246, 154, 88, 0.62);
 }
-
 .prioridade-media {
   background-color: rgba(246, 217, 88, 0.62);
 }
-
 .prioridade-baixa {
   background-color: rgba(145, 240, 90, 0.62);
 }
 
-/* Botão adicionar tarefa */
 .add-todo-button {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   background-color: #4040a1;
   color: white;
   font-size: 32px;
@@ -144,53 +151,4 @@
 
 .add-todo-button:hover {
   background-color: #2f2f8c;
-}
-
-/* Painel lateral direito */
-.side-panels {
-  position: absolute;
-  right: 40px;
-  top: 160px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-}
-
-.black-box {
-  width: 90px;
-  height: 90px;
-  background-color: black;
-  border-radius: 16px;
-}
-
-.date-box {
-  width: 100px;
-  height: 130px;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-}
-
-.big-day {
-  font-size: 34px;
-  font-weight: 900;
-  margin-bottom: 6px;
-}
-
-.weekday {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.year {
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 6px;
 }

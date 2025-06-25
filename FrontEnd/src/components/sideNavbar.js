@@ -1,47 +1,65 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import {
+  FaUser, FaCalendarAlt, FaSchool, FaCheck, FaRobot,
+  FaChalkboardTeacher, FaNetworkWired, FaBars
+} from "react-icons/fa";
 import "./sideNavbar.css";
 
 export default function SideNavbar() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownCalendario, setDropdownCalendario] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-  const toggleDropdownCalendario = () => setDropdownCalendario(!dropdownCalendario);
+  const toggleSidebar = () => {
+    setIsExpanded((prev) => !prev);
+  };
 
   return (
-    <div className="sidebar">
-      <div className="logo"></div>
-
-      <NavLink to="/" className="nav-item">página principal</NavLink>
-      <NavLink to="/perfil" className="nav-item">perfil</NavLink>
-      <NavLink to="/horario" className="nav-item">horario</NavLink>
-
-      <div className={`nav-item dropdown-toggle ${dropdownCalendario ? "open" : ""}`} onClick={toggleDropdownCalendario}>
-        calendario
+    <div className={`sidebar ${isExpanded ? "expanded" : "collapsed"}`}>
+      <div className="top-bar">
+        <button className="menu-btn" onClick={toggleSidebar}>
+          <FaBars />
+        </button>
       </div>
-      {dropdownCalendario && (
-        <div className="dropdown-menu">
-          <NavLink to="/calendario-escolar" className="nav-item subitem">escolar</NavLink>
-          <NavLink to="/calendario-exames" className="nav-item subitem">exames</NavLink>
-        </div>
-      )}
 
-      <div className={`nav-item dropdown-toggle ${dropdownOpen ? "open" : ""}`} onClick={toggleDropdown}>
-        escola
-      </div>
-      {dropdownOpen && (
-        <div className="dropdown-menu">
-          <NavLink to="/disciplinas" className="nav-item subitem">disciplinas</NavLink>
-          <NavLink to="/contactos" className="nav-item subitem">contactos</NavLink>
-          <NavLink to="/anuncios" className="nav-item subitem">anuncios</NavLink>
-          <NavLink to="/mapa" className="nav-item subitem">mapa</NavLink>
-        </div>
-      )}
+      <NavLink to="/perfil" className="nav-item">
+        <FaUser className="icon" />
+        {isExpanded && <span>perfil</span>}
+      </NavLink>
 
-      <NavLink to="/todo" className="nav-item">to-do</NavLink>
-      <NavLink to="/moodle" className="nav-item">moodle</NavLink>
-      <NavLink to="/netpa" className="nav-item">netpa</NavLink>
+      <NavLink to="/horario" className="nav-item">
+        <FaCalendarAlt className="icon" />
+        {isExpanded && <span>horario</span>}
+      </NavLink>
+
+      <NavLink to="/calendario" className="nav-item">
+        <FaCalendarAlt className="icon" />
+        {isExpanded && <span>calendario</span>}
+      </NavLink>
+
+      <NavLink to="/escola" className="nav-item">
+        <FaSchool className="icon" />
+        {isExpanded && <span>escola</span>}
+      </NavLink>
+
+      <NavLink to="/to-do" className="nav-item">
+        <FaCheck className="icon" />
+        {isExpanded && <span>to-do</span>}
+      </NavLink>
+
+      <NavLink to="/ai" className="nav-item">
+        <FaRobot className="icon" />
+        {isExpanded && <span>ai</span>}
+      </NavLink>
+
+      <NavLink to="/moodle" className="nav-item">
+        <FaChalkboardTeacher className="icon" />
+        {isExpanded && <span>moodle</span>}
+      </NavLink>
+
+      <NavLink to="/netpa" className="nav-item">
+        <FaNetworkWired className="icon" />
+        {isExpanded && <span>netpa</span>}
+      </NavLink>
     </div>
   );
 }

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../todo.css";
-import IconButton from "../components/iconbutton.js";
 import TopNavbar from "../components/TopNavbar.js";
 import CriarTarefa from "../components/criarTarefa.js";
 import ConfirmarModal from "../components/confirmarApagar.js";
 import EditarTarefa from "../components/editarTarefa.js";
-import { FaTrashAlt, FaEdit, FaRegCalendarAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
 export function Todo() {
   const [user, setUser] = useState(null);
@@ -127,19 +126,6 @@ export function Todo() {
   return (
     <div className="perfil-container">
       <div className="main-layout">
-        <aside className="sidebar">
-          <h2>MeuIPCB</h2>
-          <ul>
-            <li><NavLink to="/perfil" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Perfil</NavLink></li>
-            <li><NavLink to="/horario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Horário</NavLink></li>
-            <li><NavLink to="/calendario" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Calendario</NavLink></li>
-            <li><NavLink to="/escola" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Escola</NavLink></li>
-            <li><NavLink to="/todo" className={({ isActive }) => (isActive ? "link ativo" : "link")}>To-Do</NavLink></li>
-            <li><NavLink to="/moodle" className={({ isActive }) => (isActive ? "link ativo" : "link")}>Moodle</NavLink></li>
-            <li><NavLink to="/netpa" className={({ isActive }) => (isActive ? "link ativo" : "link")}>NetPA</NavLink></li>
-          </ul>
-        </aside>
-
         <main className="content">
           <TopNavbar />
 
@@ -150,38 +136,35 @@ export function Todo() {
                 <p>Sem tarefas.</p>
               ) : (
                 todos.map((item) => (
-                  <div className={`todo-item ${getCorPrioridade(item.prioridade)}`} key={item._id}>
-                    <div className="todo-left">
-                      <button
-                        className={`checkbox ${item.concluido ? "concluido" : ""}`}
-                        onClick={() => concluirTarefa(item._id)}
-                        title={item.concluido ? "Tarefa concluída" : "Marcar como concluída"}
-                      >
-                        {item.concluido ? "✓" : "○"}
-                      </button>
-                    </div>
+                  <div className="todo-item" key={item._id}>
+                    <button
+                      className={`checkbox ${item.concluido ? "concluido" : ""} ${getCorPrioridade(item.prioridade)}`}
+                      onClick={() => concluirTarefa(item._id)}
+                      title={item.concluido ? "Tarefa concluída" : "Marcar como concluída"}
+                    />
 
-                    <div className={`todo-text ${item.concluido ? "riscado" : ""}`}>
+                    <div className={`todo-text ${item.concluido ? "riscado" : ""} ${getCorPrioridade(item.prioridade)}`}>
                       {item.titulo}
                     </div>
 
+                    <div className={`prazo-box ${getCorPrioridade(item.prioridade)}`}>
+                      {new Date(item.prazo).toLocaleDateString("pt-PT")}
+                    </div>
+
                     <div className="todo-actions">
-                      <div className={`tag-prazo ${getCorPrioridade(item.prioridade)}`} title="Prazo">
-                        <FaRegCalendarAlt size={14} />
-                      </div>
                       <button
                         className={`botao-editar ${getCorPrioridade(item.prioridade)}`}
                         title="Editar"
                         onClick={() => setTarefaParaEditar(item)}
                       >
-                        <FaEdit size={14} />
+                        <FaEdit size={16} />
                       </button>
                       <button
                         className={`botao-apagar ${getCorPrioridade(item.prioridade)}`}
                         title="Apagar"
                         onClick={() => confirmarApagar(item._id)}
                       >
-                        <FaTrashAlt size={14} />
+                        <FaTrashAlt size={16} />
                       </button>
                     </div>
                   </div>
@@ -190,17 +173,9 @@ export function Todo() {
             </div>
           </div>
 
-          <div className="side-panels">
-            <div className="black-box"></div>
-            <div className="black-box"></div>
-            <div className="date-box">
-              <div className="big-day">{new Date().getDate()}</div>
-              <div className="weekday">{new Date().toLocaleDateString("pt-PT", { weekday: "long" })}</div>
-              <div className="year">{new Date().getFullYear()}</div>
-            </div>
-          </div>
-
-          <button className="add-todo-button" onClick={() => setMostrarModal(true)}>＋</button>
+          <button className="add-todo-button" onClick={() => setMostrarModal(true)}>
+            ＋
+          </button>
 
           {mostrarModal && (
             <CriarTarefa
@@ -215,7 +190,9 @@ export function Todo() {
               onFechar={() => setTarefaParaEditar(null)}
               onAtualizada={(tAtualizada) => {
                 setTodos((prev) =>
-                  prev.map((t) => (t._id === tAtualizada._id ? tAtualizada : t))
+                  prev.map((t) =>
+                    t._id === tAtualizada._id ? tAtualizada : t
+                  )
                 );
                 setTarefaParaEditar(null);
               }}
