@@ -8,7 +8,7 @@ import { Escola } from "./pages/escola";
 import Horario from "./pages/horario";
 import { Mapa } from "./pages/mapa";
 import { Professores } from "./pages/professores";
-import { Anuncios } from "./pages/anuncios";
+import Anuncios from "./pages/anuncios";
 import { CalendarioEscolar } from "./pages/calendarioescolar";
 import Disciplinas  from "./pages/disciplinas";
 import Contactos from "./pages/contactos";

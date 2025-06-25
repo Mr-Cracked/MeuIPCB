@@ -1,0 +1,221 @@
+/* -----------  Variáveis de cor e métricas ----------- */
+:root {
+    --sidebar-bg: #27348b;      /* azul escuro do menu lateral */
+    --sidebar-text: #ffffff;
+    --primary-bg: #d7d9ff;      /* lilás do fundo principal   */
+    --accent-bg: #c9ccff;       /* tom mais forte p/ inputs   */
+    --card-bg: #ffffff;
+    --radius-lg: 1rem;
+    --shadow-sm: 0 0 8px rgba(0, 0, 0, 0.06);
+    --transition: 0.2s ease-in-out;
+    --text-main: #1d1d1f;
+}
+
+/* -----------  Reset rápido  ----------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--primary-bg);
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+/* -----------  Layout base  ----------- */
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ----- Sidebar ----- */
+.sidebar {
+    width: 220px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 0.35rem;
+}
+
+.sidebar a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    transition: background var(--transition);
+}
+
+.sidebar a:hover,
+.sidebar a.ativo {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/*  Dropdown simples  */
+.dropdown-label {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    padding-left: 0.75rem;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* ----- Conteúdo principal ----- */
+.content {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+/* wrapper geral da página de anúncios */
+.anuncios-wrapper {
+    background: var(--primary-bg);
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    min-height: calc(100vh - 3rem); /* deixar algum espaço p/ topo */
+}
+
+/* -----------  Pesquisa + Ordenar  ----------- */
+.filtro-pesquisa {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-pesquisa-global,
+.select-filtro,
+.sort-by {
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--accent-bg);
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    outline: none;
+}
+
+.input-pesquisa-global::placeholder {
+    color: #666;
+}
+
+/* -----------  Grid de anúncios  ----------- */
+.anuncios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.anuncio-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.anuncio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.anuncio-card h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.anuncio-card .meta {
+    font-size: 0.85rem;
+    color: #6b6b6b;
+    margin-bottom: 0.75rem;
+}
+
+.anuncio-card p {
+    flex: 1;
+}
+
+/* -----------  Responsividade extra  ----------- */
+@media (max-width: 600px) {
+    .sidebar {
+        position: fixed;
+        width: 60px;
+        padding: 1rem 0.5rem;
+    }
+    .sidebar h2,
+    .sidebar .dropdown-content {
+        display: none;
+    }
+    .content {
+        margin-left: 60px;
+        padding: 1rem;
+    }
+}
+
+
+/* limitar texto */
+.descricao-limitada {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;   /* 3 linhas máx. */
+    -webkit-box-orient: vertical;
+}
+
+/* -------- modal básico -------- */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal-content {
+    width: min(90%, 500px);
+    background: #fff;
+    border-radius: 1rem;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    position: relative;
+    animation: fadeIn 0.2s ease;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0);  }
+}

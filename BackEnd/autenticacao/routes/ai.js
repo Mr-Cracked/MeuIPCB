@@ -1,4 +1,4 @@
-const fect = require("node-fetch");
+const fetch = require("node-fetch");
 const express = require("express");
 const mongoose = require("mongoose");
 const axios = require("axios");
