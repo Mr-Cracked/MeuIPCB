@@ -95,111 +95,106 @@ export function Perfil() {
     setTarefas(prev => prev.map(t => t._id === tAtualizada._id ? tAtualizada : t));
 
   return (
-    <div className="main-layout">
-      
-      <div className="content">
-        <div className="perfil-container">
-          <TopNavbar />
+    <div className="perfil-container">
+      <TopNavbar />
 
-          <div className="grid-layout">
-            {/* -------- COLUNA ESQUERDA -------- */}
-            <div className="left-column">
-              {/* cartão de perfil */}
-              <div className="perfil-card">
-                <div className="avatar-placeholder" />
-                <div className="perfil-conteudo">
-                  {user ? (
-                    <>
-                      <h2 className="perfil-nome">{user.nome}</h2>
-                      <div className="perfil-info">
-                        <p><strong>Número de Estudante:</strong> {user.numero_aluno}</p>
-                        <p><strong>E-mail:</strong> {user.email}</p>
-                        <p><strong>Curso:</strong> {user.curso}</p>
-                        <p><strong>Escola:</strong> {user.instituicao}</p>
-                        <p><strong>Ano Curricular:</strong> {user.ano_curricular}</p>
-                      </div>
-                    </>
-                  ) : (
-                    <p>A carregar informações…</p>
-                  )}
-                </div>
-              </div>
-
-              {/* painel grande com anúncio */}
-              <div className="left-painel">
-                {anuncioRecente ? (
-                  <div className="anuncio-recente">
-                    <h3>{anuncioRecente.titulo}</h3>
-                    <p className="meta">
-                      {new Date(anuncioRecente.data).toLocaleDateString("pt-PT")}
-                      {" · "}{anuncioRecente.dono}
-                    </p>
-                    <p className="descricao-limitada">
-                      {anuncioRecente.descricao.length > 250
-                        ? anuncioRecente.descricao.slice(0, 247) + "…"
-                        : anuncioRecente.descricao}
-                    </p>
-                    <button className="ver-todos-btn" onClick={() => navigate("/anuncios")}>
-                      Ver todos
-                    </button>
+      <div className="grid-layout">
+        {/* -------- COLUNA ESQUERDA -------- */}
+        <div className="left-column">
+          {/* cartão de perfil */}
+          <div className="perfil-card">
+            <div className="avatar-placeholder" />
+            <div className="perfil-conteudo">
+              {user ? (
+                <>
+                  <h2 className="perfil-nome">{user.nome}</h2>
+                  <div className="perfil-info">
+                    <p><strong>Número de Estudante:</strong> {user.numero_aluno}</p>
+                    <p><strong>E-mail:</strong> {user.email}</p>
+                    <p><strong>Curso:</strong> {user.curso}</p>
+                    <p><strong>Escola:</strong> {user.instituicao}</p>
+                    <p><strong>Ano Curricular:</strong> {user.ano_curricular}</p>
                   </div>
-                ) : (
-                  <p style={{ opacity: .6, textAlign: "center" }}>Sem anúncios novos.</p>
-                )}
-              </div>
-
-              {/* black-box com estilo da tua versão final */}
-              <div className="middle-painel">
-                <div
-                  className="black-box"
-                  onClick={() => window.open("https://moodle2425.ipcb.pt/", "_blank")}
-                  style={{ cursor: "pointer" }}
-                />
-                <div
-                  className="black-box"
-                  onClick={() => alert("Funcionalidade em breve!")}
-                />
-              </div>
+                </>
+              ) : (
+                <p>A carregar informações…</p>
+              )}
             </div>
+          </div>
 
-            {/* -------- COLUNA TO-DO -------- */}
-            <div className="todo-painel">
-              <div style={{ position: "relative", textAlign: "center", marginBottom: 20 }}>
-                <h2 style={{ margin: 0 }}>to do</h2>
-                <FaEye size={20} color="#1e2659"
-                  title="Ver todas as tarefas"
-                  style={{ position: "absolute", right: 15, top: 5, cursor: "pointer" }}
-                  onClick={() => navigate("/todo")} />
+          {/* painel grande com anúncio */}
+          <div className="left-painel">
+            {anuncioRecente ? (
+              <div className="anuncio-recente">
+                <h3>{anuncioRecente.titulo}</h3>
+                <p className="meta">
+                  {new Date(anuncioRecente.data).toLocaleDateString("pt-PT")}
+                  {" · "}{anuncioRecente.dono}
+                </p>
+                <p className="descricao-limitada">
+                  {anuncioRecente.descricao.length > 250
+                    ? anuncioRecente.descricao.slice(0, 247) + "…"
+                    : anuncioRecente.descricao}
+                </p>
+                <button className="ver-todos-btn" onClick={() => navigate("/anuncios")}>
+                  Ver todos
+                </button>
               </div>
+            ) : (
+              <p style={{ opacity: .6, textAlign: "center" }}>Sem anúncios novos.</p>
+            )}
+          </div>
 
-              <div className="todo-list">
-                {tarefas.length === 0 ? (
-                  <>
-                    <div className="todo-item azul" />
-                    <div className="todo-item rosa" />
-                    <div className="todo-item amarelo" />
-                    <div className="todo-item verde" />
-                  </>
-                ) : (
-                  tarefas.map(t => (
-                    <div key={t._id}
-                      className={`todo-item ${getCorPrioridade(t.prioridade)}`}
-                      style={{ cursor: "pointer", justifyContent: "space-between" }}>
-                      <div className="todo-text" onClick={() => abrirDetalhes(t)}>
-                        <span>{t.titulo}</span>
-                      </div>
-                      <div title="Concluir"
-                        onClick={() => marcarComoConcluida(t._id)}
-                        style={{
-                          width: 18, height: 18, border: "2px solid #333",
-                          borderRadius: 4, background: "#fff", marginLeft: 10,
-                          cursor: "pointer", flexShrink: 0
-                        }} />
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
+          {/* black-box com estilo da tua versão final */}
+          <div className="middle-painel">
+            <div
+              className="black-box"
+              onClick={() => window.open("https://moodle2425.ipcb.pt/", "_blank")}
+              style={{ cursor: "pointer" }}
+            />
+            <div
+              className="black-box"
+              onClick={() => alert("Funcionalidade em breve!")}
+            />
+          </div>
+        </div>
+
+        {/* -------- COLUNA TO-DO -------- */}
+        <div className="todo-painel">
+          <div style={{ position: "relative", textAlign: "center", marginBottom: 20 }}>
+            <h2 style={{ margin: 0 }}>to do</h2>
+            <FaEye size={20} color="#1e2659"
+              title="Ver todas as tarefas"
+              style={{ position: "absolute", right: 15, top: 5, cursor: "pointer" }}
+              onClick={() => navigate("/todo")} />
+          </div>
+
+          <div className="todo-list">
+            {tarefas.length === 0 ? (
+              <>
+                <div className="todo-item azul" />
+                <div className="todo-item rosa" />
+                <div className="todo-item amarelo" />
+                <div className="todo-item verde" />
+              </>
+            ) : (
+              tarefas.map(t => (
+                <div key={t._id}
+                  className={`todo-item ${getCorPrioridade(t.prioridade)}`}
+                  style={{ cursor: "pointer", justifyContent: "space-between" }}>
+                  <div className="todo-text" onClick={() => abrirDetalhes(t)}>
+                    <span>{t.titulo}</span>
+                  </div>
+                  <div title="Concluir"
+                    onClick={() => marcarComoConcluida(t._id)}
+                    style={{
+                      width: 18, height: 18, border: "2px solid #333",
+                      borderRadius: 4, background: "#fff", marginLeft: 10,
+                      cursor: "pointer", flexShrink: 0
+                    }} />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

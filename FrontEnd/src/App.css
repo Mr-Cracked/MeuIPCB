@@ -83,7 +83,6 @@ p {
 
 .content {
   flex: 1;
-  margin-left: 78px;
   padding: 20px;
   transition: margin-left 0.3s ease;
 }
@@ -103,4 +102,46 @@ body.light-mode .sidebar {
 
 body.light-mode .content {
   background: #f5f6fa;
+}
+
+/* === BOTÃO DE LOGIN CENTRAL === */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.button {
+  background-color: #003878;
+  color: white;
+  padding: 16px 32px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #002a5e;
+}
+
+/* === BOTÃO OPCIONAL EXTRA === */
+.login-button {
+  background-color: #003878;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 20px auto;
+  display: block;
+}
+
+.login-button:hover {
+  background-color: #002a5e;
 }

@@ -1,16 +1,20 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .perfil-container {
+  flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background-color: #e8eaff;
-}
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+  width: 100%;
+  background-color: transparent;
 }
 
 .main-layout {
@@ -18,13 +22,14 @@ html {
   flex-direction: row;
   flex-wrap: wrap;
   flex: 1;
+  width: 100%;
 }
-
-/* REMOVIDO .sidebar PARA NÃO CONFLITAR COM sideNavbar.css */
 
 .content {
   flex: 1;
+  width: 100%;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .grid-layout {
@@ -32,7 +37,14 @@ html {
   flex-wrap: wrap;
   gap: 40px;
   align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
 }
+
 
 .left-column {
   display: flex;
@@ -42,19 +54,20 @@ html {
   min-width: 300px;
 }
 
-/* === Cartão do perfil === */
 .perfil-card {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
   background-color: white;
   border-radius: 30px;
-  padding: 30px;
+  padding: 25px 30px;
   box-shadow: 6px 6px 0px #cbd2ff;
   gap: 30px;
-  max-width: 100%;
+  max-width: 1000px;
+  height: 300px;
 }
+
+
 
 .avatar-placeholder {
   width: 180px;
@@ -85,9 +98,10 @@ html {
   color: #3a3a3a;
   font-weight: 500;
   line-height: 1.6;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
-  max-width: 400px;
+  max-width: 600px;
+  max-height: 200px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -95,7 +109,6 @@ html {
   margin: 8px 0;
 }
 
-/* === Painel grande — anúncio === */
 .left-painel {
   position: relative;
   flex: 1;
@@ -108,10 +121,10 @@ html {
   overflow: visible;
 }
 
-/* Anúncio mais recente */
 .anuncio-recente {
   max-width: 200px;
   word-wrap: break-word;
+  max-height: 200px;
 }
 
 .anuncio-recente h3 {
@@ -149,8 +162,6 @@ html {
   opacity: .85;
 }
 
-
-/* === Painel “To Do” === */
 .todo-painel {
   width: 100%;
   max-width: 320px;
@@ -204,7 +215,6 @@ html {
   color: gray;
 }
 
-/* Cores por prioridade */
 .azul {
   background-color: #bbc9ff;
 }
@@ -230,7 +240,6 @@ html {
   background-color: rgba(145, 240, 90, 0.62);
 }
 
-/* Scrollbar moderna */
 .todo-list::-webkit-scrollbar {
   width: 6px;
 }
@@ -244,7 +253,6 @@ html {
   background-color: transparent;
 }
 
-/* Responsividade */
 @media (max-width: 1000px) {
   .grid-layout {
     flex-direction: column;
@@ -259,39 +267,6 @@ html {
     flex-direction: column;
     align-items: stretch;
   }
-
-/* === NOVO: Painel com atalhos pretos === */
-.middle-painel {
-  background-color: white;
-  border-radius: 20px;
-  width: 130px;
-  height: 220px;
-  box-shadow: 4px 4px 0px #cbd2ff;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* === NOVO: Cada atalho preto === */
-.black-box {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  height: 100px; /* fallback para garantir visibilidade */
-  background-color: black;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease, outline 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.black-box:hover {
-  outline: 2px solid #1e2659;
-  transform: scale(1.05);
-}
-
 
   .todo-painel {
     width: 100%;
@@ -308,4 +283,36 @@ html {
     width: 150px;
     height: 150px;
   }
+}
+
+/* Painel com atalhos pretos */
+.middle-painel {
+  background-color: white;
+  border-radius: 20px;
+  width: 130px;
+  height: 220px;
+  box-shadow: 4px 4px 0px #cbd2ff;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Cada atalho preto */
+.black-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: 100px;
+  background-color: black;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, outline 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.black-box:hover {
+  outline: 2px solid #1e2659;
+  transform: scale(1.05);
 }
