@@ -39,4 +39,22 @@ router.get('/',isAuthenticated, isAluno, async (req, res) => {
     }
 });
 
+router.get("/horariosSalas",isAuthenticated, isAluno, async (req, res) => {
+    try {
+        const aluno = await Aluno.findOne({ email: req.session.account.username });
+        const escola = await Escola.findOne({ nome:aluno.instituicao })
+            .select("nome horariosSalas -_id")
+            .lean();
+
+        if (!escola) {
+            return res.status(404).json({ erro: "Escola não encontrada" });
+        }
+
+        return res.json(escola);                 // devolve {nome, horariosSalas}
+    } catch (err) {
+        console.error("Erro a obter horários:", err);
+        return res.status(500).json({ erro: "Falha no servidor" });
+    }
+});
+
 module.exports = router;

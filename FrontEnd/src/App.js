@@ -7,7 +7,7 @@ import { Perfil } from "./pages/perfil";
 import { Todo } from "./pages/todo";
 import { Escola } from "./pages/escola";
 import Horario from "./pages/horario";
-import { Mapa } from "./pages/mapa";
+import Mapa from "./pages/mapa";
 import { Professores } from "./pages/professores";
 import Anuncios from "./pages/anuncios";
 import { CalendarioEscolar } from "./pages/calendarioescolar";
