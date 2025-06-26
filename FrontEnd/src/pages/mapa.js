@@ -26,14 +26,54 @@ const hotspots = {
             { id:"A1", roomLabel:"Sala A1", x:35, y:18, w:34, h:36 },
             { id:"A2", roomLabel:"Sala A2", x:29, y:18, w:34, h:36 },
             { id:"A3", roomLabel:"Sala A3", x:23, y:18, w:34, h:36 },
-            { id:"A4", roomLabel:"Sala A4", x:18, y:18, w:34, h:36 },
+            { id:"A4", roomLabel:"Sala A4", x:17, y:18, w:34, h:36 },
             { id:"A5", roomLabel:"Sala A5", x:36, y:30, w:34, h:36 },
-            { id:"A6", roomLabel:"Sala A6", x:31, y:30, w:34, h:36 },
-            { id:"A7", roomLabel:"Sala A7", x:27.5, y:30, w:34, h:36 },
-            { id:"A8", roomLabel:"Sala A8", x:23.5, y:30, w:34, h:36 },
-            { id:"A9", roomLabel:"Sala A9", x:20, y:30, w:34, h:36 },
-            { id:"A10", roomLabel:"Sala A10", x:15.5, y:30, w:34, h:36 }
-        ]}
+            { id:"A6", roomLabel:"Sala A6", x:31.5, y:30, w:34, h:36 },
+            { id:"A7", roomLabel:"Sala A7", x:27, y:30, w:34, h:36 },
+            { id:"A8", roomLabel:"Sala A8", x:23, y:30, w:34, h:36 },
+            { id:"A9", roomLabel:"Sala A9", x:18.5, y:30, w:34, h:36 },
+            { id:"A10", roomLabel:"Sala A10", x:14.5, y:30, w:34, h:36 }
+        ]},
+    B: { 0: [
+            { id:"auditorioB", roomLabel:"Anfiteatro Bloco B - EST", x:28, y:25, w:34, h:36 }
+        ],
+        1:  [
+            { id:"B4", roomLabel:"Sala B4", x:23.5, y:19.5, w:34, h:36 },
+            { id:"B5", roomLabel:"Sala B5", x:36, y:20, w:34, h:36 },
+            { id:"B6", roomLabel:"Sala B6", x:25, y:45, w:34, h:36 },
+            { id:"B7", roomLabel:"Sala B7", x:35, y:45, w:34, h:36 },
+        ]},
+    C: { 0:  [
+            { id:"C3", roomLabel:"Sala C3", x:41.5, y:45, w:34, h:36 },
+            { id:"C4", roomLabel:"Sala C4", x:36, y:20, w:34, h:36 },
+            { id:"C5", roomLabel:"Sala C5", x:25, y:20, w:34, h:36 },
+            { id:"C6", roomLabel:"Sala C6", x:13, y:20, w:34, h:36 },
+        ],
+        1:  [
+            { id:"C8", roomLabel:"Sala C8", x:18, y:15, w:34, h:36 },
+            { id:"C9", roomLabel:"Sala C9", x:29, y:20, w:34, h:36 },
+            { id:"C10", roomLabel:"Sala C10", x:36, y:20, w:34, h:36 },
+            { id:"C11", roomLabel:"Sala C11", x:42, y:8, w:34, h:36 },
+            { id:"C12", roomLabel:"Sala C12", x:50, y:8, w:34, h:36 },
+            { id:"C13", roomLabel:"Sala C13", x:50, y:30, w:34, h:36 },
+        ]},
+    D: { 0:  [
+            { id:"D7", roomLabel:"Sala D7", x:44, y:40, w:34, h:36 },
+            { id:"D8", roomLabel:"Sala D8", x:44, y:20, w:34, h:36 },
+            { id:"D9", roomLabel:"Sala D9", x:35, y:20, w:34, h:36 },
+            { id:"D10", roomLabel:"Sala D10", x:27, y:20, w:34, h:36 },
+            { id:"D11", roomLabel:"Sala D11", x:34, y:40, w:34, h:36 },
+        ],
+        1:  [
+            { id:"D2", roomLabel:"Sala D2", x:12, y:18, w:34, h:36 },
+            { id:"D3", roomLabel:"Sala D3", x:12, y:35, w:34, h:36 },
+            { id:"D4", roomLabel:"Sala D4", x:36, y:35, w:34, h:36 },
+            { id:"D5", roomLabel:"Sala D5", x:46, y:34, w:34, h:36 },
+            { id:"D6", roomLabel:"Sala D6", x:46, y:20, w:34, h:36 },
+            { id:"D7", roomLabel:"Sala D7", x:28, y:18, w:34, h:36 },
+            { id:"D8", roomLabel:"Sala D8", x:36, y:18, w:34, h:36 },
+        ]},
+
 };
 
 
