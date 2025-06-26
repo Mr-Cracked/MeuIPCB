@@ -73,18 +73,6 @@ export default function Horario() {
 
   return (
       <div className="layout-container">
-        <aside className="sidebar">
-          <h2>MeuIPCB</h2>
-          <ul>
-            <li><NavLink to="/perfil">perfil</NavLink></li>
-            <li><NavLink to="/horario" className="ativo">horario</NavLink></li>
-            <li><NavLink to="/calendario">calendario</NavLink></li>
-            <li><NavLink to="/escola">escola</NavLink></li>
-            <li><NavLink to="/todo">to-do</NavLink></li>
-            <li><NavLink to="/moodle">moodle</NavLink></li>
-            <li><NavLink to="/netpa">netpa</NavLink></li>
-          </ul>
-        </aside>
 
         <main className="main-content">
           <TopNavbar />

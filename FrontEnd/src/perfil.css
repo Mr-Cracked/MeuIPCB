@@ -1,4 +1,3 @@
-/* === Layout global === */
 .perfil-container {
   display: flex;
   flex-direction: column;
@@ -20,6 +19,8 @@ html {
   flex-wrap: wrap;
   flex: 1;
 }
+
+/* REMOVIDO .sidebar PARA NÃO CONFLITAR COM sideNavbar.css */
 
 .content {
   flex: 1;
@@ -94,14 +95,7 @@ html {
   margin: 8px 0;
 }
 
-/* === Painéis === */
-.painel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-/* Painel grande — anúncio + atalhos pretos */
+/* === Painel grande — anúncio === */
 .left-painel {
   position: relative;
   flex: 1;
@@ -109,81 +103,54 @@ html {
   min-height: 240px;
   background: #fff;
   border-radius: 30px;
-  padding: 1.75rem 2rem 3.5rem; /* espaço extra em baixo para o mini‑painel */
-  box-shadow: 0 0 6px rgba(0,0,0,.06);
-  overflow: visible; /* deixa conteúdo crescer sem cortar as bordas */
+  padding: 1.75rem 2rem 3.5rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+  overflow: visible;
 }
 
-/* Anúncio mais recente - largura limitada para não colidir com mini‑painel */
-.anuncio-recente{
-  max-width: calc(100% - 140px); /* 110 px (mini‑painel) + 30 px folga */
-  word-wrap: break-word;         /* quebra palavras demasiado longas   */
+/* Anúncio mais recente */
+.anuncio-recente {
+  max-width: 200px;
+  word-wrap: break-word;
 }
 
-.anuncio-recente h3{
-  margin:0 0 .5rem;
-  font-size:1.1rem;
-  color:#1e2659;
+.anuncio-recente h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.1rem;
+  color: #1e2659;
 }
 
-.anuncio-recente .meta{
-  font-size:.85rem;
-  color:#666;
-  margin-bottom:.75rem;
+.anuncio-recente .meta {
+  font-size: .85rem;
+  color: #666;
+  margin-bottom: .75rem;
 }
 
-.descricao-limitada{
+.descricao-limitada {
   word-break: break-word;
-  overflow:hidden;
-  display:-webkit-box;
-  -webkit-line-clamp:4;
-  -webkit-box-orient:vertical;
-  margin-bottom:1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  margin-bottom: 1rem;
 }
 
-.ver-todos-btn{
-  background:#1e2659;
-  color:#fff;
-  border:none;
-  padding:.45rem 1.2rem;
-  border-radius:.5rem;
-  cursor:pointer;
-  transition:opacity .15s;
+.ver-todos-btn {
+  background: #1e2659;
+  color: #fff;
+  border: none;
+  padding: .45rem 1.2rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: opacity .15s;
 }
 
-.ver-todos-btn:hover{opacity:.85}
-
-/* Mini‑painel com atalhos pretos */
-.mini-painel{
-  position:absolute;
-  right:1.25rem;
-  top:1.25rem;
-  width:110px;
-  padding:1rem .75rem;
-  background:#fff;
-  border-radius:1rem;
-  box-shadow:0 0 6px rgba(0,0,0,.08);
-  display:flex;
-  flex-direction:column;
-  gap:1rem;
+.ver-todos-btn:hover {
+  opacity: .85;
 }
 
-.black-box{
-  width:100%;
-  aspect-ratio:1/1;
-  background:#000;
-  border-radius:.8rem;
-  cursor:pointer;
-  word-break: break-word;
-}
 
-.black-box:hover{
-  outline:2px solid #1e2659;
-  transform:scale(1.05);
-  transition:transform .2s ease;
-}
-
-/* === Painel “To Do” === */
+/* === Painel “To Do” === */
 .todo-painel {
   width: 100%;
   max-width: 320px;
@@ -238,61 +205,107 @@ html {
 }
 
 /* Cores por prioridade */
-.azul             { background-color:#bbc9ff; }
-.rosa             { background-color:#f3a3d6; }
-.amarelo          { background-color:#f8ec77; }
-.verde            { background-color:#a7f5a1; }
-.prioridade-alta        { background-color:rgba(217,75,82,.62); }
-.prioridade-media-alta  { background-color:rgba(246,154,88,.62); }
-.prioridade-media       { background-color:rgba(246,217,88,.62); }
-.prioridade-baixa       { background-color:rgba(145,240,90,.62); }
+.azul {
+  background-color: #bbc9ff;
+}
+.rosa {
+  background-color: #f3a3d6;
+}
+.amarelo {
+  background-color: #f8ec77;
+}
+.verde {
+  background-color: #a7f5a1;
+}
+.prioridade-alta {
+  background-color: rgba(217, 75, 82, 0.62);
+}
+.prioridade-media-alta {
+  background-color: rgba(246, 154, 88, 0.62);
+}
+.prioridade-media {
+  background-color: rgba(246, 217, 88, 0.62);
+}
+.prioridade-baixa {
+  background-color: rgba(145, 240, 90, 0.62);
+}
 
 /* Scrollbar moderna */
-.todo-list::-webkit-scrollbar{
-  width:6px;
+.todo-list::-webkit-scrollbar {
+  width: 6px;
 }
 
-.todo-list::-webkit-scrollbar-thumb{
-  background-color:rgba(0,0,0,.3);
-  border-radius:4px;
+.todo-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 
-.todo-list::-webkit-scrollbar-track{
-  background-color:transparent;
+.todo-list::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 /* Responsividade */
-@media (max-width:1000px){
-  .grid-layout{ flex-direction:column; }
-  .sidebar{
-    width:100%;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-around;
+@media (max-width: 1000px) {
+  .grid-layout {
+    flex-direction: column;
   }
-  .perfil-card{
-    flex-direction:column;
-    align-items:center;
+
+  .perfil-card {
+    flex-direction: column;
+    align-items: center;
   }
-  .painel{
-    flex-direction:column;
-    align-items:stretch;
+
+  .painel {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .middle-painel{
-    padding:20px;
-    max-width:100%;
-    height:auto;
-  }
-  .todo-painel{
-    width:100%;
-    max-width:100%;
+
+/* === NOVO: Painel com atalhos pretos === */
+.middle-painel {
+  background-color: white;
+  border-radius: 20px;
+  width: 130px;
+  height: 220px;
+  box-shadow: 4px 4px 0px #cbd2ff;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* === NOVO: Cada atalho preto === */
+.black-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: 100px; /* fallback para garantir visibilidade */
+  background-color: black;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, outline 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.black-box:hover {
+  outline: 2px solid #1e2659;
+  transform: scale(1.05);
+}
+
+
+  .todo-painel {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
-@media (max-width:600px){
-  .perfil-info{ font-size:13px; }
-  .avatar-placeholder{
-    width:150px;
-    height:150px;
+@media (max-width: 600px) {
+  .perfil-info {
+    font-size: 13px;
+  }
+
+  .avatar-placeholder {
+    width: 150px;
+    height: 150px;
   }
 }

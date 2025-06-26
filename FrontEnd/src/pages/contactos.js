@@ -46,34 +46,6 @@ export default function Contactos() {
   return (
       <div className="perfil-container">
         <div className="main-layout">
-          {/* Sidebar */}
-          <aside className="sidebar">
-            <h2>MeuIPCB</h2>
-            <ul>
-              <li><NavLink to="/perfil">Perfil</NavLink></li>
-              <li><NavLink to="/horario">Horário</NavLink></li>
-              <li className="dropdown">
-                <span className="dropdown-label">Calendarios ▾</span>
-                <ul className="dropdown-content">
-                  <li><NavLink to="/calendarioescolar">Escolar</NavLink></li>
-                  <li><NavLink to="/calendariofrequencia">Frequências</NavLink></li>
-                  <li><NavLink to="/calendarioexames">Exame/Recurso</NavLink></li>
-                </ul>
-              </li>
-              <li className="dropdown">
-                <span className="dropdown-label">escola ▾</span>
-                <ul className="dropdown-content">
-                  <li><NavLink to="/disciplinas">disciplinas</NavLink></li>
-                  <li><NavLink to="/contactos" className="ativo">contactos</NavLink></li>
-                  <li><NavLink to="/anuncios">anuncios</NavLink></li>
-                  <li><NavLink to="/mapa">mapa</NavLink></li>
-                </ul>
-              </li>
-              <li><NavLink to="/todo">to-do</NavLink></li>
-              <li><NavLink to="/moodle">moodle</NavLink></li>
-              <li><NavLink to="/netpa">netpa</NavLink></li>
-            </ul>
-          </aside>
 
           {/* Conteúdo principal */}
           <main className="content">

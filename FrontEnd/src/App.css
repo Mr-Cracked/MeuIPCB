@@ -1,3 +1,4 @@
+/* === ESTILOS GERAIS === */
 h1 {
   color: black;
   text-align: center;
@@ -22,8 +23,7 @@ p {
   left: 0;
 }
 
-/* RECTANGLE */
-
+/* === ELEMENTOS VISUAIS === */
 .rectangle {
   width: 700px;
   height: 600px;
@@ -58,3 +58,49 @@ p {
   border-radius: 5%;
 }
 
+/* === LAYOUT COM SIDEBAR === */
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #e8eaff;
+}
+
+.sidebar {
+  min-width: 78px;
+  max-width: 250px;
+  width: 78px;
+  background-color: #11101d;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  z-index: 100;
+  position: fixed;
+  height: 100vh;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.content {
+  flex: 1;
+  margin-left: 78px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.open ~ .content {
+  margin-left: 250px;
+}
+
+/* === TEMA CLARO OPCIONAL === */
+body.light-mode {
+  background: #f5f6fa;
+}
+
+body.light-mode .sidebar {
+  background: #ffffff;
+}
+
+body.light-mode .content {
+  background: #f5f6fa;
+}
