@@ -1,0 +1,42 @@
+/* ---------- layout geral ---------- */
+.mapa-container         { display:flex; flex-direction:column; height:100vh; }
+.mapa-controls          { display:flex; gap:12px; align-items:center; padding:12px 32px; }
+.mapa-plant-wrapper     { flex:1; position:relative; display:flex; justify-content:center;
+    align-items:flex-start; overflow:auto; background:#e8eaff; padding:16px 0; }
+
+/* ---------- botões ---------- */
+.block-btn              { width:42px; height:42px; border:none; border-radius:50%; font-weight:700;
+    cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,.15); color:#1e2659; }
+.block-btn.active       { background:#f7d33d; }
+.block-btn:not(.active) { background:#fff; }
+
+.floor-btn              { border:none; background:#1e2659; color:#fff; border-radius:6px;
+    padding:6px 14px; font-weight:600; cursor:pointer;
+    box-shadow:0 2px 4px rgba(0,0,0,.15); }
+
+/* ---------- mapa ---------- */
+.map-image              { max-width:800px; width:70%; border-radius:16px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15); display:block; }
+
+/* ---------- hotspot ---------- */
+.hotspot-wrapper        { position:absolute; transform:translate(-50%,-50%); pointer-events:none; }
+
+/* botão-rótulo (texto clicável) */
+.hotspot-label-btn      { position:absolute; transform:translateY(-50%);
+    background:rgba(30,38,89,.85); color:#fff;
+    padding:2px 6px; border:none; border-radius:4px;
+    font-size:12px; white-space:nowrap; cursor:pointer;
+    pointer-events:auto; }
+
+/* ---------- modal ---------- */
+.modal-overlay          { position:fixed; inset:0; background:rgba(0,0,0,.45);
+    display:flex; align-items:center; justify-content:center; }
+.modal-dialog           { background:#fff; border-radius:12px; padding:24px;
+    width:600px; max-width:90%; box-shadow:0 4px 16px rgba(0,0,0,.25); }
+.modal-close-btn        { margin-top:20px; background:#1e2659; color:#fff; border:none;
+    border-radius:6px; padding:8px 16px; cursor:pointer; }
+
+/* ---------- tabela ---------- */
+.schedule-table         { width:100%; min-width:550px; border-collapse:collapse; font-size:15px; }
+.schedule-table th      { border:1px solid #ccc; padding:6px 4px; }
+.schedule-table td      { border:1px solid #ddd; padding:6px 4px; }
