@@ -24,9 +24,22 @@ export function Perfil() {
         });
         if (ativo) setUser(data);
       } catch (err) {
-        if (ativo && err.response?.status === 401) navigate("/");
+        if (!ativo) return;
+
+        const status = err.response?.status;
+
+        if (status === 401) {
+          // Sessão não autenticada
+          navigate("/", { replace: true });
+        } else if (status === 403) {
+          // Não é aluno → redirecionar para página de entidade
+          navigate("/anuncioscoord", { replace: true });
+        } else {
+          console.error("Erro ao buscar perfil:", err);
+        }
       }
     }
+
 
     async function fetchTarefas() {
       try {

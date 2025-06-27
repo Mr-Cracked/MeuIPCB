@@ -4,8 +4,7 @@ const router = express.Router();
 
 const Aluno     = require("../models/Aluno");
 const Anuncio   = require("../models/Anuncio");
-const Role      = require("../models/Role");
-
+const Professor = require("../models/Professor");
 const { isAuthenticated }    = require("../middleware/autheicatorChecker");
 const { isServicoEscolar }   = require("../middleware/isServicoEscolar");
 const { isAluno }            = require("../middleware/isAluno");
@@ -65,25 +64,39 @@ router.get("/buscaservicoescolar", isAuthenticated, isServicoEscolar, async (req
     const email = req.session.account?.username;
 
     try {
-        const servico = await Role.findOne({ email });
-        if (!servico?.tipo) return res.status(403).json({ message: "Tipo de utilizador não encontrado." });
+        // 1 — obter o utilizador e validar role
+        const utilizador = await Professor.findOne({ email });
+        const role = utilizador?.Role?.trim().toLowerCase();
 
-        let filtro = { titulo: { $regex: query, $options: "i" } };
+        if (!role) {
+            return res.status(403).json({ message: "Tipo de utilizador não encontrado." });
+        }
 
-        switch (servico.tipo) {
-            case "Admin":
+        // 2 — construir filtro de pesquisa
+        const filtro = {
+            titulo: { $regex: query, $options: "i" }
+        };
+
+        switch (role) {
+            case "admin":
                 // vê tudo
                 break;
+
             case "professor":
                 filtro.dono = email;
                 break;
+
             case "servico escolar":
-                filtro.instituicoes = { $elemMatch: { $regex: servico.instituicao, $options: "i" } };
+                filtro.instituicoes = {
+                    $elemMatch: { $regex: utilizador.instituicao, $options: "i" }
+                };
                 break;
+
             default:
                 return res.status(403).json({ message: "Tipo de serviço escolar inválido." });
         }
 
+        // 3 — executar query
         const anuncios = await Anuncio.find(filtro).sort({ data: -1 });
         res.json(anuncios);
 
@@ -93,6 +106,8 @@ router.get("/buscaservicoescolar", isAuthenticated, isServicoEscolar, async (req
     }
 });
 
+
+
 /* -------------------------------------------------------- *
  *  SERVIÇO ESCOLAR – ver lista completa segundo role
  *  GET /anuncio/ver
@@ -101,15 +116,24 @@ router.get("/ver", isAuthenticated, isServicoEscolar, async (req, res) => {
     const email = req.session.account?.username;
 
     try {
-        const utilizador = await Role.findOne({ email });
-        if (!utilizador?.tipo) return res.status(403).json({ message: "Tipo de utilizador não encontrado." });
+        const utilizador = await Professor.findOne({ email }); // ✅ corrigido aqui
+        if (!utilizador?.Role) {
+            return res.status(403).json({ message: "Tipo de utilizador não encontrado." });
+        }
 
         let filtro = {};
-        switch (utilizador.tipo) {
+        switch (utilizador.Role) {
             case "Admin": break;
-            case "professor":       filtro.dono = email; break;
-            case "servico escolar": filtro.instituicoes = { $elemMatch: { $regex: utilizador.instituicao, $options: "i" } }; break;
-            default: return res.status(403).json({ message: "Tipo de serviço escolar inválido." });
+            case "professor":
+                filtro.dono = email;
+                break;
+            case "servico escolar":
+                filtro.instituicoes = {
+                    $elemMatch: { $regex: utilizador.instituicao, $options: "i" }
+                };
+                break;
+            default:
+                return res.status(403).json({ message: "Tipo de serviço escolar inválido." });
         }
 
         const anuncios = await Anuncio.find(filtro).sort({ data: -1 });
@@ -147,26 +171,31 @@ router.post("/inserir", isAuthenticated, isServicoEscolar, async (req, res) => {
  *  SERVIÇO ESCOLAR – atualizar anúncio
  *  PUT /anuncio/atualizar
  * -------------------------------------------------------- */
-router.put("/atualizar", isAuthenticated, isServicoEscolar, async (req, res) => {
+router.put("/atualizar/:id", isAuthenticated, isServicoEscolar, async (req, res) => {
     const emailSessao = req.session.account?.username;
-    const { id, titulo, descricao, instituicoes } = req.body;
+    const { titulo, descricao, instituicoes } = req.body;
+    const id = req.params.id;
 
     if (!id || !titulo || !descricao || !instituicoes?.length)
         return res.status(400).json({ message: "Campos em falta." });
 
     try {
-        const utilizador = await Role.findOne({ email: emailSessao });
+        const utilizador = await Professor.findOne({ email: emailSessao });
         const anuncio    = await Anuncio.findById(id);
 
         if (!utilizador || !anuncio)
             return res.status(404).json({ message: "Anúncio ou utilizador não encontrado." });
 
-        /* ——— validar permissões ——— */
-        if (utilizador.tipo === "professor" && anuncio.dono !== emailSessao)
+        /* ——— permissões ——— */
+        if (utilizador.Role === "professor" && anuncio.dono !== emailSessao)
             return res.status(403).json({ message: "Sem permissão para editar este anúncio." });
 
-        if (utilizador.tipo === "servico escolar" &&
-            !anuncio.instituicoes.some(inst => new RegExp(utilizador.instituicao, "i").test(inst)))
+        if (
+            utilizador.Role === "servico escolar" &&
+            !anuncio.instituicoes.some(inst =>
+                new RegExp(utilizador.instituicao, "i").test(inst)
+            )
+        )
             return res.status(403).json({ message: "Sem permissão para editar este anúncio." });
 
         const atualizado = await Anuncio.findByIdAndUpdate(
@@ -174,7 +203,6 @@ router.put("/atualizar", isAuthenticated, isServicoEscolar, async (req, res) => 
             { titulo, descricao, instituicoes, data: Date.now() },
             { new: true }
         );
-
         res.json({ message: "Anúncio atualizado com sucesso", anuncio: atualizado });
     } catch (err) {
         console.error(err);
@@ -193,18 +221,22 @@ router.delete("/apagar/:id", isAuthenticated, isServicoEscolar, async (req, res)
     if (!id) return res.status(400).json({ message: "Sem ID." });
 
     try {
-        const utilizador = await Role.findOne({ email: emailSessao });
+        const utilizador = await Professor.findOne({ email: emailSessao });
         const anuncio    = await Anuncio.findById(id);
 
         if (!utilizador || !anuncio)
             return res.status(404).json({ message: "Anúncio ou utilizador não encontrado." });
 
-        /* ——— validar permissões ——— */
-        if (utilizador.tipo === "professor" && anuncio.dono !== emailSessao)
+        /* ——— permissões ——— */
+        if (utilizador.Role === "professor" && anuncio.dono !== emailSessao)
             return res.status(403).json({ message: "Sem permissão para apagar este anúncio." });
 
-        if (utilizador.tipo === "servico escolar" &&
-            !anuncio.instituicoes.some(inst => new RegExp(utilizador.instituicao, "i").test(inst)))
+        if (
+            utilizador.Role === "servico escolar" &&
+            !anuncio.instituicoes.some(inst =>
+                new RegExp(utilizador.instituicao, "i").test(inst)
+            )
+        )
             return res.status(403).json({ message: "Sem permissão para apagar este anúncio." });
 
         await Anuncio.findByIdAndDelete(id);

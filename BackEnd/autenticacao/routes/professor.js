@@ -7,6 +7,7 @@ const Curso = require("../models/Curso");
 const router = express.Router();
 const {isAuthenticated} = require("../middleware/autheicatorChecker")
 const {isAluno} = require("../middleware/isAluno");
+const {isServicoEscolar} = require("../middleware/isServicoEscolar");
 
 
 //pesquisar professores da escola do aluno
@@ -27,6 +28,13 @@ router.get('/professores',isAuthenticated, isAluno, async (req, res) => {
         return res.status(500).json({ message: "Erro ao encontrar Professores", err });
 
     }
+});
+
+router.get("/email", isAuthenticated, isServicoEscolar, async (req, res) => {
+    const email = req.session.account?.username;
+    const prof  = await Professor.findOne({ email:email });
+    if (!prof) return res.status(404).end();   // não é professor
+    res.status(200).end();                     // é professor
 });
 
 //pesquisar professores por email
