@@ -1,31 +1,48 @@
+body,
+html,
+.perfil-container,
+.main-layout,
+.side-panel {
+  background-color: #e8eaff !important;
+}
+
 .perfil-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #dee0ff;
   font-family: Arial, sans-serif;
 }
 
 .main-layout {
   display: flex;
   flex-direction: row;
-  gap: 20px;
   align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px 40px;
 }
 
 .content {
   flex: 1;
   padding: 20px;
+  background-color: transparent;
 }
 
 .todo-box {
-  background-color: white;
   padding: 30px 25px;
   border-radius: 20px;
-  max-width: 800px;
+  max-width: 1050px;
   width: 100%;
-  margin: 0 auto;
+  background-color: white;
+  margin-left: 18px;
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;         /* ← altura total */
+  overflow: hidden;
 }
+
+
+
 
 .todo-box h2 {
   text-align: center;
@@ -38,29 +55,32 @@
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-height: 500px;
   overflow-y: auto;
+  padding-right: 10px;
+  gap: 10px;
+  flex: 1;                      /* ← importante para ocupar espaço */
+  min-height: 0;                /* ← essencial para permitir scroll */
 }
+
+
 
 .todo-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  height: 48px;
-  background: transparent;
+  height: 70px;
 }
 
 .checkbox {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background-color: white;
   border: 2px solid #bbb;
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
+  background-color: white;
 }
 
 .checkbox:hover::after {
@@ -90,12 +110,11 @@
 
 .todo-text {
   flex: 1;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
 .todo-text.riscado {
@@ -149,7 +168,7 @@
   background-color: rgba(145, 240, 90, 0.62);
 }
 
-/* Botão adicionar */
+/* Botão de adicionar nova tarefa */
 .add-todo-button {
   position: fixed;
   bottom: 30px;
@@ -163,42 +182,104 @@
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
-/* Painel lateral (versão antiga) */
+/* Painel lateral com caixas pretas e data */
 .side-panel {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 10px 10px;
+  padding: 10px;
   width: 110px;
   align-items: center;
-  background-color: #dee0ff;
   border-radius: 20px;
 }
 
 .black-box {
-  width: 90px;
-  height: 90px;
+  width: 150px;
+  height: 150px;
   background-color: black;
   border-radius: 16px;
 }
 
 .date-box {
-  background-color: white;
-  width: 90px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   padding: 12px 10px;
   border-radius: 16px;
   text-align: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .big-text {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 34px;
+  font-weight: 900;
 }
 
 .small-text {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 50, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Estilos do calendário react-calendar */
+.react-calendar {
+  width: 350px;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  bottom: 170px; /* sobe o calendário para cima do botão */
+  right: 0;
+  z-index: 1500;
+}
+
+.react-calendar__tile {
+  height: 50px;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #3c459f;
+  border-radius: 50%;
+}
+
+.todo-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background-color: transparent;
 }

@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./criarTarefa.css";
 import axios from "axios";
 
-export default function CriarTarefa({ onClose, onTarefaCriada }) {
+export default function CriarTarefa({ onClose, onTarefaCriada, dataInicial }) {
   const [titulo, setTitulo] = useState("");
   const [prioridade, setPrioridade] = useState("");
-  const [prazo, setPrazo] = useState("");
+  const [prazo, setPrazo] = useState(dataInicial || "");
   const [descricao, setDescricao] = useState("");
   const [dono, setDono] = useState("");
 
-  // Obter o dono via endpoint da sessão (assumindo que existe)
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/aluno", { withCredentials: true })
       .then((res) => {
-        setDono(res.data.email || res.data.username); // adaptado conforme a resposta
+        setDono(res.data.email || res.data.username);
       })
       .catch((err) => {
         console.error("Erro ao obter dono da sessão:", err);
@@ -28,21 +27,12 @@ export default function CriarTarefa({ onClose, onTarefaCriada }) {
     }
 
     try {
-      console.log("A enviar para o servidor:", {
-        dono,
-        titulo,
-        prioridade,
-        prazo,
-        descricao,
-      });
-
       const res = await axios.post(
         "http://localhost:3000/api/todo/inserir",
         { dono, titulo, prioridade, prazo, descricao },
         { withCredentials: true }
       );
 
-      console.log("Resposta recebida:", res.data);
       onTarefaCriada(res.data);
       onClose();
     } catch (err) {

@@ -190,3 +190,9 @@ body.dark .chat-input.dark button {
 body.dark .chat-input.dark button:hover {
   background-color: #777;
 }
+
+/* === MODO ESCURO CORRIGIDO === */
+body.dark .main-layout,
+body.dark .ai-wrapper {
+  background-color: #1e1e1e !important;
+}

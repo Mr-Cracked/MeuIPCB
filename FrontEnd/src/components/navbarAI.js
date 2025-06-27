@@ -18,7 +18,6 @@ const SideNavbar = () => {
 
   return (
     <>
-      {/* Botão flutuante separado */}
       <button
         className="toggle-flutuante-separado"
         onClick={toggleNavbar}
@@ -27,7 +26,6 @@ const SideNavbar = () => {
         {expandida ? <FaTimes /> : <FaBars />}
       </button>
 
-      {/* NAVBAR */}
       <div className={`side-navbar ${expandida ? "expandida" : ""}`}>
         <div className="nav-item">
           <FaComments className="icon" />

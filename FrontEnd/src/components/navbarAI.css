@@ -2,16 +2,16 @@
 .side-navbar {
   position: fixed;
   top: 50%;
-  left: 2rem;
+  left: 1rem;
   transform: translateY(-50%);
   width: 60px;
   background-color: white;
   border-radius: 2rem;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   z-index: 1000;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   transition: width 0.3s ease, padding 0.3s ease;
@@ -20,7 +20,7 @@
 .side-navbar.expandida {
   width: 180px;
   align-items: flex-start;
-  padding: 1rem;
+  padding: 1.2rem;
 }
 
 .nav-item {
@@ -30,6 +30,12 @@
   color: #333;
   cursor: pointer;
   transition: color 0.3s;
+  padding-left: 1rem;
+  width: 100%;
+}
+
+.nav-item:hover {
+  color: #007bff;
 }
 
 .nav-item .icon {
@@ -44,8 +50,8 @@
 /* BOTÃO FLUTUANTE SEPARADO */
 .toggle-flutuante-separado {
   position: fixed;
-  left: 2rem;
-  top: calc(50% - 120px); /* 120px acima do centro (ajustável) */
+  left: 1rem;
+  top: 10%;
   width: 45px;
   height: 45px;
   border-radius: 12px;
@@ -64,7 +70,7 @@
   transform: scale(1.05);
 }
 
-/* Modo escuro */
+/* MODO ESCURO */
 body.dark .side-navbar {
   background-color: #2a2a2a;
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
@@ -72,6 +78,10 @@ body.dark .side-navbar {
 
 body.dark .nav-item {
   color: #ccc;
+}
+
+body.dark .nav-item:hover {
+  color: #61dafb;
 }
 
 body.dark .toggle-flutuante-separado {

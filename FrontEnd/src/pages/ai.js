@@ -21,7 +21,6 @@ const AIChatPage = () => {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Verificação de autenticação
   useEffect(() => {
     let isMounted = true;
 
@@ -80,9 +79,9 @@ const AIChatPage = () => {
 
     try {
       const response = await axios.post(
-          "http://localhost:3000/api/ai/pergunta",
-          { pergunta: mensagem },
-          { withCredentials: true }
+        "http://localhost:3000/api/ai/pergunta",
+        { pergunta: mensagem },
+        { withCredentials: true }
       );
 
       const novaResposta = { autor: "ai", texto: response.data.resposta };
@@ -99,67 +98,67 @@ const AIChatPage = () => {
   };
 
   return (
-      <div className="ai-wrapper">
-        <SideNavbar />
-        <div className={`chat-container ${darkMode ? "dark" : ""}`}>
-          <h2>Drava</h2>
+    <div className={`ai-wrapper ${darkMode ? "dark" : ""}`}>
+      <SideNavbar />
+      <div className={`chat-container ${darkMode ? "dark" : ""}`}>
+        <h2>Drava</h2>
 
-          <div style={{ marginBottom: "1rem", textAlign: "center" }}>
-            <label htmlFor="tema">🎨 Tema:&nbsp;</label>
-            <select
-                id="tema"
-                value={temaAtual}
-                onChange={(e) => setTemaAtual(e.target.value)}
-            >
-              {Object.keys(temas).map((tema) => (
-                  <option key={tema} value={tema}>
-                    {tema}
-                  </option>
-              ))}
-            </select>
-            <button
-                onClick={() => setDarkMode((prev) => !prev)}
-                style={{
-                  marginLeft: "1rem",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "0.5rem",
-                  backgroundColor: darkMode ? "#999" : "#333",
-                  color: "#fff",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-            >
-              {darkMode ? "☀️ Claro" : "🌙 Escuro"}
-            </button>
-          </div>
-
-          <div className={`chat-box ${darkMode ? "dark" : ""}`}>
-            {mensagens.map((msg, i) => (
-                <div key={i} className={`mensagem ${msg.autor}`}>
-                  <ReactMarkdown>{msg.texto}</ReactMarkdown>
-                </div>
-            ))}
-            {loading && (
-                <div className="mensagem ai">
-                  <span>⏳ A escrever...</span>
-                </div>
-            )}
-          </div>
-
-          <form
-              className={`chat-input ${darkMode ? "dark" : ""}`}
-              onSubmit={enviarPergunta}
+        <div style={{ marginBottom: "1rem", textAlign: "center" }}>
+          <label htmlFor="tema">🎨 Tema:&nbsp;</label>
+          <select
+            id="tema"
+            value={temaAtual}
+            onChange={(e) => setTemaAtual(e.target.value)}
           >
-            <input
-                type="text"
-                value={mensagem}
-                onChange={(e) => setMensagem(e.target.value)}
-                placeholder="Escreve a tua pergunta aqui..."
-            />
-            <button type="submit">➤</button>
-          </form>
+            {Object.keys(temas).map((tema) => (
+              <option key={tema} value={tema}>
+                {tema}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => setDarkMode((prev) => !prev)}
+            style={{
+              marginLeft: "1rem",
+              padding: "0.5rem 1rem",
+              borderRadius: "0.5rem",
+              backgroundColor: darkMode ? "#999" : "#333",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            {darkMode ? "☀️ Claro" : "🌙 Escuro"}
+          </button>
         </div>
+
+        <div className={`chat-box ${darkMode ? "dark" : ""}`}>
+          {mensagens.map((msg, i) => (
+            <div key={i} className={`mensagem ${msg.autor}`}>
+              <ReactMarkdown>{msg.texto}</ReactMarkdown>
+            </div>
+          ))}
+          {loading && (
+            <div className="mensagem ai">
+              <span>⏳ A escrever...</span>
+            </div>
+          )}
+        </div>
+
+        <form
+          className={`chat-input ${darkMode ? "dark" : ""}`}
+          onSubmit={enviarPergunta}
+        >
+          <input
+            type="text"
+            value={mensagem}
+            onChange={(e) => setMensagem(e.target.value)}
+            placeholder="Escreve a tua pergunta aqui..."
+          />
+          <button type="submit">➤</button>
+        </form>
       </div>
+    </div>
   );
 };
 

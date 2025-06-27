@@ -34,7 +34,9 @@ export default function EditarTarefa({ tarefa, onFechar, onAtualizada }) {
         { withCredentials: true }
       );
 
-      if (onAtualizada) onAtualizada(res.data);
+      console.log("Resposta ao editar tarefa:", res.data);
+
+      if (onAtualizada) onAtualizada(); // sem enviar tarefa
       onFechar();
     } catch (err) {
       console.error("Erro ao atualizar tarefa:", err);

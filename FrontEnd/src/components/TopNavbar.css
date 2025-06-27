@@ -1,5 +1,5 @@
 .top-navbar {
-width: calc(100% - 78px); /* ajusta para a sidebar fechada */  height: 100px;
+  width: calc(100% - 78px); /* ajusta para a sidebar fechada */  height: 100px;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
