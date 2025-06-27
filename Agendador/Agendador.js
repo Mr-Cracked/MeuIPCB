@@ -133,11 +133,12 @@ const importData = async () => {
             }
 
 
-            // Extrair os dados do aluno
+            // Extrair os dados do professor
             const ProfessorData = {
                 Escola: professor.escolas,
                 nome: professor.nome,
                 email: professor.email,
+                Role: professor.Role
             };
 
             console.log(`📌 Processando aluno: ${ProfessorData.nome} (${ProfessorData.email})`);

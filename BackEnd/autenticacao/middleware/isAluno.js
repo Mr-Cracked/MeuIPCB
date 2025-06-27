@@ -9,7 +9,7 @@ async function isAluno(req, res, next) {
     console.log(aluno);
 
     if (!aluno) {
-        return res.status(401).json({message: "Não é aluno"});
+        return res.status(403).json({message: "Não é aluno"});
     }
 
     next();
