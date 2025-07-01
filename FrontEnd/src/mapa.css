@@ -1,6 +1,6 @@
 /* ---------- layout geral ---------- */
 .mapa-container         { display:flex; flex-direction:column; height:100vh; }
-.mapa-controls          { display:flex; gap:12px; align-items:center; padding:12px 32px; }
+.mapa-controls          { display:flex; gap:12px; align-items:center; padding:12px 75px; }
 .mapa-plant-wrapper     { flex:1; position:relative; display:flex; justify-content:center;
     align-items:flex-start; overflow:auto; background:#e8eaff; padding:16px 0; }
 

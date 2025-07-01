@@ -1,7 +1,6 @@
 html,
 body {
   margin: 0;
-  padding: 0;
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -14,7 +13,7 @@ body {
   min-height: 100vh;
   font-family: Arial, sans-serif;
   width: 100%;
-  background-color: transparent;
+  background-color: red;
 }
 
 .main-layout {
@@ -23,13 +22,6 @@ body {
   flex-wrap: wrap;
   flex: 1;
   width: 100%;
-}
-
-.content {
-  flex: 1;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 .grid-layout {
@@ -61,13 +53,12 @@ body {
   background-color: white;
   border-radius: 30px;
   padding: 25px 30px;
-  box-shadow: 6px 6px 0px #cbd2ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   gap: 30px;
   max-width: 1000px;
   height: 300px;
+  margin-left: 47px;
 }
-
-
 
 .avatar-placeholder {
   width: 180px;
@@ -98,7 +89,6 @@ body {
   color: #3a3a3a;
   font-weight: 500;
   line-height: 1.6;
-  font-size: 12px;
   text-align: left;
   max-width: 600px;
   max-height: 200px;
@@ -107,18 +97,21 @@ body {
 
 .perfil-info p {
   margin: 8px 0;
+  font-size: 16px !important;
 }
 
 .left-painel {
   position: relative;
   flex: 1;
-  min-width: 300px;
-  min-height: 240px;
+  width: 670px;
+  height: 5px;
   background: #fff;
   border-radius: 30px;
   padding: 1.75rem 2rem 3.5rem;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   overflow: visible;
+  margin-left: 47px;
+  margin-top: -10px;
 }
 
 .anuncio-recente {
@@ -171,9 +164,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 4px 4px 0px #cbd2ff;
-  min-height: 555px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  height: 600px;
   overflow: hidden;
+  margin-right: -25px;
 }
 
 .todo-painel h2 {
@@ -194,7 +188,7 @@ body {
 }
 
 .todo-item {
-  min-height: 40px;
+  min-height: 60px;
   border-radius: 16px;
   margin: 6px 0;
   display: flex;
@@ -215,18 +209,6 @@ body {
   color: gray;
 }
 
-.azul {
-  background-color: #bbc9ff;
-}
-.rosa {
-  background-color: #f3a3d6;
-}
-.amarelo {
-  background-color: #f8ec77;
-}
-.verde {
-  background-color: #a7f5a1;
-}
 .prioridade-alta {
   background-color: rgba(217, 75, 82, 0.62);
 }
@@ -287,30 +269,36 @@ body {
 
 /* Painel com atalhos pretos */
 .middle-painel {
+  position: absolute;
   background-color: white;
-  border-radius: 20px;
-  width: 130px;
-  height: 220px;
-  box-shadow: 4px 4px 0px #cbd2ff;
+  border-radius: 25px;
+  width: 170px;
+  height: 280px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 745px;
+  margin-top: 320px;
+  align-items: center;
+  gap: 5px;
 }
 
-/* Cada atalho preto */
 .black-box {
-  width: 100%;
+  width: 120px !important;         
+  height: 120px !important;
   aspect-ratio: 1 / 1;
-  height: 100px;
-  background-color: black;
-  border-radius: 12px;
+  flex-shrink: 0;              
+  border-radius: 25%;
   cursor: pointer;
   transition: transform 0.2s ease, outline 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+
 
 .black-box:hover {
   outline: 2px solid #1e2659;

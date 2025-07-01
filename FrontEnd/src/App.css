@@ -1,4 +1,12 @@
 /* === ESTILOS GERAIS === */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0015ff !important; /* ou a cor que quiseres */
+}
+
 h1 {
   color: black;
   text-align: center;
@@ -62,46 +70,33 @@ p {
 .main-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #e8eaff;
 }
 
+/* Sidebar fixa à esquerda */
 .sidebar {
-  min-width: 78px;
-  max-width: 250px;
-  width: 78px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px; /* ← Reservamos sempre 250px */
   background-color: #11101d;
   transition: width 0.3s ease;
   overflow-x: hidden;
   z-index: 100;
-  position: fixed;
-  height: 100vh;
 }
 
-.sidebar.open {
-  width: 250px;
+/* Quando a sidebar está "fechada", só visual reduzido — mas espaço continua reservado */
+.sidebar:not(.open) {
+  width: 78px;
 }
 
+/* Conteúdo principal com margem fixa para a sidebar */
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 0px;
+  margin-left: 150px; /* ← Fixa o conteúdo sempre a partir daqui */
   transition: margin-left 0.3s ease;
-}
 
-.sidebar.open ~ .content {
-  margin-left: 250px;
-}
-
-/* === TEMA CLARO OPCIONAL === */
-body.light-mode {
-  background: #f5f6fa;
-}
-
-body.light-mode .sidebar {
-  background: #ffffff;
-}
-
-body.light-mode .content {
-  background: #f5f6fa;
 }
 
 /* === BOTÃO DE LOGIN CENTRAL === */

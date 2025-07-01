@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./sideNavbar.css";
 
 export default function SideNavbar() {
-  const [open, setOpen] = useState(false);
   const [lightMode, setLightMode] = useState(false);
   const [calendarioAberto, setCalendarioAberto] = useState(false);
   const [escolaAberto, setEscolaAberto] = useState(false);
@@ -26,7 +25,7 @@ export default function SideNavbar() {
     const escolaTop = escolaRef.current?.getBoundingClientRect().top || 0;
     const calendarioTop = calendarioRef.current?.getBoundingClientRect().top || 0;
     setDropdownPos({ escola: escolaTop, calendario: calendarioTop });
-  }, [escolaAberto, calendarioAberto, open]);
+  }, [escolaAberto, calendarioAberto]);
 
   const toggleTheme = () => {
     const newMode = !lightMode;
@@ -44,65 +43,54 @@ export default function SideNavbar() {
 
   return (
     <>
-      <div className={`sidebar ${open ? "open" : ""}`}>
+      <div className="sidebar open">
         <div className="logo-details">
-          <i className="bx bx-menu" id="btn" onClick={() => setOpen(!open)}></i>
           <span className="logo_name">MeuIPCB</span>
         </div>
 
         <ul className="nav-list">
-          {/* PERFIL */}
           <li className={isAtivo("/perfil") ? "active" : ""} onClick={() => navigate("/perfil")}>
-            <i className="bx bx-user"></i>
             <span className="links_name">Perfil</span>
           </li>
-
-          {/* HORÁRIO */}
           <li className={isAtivo("/horario") ? "active" : ""} onClick={() => navigate("/horario")}>
-            <i className="bx bx-calendar"></i>
             <span className="links_name">Horário</span>
           </li>
-
-          {/* TO-DO */}
           <li className={isAtivo("/todo") ? "active" : ""} onClick={() => navigate("/todo")}>
-            <i className="bx bx-list-check"></i>
             <span className="links_name">To-Do</span>
           </li>
 
-          {/* CALENDÁRIO */}
           <li className={`dropdown ${calendarioAberto ? "open" : ""}`} ref={calendarioRef}>
             <div className="dropdown-toggle" onClick={() => setCalendarioAberto(!calendarioAberto)}>
-              <i className="bx bx-calendar-event"></i>
               <span className="links_name">Calendário</span>
-              <i className={`bx ${calendarioAberto ? "bx-chevron-up" : "bx-chevron-down"}`} />
             </div>
           </li>
 
-          {/* ESCOLA */}
           <li className={`dropdown ${escolaAberto ? "open" : ""}`} ref={escolaRef}>
             <div className="dropdown-toggle" onClick={() => setEscolaAberto(!escolaAberto)}>
-              <i className="bx bx-buildings"></i>
               <span className="links_name">Escola</span>
-              <i className={`bx ${escolaAberto ? "bx-chevron-up" : "bx-chevron-down"}`} />
             </div>
           </li>
 
-          {/* TEMA */}
-          <li onClick={toggleTheme}>
-            <i className={`bx ${lightMode ? "bx-sun" : "bx-moon"}`}></i>
-            <span className="links_name">Tema</span>
+          <li>
+            <a href="https://moodle2425.ipcb.pt/" target="_blank" rel="noopener noreferrer">
+              <span className="links_name">Moodle</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://academicos.ipcb.pt/netpa/page" target="_blank" rel="noopener noreferrer">
+              <span className="links_name">NetPa</span>
+            </a>
           </li>
         </ul>
       </div>
 
-      {/* DROPDOWN CALENDÁRIO */}
       {calendarioAberto && (
         <ul
           className="dropdown-menu"
           style={{
             position: "fixed",
             top: dropdownPos.calendario,
-            left: open ? 250 : 78,
+            left: 250,
           }}
         >
           <li className={isAtivo("/calendarioescolar") ? "active" : ""} onClick={() => navigate("/calendarioescolar")}>
@@ -117,19 +105,15 @@ export default function SideNavbar() {
         </ul>
       )}
 
-      {/* DROPDOWN ESCOLA */}
       {escolaAberto && (
         <ul
           className="dropdown-menu"
           style={{
             position: "fixed",
             top: dropdownPos.escola,
-            left: open ? 250 : 78,
+            left: 250,
           }}
         >
-          <li className={isAtivo("/professores") ? "active" : ""} onClick={() => navigate("/professores")}>
-            <span>Professores</span>
-          </li>
           <li className={isAtivo("/disciplinas") ? "active" : ""} onClick={() => navigate("/disciplinas")}>
             <span>Disciplinas</span>
           </li>
@@ -142,7 +126,9 @@ export default function SideNavbar() {
           <li className={isAtivo("/anuncios") ? "active" : ""} onClick={() => navigate("/anuncios")}>
             <span>Anúncios</span>
           </li>
+          
         </ul>
+        
       )}
     </>
   );
