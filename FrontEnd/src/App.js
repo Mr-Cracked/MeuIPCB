@@ -26,7 +26,7 @@ function AppContent() {
   const location = useLocation();
   
   // Páginas onde NÃO queres mostrar a sidebar
-  const paginasSemSidebar = ["/ai", "/", "/anuncioscoord"]; // adiciona outras conforme necessário
+  const paginasSemSidebar = ["/", "/anuncioscoord"]; // adiciona outras conforme necessário
 
   const mostrarSidebar = !paginasSemSidebar.includes(location.pathname);
 

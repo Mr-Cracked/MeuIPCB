@@ -7,3 +7,11 @@
     border-radius: 8px;
     overflow: hidden;
 }
+
+.pdf-scroll-container {
+    height: 600px; /* ou qualquer valor que queiras */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+

@@ -14,12 +14,12 @@ export function CalendarioEscolar() {
                     <div className="calendario-wrapper">
                         <h2>Calendário Escolar</h2>
 
-                        <div className="pdf-container">
+                        <div className="pdf-scroll-container">
                             <iframe
                                 src="http://localhost:3000/api/escola/"
                                 title="Calendário Escolar"
                                 width="100%"
-                                height="800px"
+                                height="100%"
                                 frameBorder="0"
                             ></iframe>
                         </div>

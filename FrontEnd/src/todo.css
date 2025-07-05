@@ -37,7 +37,7 @@ html,
   margin-left: 18px;
   display: flex;
   flex-direction: column;
-  max-height: 500px;         /* ← altura total */
+  max-height: 750px;         /* ← altura total */
   overflow: hidden;
 }
 
@@ -150,7 +150,6 @@ html,
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
   background-color: white;
 }
 
@@ -199,7 +198,6 @@ html,
 .black-box {
   width: 150px;
   height: 150px;
-  background-color: black;
   border-radius: 16px;
 }
 

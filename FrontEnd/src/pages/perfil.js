@@ -6,6 +6,9 @@ import EditarTarefa from "../components/editarTarefa";
 import "../perfil.css";
 import { FaEye } from "react-icons/fa";
 
+import Moodle from "../assets/Moodle.png";
+import NetPa from "../assets/Netpa.png";
+
 export function Perfil() {
   const [user, setUser] = useState(null);
   const [tarefas, setTarefas] = useState([]);
@@ -145,9 +148,7 @@ export function Perfil() {
                   {" · "}{anuncioRecente.dono}
                 </p>
                 <p className="descricao-limitada">
-                  {anuncioRecente.descricao.length > 250
-                    ? anuncioRecente.descricao.slice(0, 247) + "…"
-                    : anuncioRecente.descricao}
+                  {anuncioRecente.descricao}
                 </p>
                 <button className="ver-todos-btn" onClick={() => navigate("/anuncios")}>
                   Ver todos
@@ -161,31 +162,42 @@ export function Perfil() {
           {/* black-box com estilo da tua versão final */}
           <div className="middle-painel">
             <div
-              className="black-box"
-              onClick={() => window.open("https://moodle2425.ipcb.pt/", "_blank")}
-              style={{ cursor: "pointer" }}
+                className="black-box"
+                onClick={() => window.open("https://moodle2425.ipcb.pt/", "_blank")}
+                style={{
+                  backgroundImage: `url(${Moodle})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  cursor: "pointer"
+                }}
             />
             <div
-              className="black-box"
-              onClick={() => alert("Funcionalidade em breve!")}
+                className="black-box"
+                onClick={() => window.open("https://academicos.ipcb.pt/netpa/page", "_blank")}
+                style={{
+                  backgroundImage: `url(${NetPa})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  cursor: "pointer"
+                }}
             />
           </div>
         </div>
 
         {/* -------- COLUNA TO-DO -------- */}
         <div className="todo-painel">
-          <div style={{ position: "relative", textAlign: "center", marginBottom: 20 }}>
-            <h2 style={{ margin: 0 }}>to do</h2>
+          <div style={{position: "relative", textAlign: "center", marginBottom: 20}}>
+            <h2 style={{margin: 0}}>to do</h2>
             <FaEye size={20} color="#1e2659"
-              title="Ver todas as tarefas"
-              style={{ position: "absolute", right: 15, top: 5, cursor: "pointer" }}
-              onClick={() => navigate("/todo")} />
+                   title="Ver todas as tarefas"
+                   style={{position: "absolute", right: 15, top: 5, cursor: "pointer"}}
+                   onClick={() => navigate("/todo")}/>
           </div>
 
           <div className="todo-list">
             {tarefas.length === 0 ? (
-              <>
-                <div className="todo-item azul" />
+                <>
+                  <div className="todo-item azul" />
                 <div className="todo-item rosa" />
                 <div className="todo-item amarelo" />
                 <div className="todo-item verde" />

@@ -195,11 +195,14 @@ router.get("/novosdata", isAuthenticated, isAluno, async (req, res) => {
 
 router.get("/feitos", isAuthenticated, isAluno, async (req, res) => {
   try {
-    const todos = await Todo.find({ dono: req.session.account?.username }).sort(
-      { concluido: true }
-    ); // -1 = descendente, 1 = ascendente
+    const todos = await Todo.find({
+      dono: req.session.account?.username,
+      concluido: true,
+    }).sort({ data_criacao: -1 }); // mais recentes primeiro
+
     return res.json(todos);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "Erro ao obter Todos", error });
   }
 });
