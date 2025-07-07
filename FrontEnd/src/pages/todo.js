@@ -25,23 +25,15 @@ export function Todo() {
   const calendarioRef = useRef(null);
   const navigate = useNavigate();
 
-  // Carrega perfil do utilizador
   useEffect(() => {
     let isMounted = true;
-
     async function fetchUserProfile() {
       try {
         const response = await axios.get("http://localhost:3000/api/aluno/", {
           withCredentials: true,
         });
-
-        if (isMounted && response.data) {
-          setUser(response.data);
-        } else {
-          setTimeout(() => {
-            if (isMounted) navigate("/");
-          }, 0);
-        }
+        if (isMounted && response.data) setUser(response.data);
+        else setTimeout(() => isMounted && navigate("/"), 0);
       } catch (error) {
         if (isMounted && error.response?.status === 401) {
           setTimeout(() => navigate("/"), 0);
@@ -50,36 +42,28 @@ export function Todo() {
         }
       }
     }
-
     fetchUserProfile();
-
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, [navigate]);
 
-  // Carrega tarefas conforme o filtro
-  useEffect(() => {
-    async function fetchTarefasPorFiltro() {
-      if (!user) return;
-
-      try {
-        const endpoint =
-            filtroSelecionado === "concluidas"
-                ? "http://localhost:3000/api/todo/feitos"
-                : "http://localhost:3000/api/todo/all";
-
-        const resposta = await axios.get(endpoint, {
-          withCredentials: true,
-        });
-
-        setTodos(resposta.data);
-      } catch (erro) {
-        console.error("Erro ao buscar tarefas por filtro:", erro);
-      }
+  const fetchTarefas = async () => {
+    if (!user) return;
+    try {
+      const endpoint =
+          filtroSelecionado === "concluidas"
+              ? "http://localhost:3000/api/todo/feitos"
+              : "http://localhost:3000/api/todo/all";
+      const resposta = await axios.get(endpoint, {
+        withCredentials: true,
+      });
+      setTodos(resposta.data);
+    } catch (erro) {
+      console.error("Erro ao buscar tarefas por filtro:", erro);
     }
+  };
 
-    fetchTarefasPorFiltro();
+  useEffect(() => {
+    fetchTarefas();
   }, [filtroSelecionado, user]);
 
   useEffect(() => {
@@ -91,11 +75,9 @@ export function Todo() {
         setMostrarCalendario(false);
       }
     }
-
     if (mostrarCalendario) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -107,7 +89,6 @@ export function Todo() {
 
   function apagarTarefaConfirmada() {
     if (!tarefaParaApagar) return;
-
     axios
         .delete(`http://localhost:3000/api/todo/${tarefaParaApagar}`, {
           withCredentials: true,
@@ -126,7 +107,6 @@ export function Todo() {
   function concluirTarefa(id) {
     const tarefa = todos.find((t) => t._id === id);
     if (!tarefa) return;
-
     axios
         .put(
             `http://localhost:3000/api/todo/atualizar`,
@@ -186,7 +166,9 @@ export function Todo() {
     });
   }
 
-  const datasComTarefas = todos.map((t) => new Date(t.prazo).toDateString());
+  const datasComTarefas = todos.map((t) =>
+      new Date(t.prazo).toDateString()
+  );
 
   function handleDiaSelecionado(date) {
     const selecionadas = todos.filter(
@@ -264,8 +246,8 @@ export function Todo() {
                     tarefa={tarefaParaEditar}
                     onFechar={() => setTarefaParaEditar(null)}
                     onAtualizada={() => {
+                      fetchTarefas();
                       setTarefaParaEditar(null);
-                      setFiltroSelecionado((prev) => prev); // força refresh do filtro atual
                     }}
                 />
             )}
@@ -329,7 +311,7 @@ export function Todo() {
                 <div className="calendar-popup" ref={calendarioRef}>
                   <Calendar
                       locale="pt-PT"
-                      onClickDay={(date) => handleDiaSelecionado(date)}
+                      onClickDay={handleDiaSelecionado}
                       tileClassName={({ date }) =>
                           datasComTarefas.includes(date.toDateString()) ? "highlight" : null
                       }

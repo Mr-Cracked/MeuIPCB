@@ -493,9 +493,11 @@
                         "codigo": "9119032",
                         "UC": "Big Data",
                         "ECTS": 4,
+                        "nota": 17,
+                        "qualitativa": 4.0,
                         "turma": "PLINF2",
                         "ano_letivo": "2024-25",
-                        "situacao": "Inscrito",
+                        "situacao": "Aprovado",
                         "faltas_dadas": "00:00",
                         "limite_faltas": "25:00",
                         "faltas_justificadas": "00:00"
@@ -505,9 +507,11 @@
                         "codigo": "9119030",
                         "UC": "Cibersegurança",
                         "ECTS": 6,
+                        "nota": 16,
+                        "qualitativa": 6.0,
                         "turma": "PLINF1",
                         "ano_letivo": "2024-25",
-                        "situacao": "Inscrito",
+                        "situacao": "Aprovado",
                         "faltas_dadas": "00:00",
                         "limite_faltas": "25:00",
                         "faltas_justificadas": "00:00"
@@ -517,6 +521,8 @@
                         "codigo": "9119031",
                         "UC": "Computação em Nuvem",
                         "ECTS": 5,
+                        "nota": 19,
+                        "qualitativa": 5.0,
                         "turma": "PLINF2",
                         "ano_letivo": "2024-25",
                         "situacao": "Inscrito",
@@ -529,9 +535,11 @@
                         "codigo": "9119033",
                         "UC": "Gestão de Projetos em Informática",
                         "ECTS": 6,
+                        "nota": 19,
+                        "qualitativa": 5.0,
                         "turma": "PLINF2",
                         "ano_letivo": "2024-25",
-                        "situacao": "Inscrito",
+                        "situacao": "Aprovado",
                         "faltas_dadas": "00:00",
                         "limite_faltas": "25:00",
                         "faltas_justificadas": "00:00"
@@ -872,7 +880,7 @@
         },
         {
             "nome": "Tatiana Honório",
-            "email": "thonotio@ipcbcampus.pt",
+            "email": "thonorio@ipcbcampus.pt",
             "escolas": ["Escola Superior de Tecnologia de Castelo Branco"],
             "Role": "Admin"
         }

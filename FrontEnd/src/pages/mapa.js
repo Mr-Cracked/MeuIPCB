@@ -30,9 +30,9 @@ const hotspots = {
             { id:"A5", roomLabel:"Sala A5", x:36, y:30, w:34, h:36 },
             { id:"A6", roomLabel:"Sala A6", x:31.5, y:30, w:34, h:36 },
             { id:"A7", roomLabel:"Sala A7", x:27, y:30, w:34, h:36 },
-            { id:"A8", roomLabel:"Sala A8", x:23, y:30, w:34, h:36 },
-            { id:"A9", roomLabel:"Sala A9", x:18.5, y:30, w:34, h:36 },
-            { id:"A10", roomLabel:"Sala A10", x:14.5, y:30, w:34, h:36 }
+            { id:"A8", roomLabel:"Sala A8", x:22.5, y:30, w:34, h:36 },
+            { id:"A9", roomLabel:"Sala A9", x:18, y:30, w:34, h:36 },
+            { id:"A10", roomLabel:"Sala A10", x:13.5, y:30, w:34, h:36 }
         ]},
     B: { 0: [
             { id:"auditorioB", roomLabel:"Anfiteatro Bloco B - EST", x:28, y:25, w:34, h:36 }

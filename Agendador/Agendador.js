@@ -1,3 +1,4 @@
+const cron = require("node-cron");
 const database = require("./database/basedados");
 const fs = require("fs");
 const mongoose = require("mongoose");
@@ -12,15 +13,12 @@ require("dotenv").config();
 
 const importData = async () => {
     try {
-        // Conectar à base de dados
         await database();
         console.log("🔹 Conexão estabelecida. Lendo o JSON...");
 
-        // Ler o JSON
         let jsonData = JSON.parse(fs.readFileSync("Dados.json", "utf-8"));
         let jsonDataSalas = JSON.parse(fs.readFileSync("horarios_salas_EST.json", "utf-8"));
 
-        // Garantir que os dados são um array
         const alunos = jsonData.alunos;
         const horarios = jsonData.horarios;
         const professores = jsonData.professores;
@@ -29,21 +27,14 @@ const importData = async () => {
         console.log(`📌 ${alunos.length} alunos carregados do JSON`);
 
         for (let data of alunos) {
-            // Verificar se o JSON tem a estrutura correta
             if (!data.perfil || !data.perfil.numero_aluno) {
                 console.error("❌ Estrutura inválida, ignorando aluno...");
                 continue;
             }
 
-
-            //Determinar turmas do aluno
             const turmas = [];
             const plano = data.plano_de_estudos;
-
-            // Obter as chaves dos anos (por ex. "1º Ano", "2º Ano", "3º Ano")
             const anos = Object.keys(plano);
-
-            // Apanhar o último ano (última chave)
             const ultimoAno = anos[anos.length - 1];
             const disciplinasUltimoAno = plano[ultimoAno];
 
@@ -52,9 +43,7 @@ const importData = async () => {
                     turmas.push(disciplina.turma);
                 }
             }
-            console.log("TURMAS DO ALUNO ",turmas);
 
-            // Extrair os dados do aluno
             const AlunoData = {
                 numero_aluno: data.perfil.numero_aluno,
                 nome: data.perfil.nome,
@@ -63,7 +52,7 @@ const importData = async () => {
                 instituicao: data.perfil.instituicao,
                 grau_conferido: data.perfil.grau_conferido,
                 situacao: data.perfil.situacao,
-                ano_curricular: ultimoAno.slice(0,2),
+                ano_curricular: ultimoAno.slice(0, 2),
                 nota_final: data.perfil.nota_final || "N/A",
                 percurso_academico: Array.isArray(data.percurso_academico) ? data.percurso_academico : [],
                 totais_por_ano_letivo: data.totais_por_ano_letivo || {},
@@ -71,19 +60,14 @@ const importData = async () => {
                 turma: turmas,
             };
 
-            console.log(`📌 Processando aluno: ${AlunoData.nome} (${AlunoData.numero_aluno})`);
-
-            // Inserir ou atualizar aluno no MongoDB
             await Aluno.findOneAndUpdate(
                 { numero_aluno: AlunoData.numero_aluno },
                 AlunoData,
                 { upsert: true, new: true }
             );
-
             console.log(`✅ Aluno ${AlunoData.nome} inserido/atualizado com sucesso!`);
         }
 
-        // Processar os horários
         for (let horario of horarios) {
             if (!horario.turma || !horario.dias) {
                 console.warn("⚠️ Horário sem turma ou dias. Ignorando...");
@@ -98,42 +82,30 @@ const importData = async () => {
                 horario: Array.isArray(horario.dias) ? horario.dias : []
             };
 
-            console.log(`📌 Processando horário da turma: ${TurmaData.nome}`);
-
             try {
-                // Inserir ou atualizar turma no MongoDB
                 await Turma.findOneAndUpdate(
                     { nome: TurmaData.nome, curso: TurmaData.curso, ano: TurmaData.ano, semestre: TurmaData.semestre },
                     TurmaData,
                     { upsert: true, new: true }
                 );
-
                 console.log(`✅ Horário da turma ${TurmaData.nome} inserido/atualizado com sucesso!`);
             } catch (error) {
                 console.error(`❌ Erro ao inserir/atualizar horário da turma ${TurmaData.nome}:`, error);
             }
-
         }
 
-        console.log("✅ Todos os alunos e horários foram inseridos/atualizados com sucesso!");
-
-        // Executar scraping dos calendários das escolas
         await scrapeCalendariosEscolas();
-        console.log("✅ Calendários importados com sucesso!");
+        console.log("✅ Calendários escolares importados com sucesso!");
 
         await scrapeCalendariosCursos();
-        console.log("✅ Calendários importados com sucesso!");
-
+        console.log("✅ Calendários dos cursos importados com sucesso!");
 
         for (let professor of professores) {
-            // Verificar se o JSON tem a estrutura correta
             if (!professor.escolas || !professor.email) {
                 console.error("❌ Estrutura inválida, ignorando Professor...");
                 continue;
             }
 
-
-            // Extrair os dados do professor
             const ProfessorData = {
                 Escola: professor.escolas,
                 nome: professor.nome,
@@ -141,24 +113,18 @@ const importData = async () => {
                 Role: professor.Role
             };
 
-            console.log(`📌 Processando aluno: ${ProfessorData.nome} (${ProfessorData.email})`);
-
-            // Inserir ou atualizar aluno no MongoDB
-            const resultProfessor = await Professor.findOneAndUpdate(
+            await Professor.findOneAndUpdate(
                 { email: ProfessorData.email },
                 ProfessorData,
                 { upsert: true, new: true }
             );
-
             console.log(`✅ Professor ${ProfessorData.nome} inserido/atualizado com sucesso!`);
         }
 
         const SalasEST = [];
-
-
         for (const key in jsonDataSalas) {
             if (key === "salas_EST" && Array.isArray(jsonDataSalas[key])) {
-                SalasEST.push(...jsonDataSalas[key]); // espalha o array
+                SalasEST.push(...jsonDataSalas[key]);
             } else if (typeof jsonDataSalas[key] === "object") {
                 SalasEST.push({
                     sala: key,
@@ -168,13 +134,12 @@ const importData = async () => {
         }
 
         await Escola.updateOne(
-            { nome: "Escola Superior de Tecnologia de Castelo Branco"},
+            { nome: "Escola Superior de Tecnologia de Castelo Branco" },
             { $set: { horariosSalas: SalasEST } },
             { upsert: true }
         );
 
         console.log("✅ Horários das salas da ESTCB inseridos/atualizados com sucesso!");
-
     } catch (error) {
         console.error("❌ Erro a importar dados:", error);
     } finally {
@@ -183,5 +148,11 @@ const importData = async () => {
     }
 };
 
-// Executar a importação
+//Executar de imediato na primeira vez
 importData();
+
+//Agendado para correr de 7 em 7 dias às 04:00 da manhã
+cron.schedule("0 4 */7 * *", () => {
+    console.log("⏰ Agendamento automático iniciado (de 7 em 7 dias)");
+    importData();
+});
