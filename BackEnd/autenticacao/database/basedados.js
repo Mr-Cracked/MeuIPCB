@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config(); // Para carregar variáveis de ambiente
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://user:amarelo123@meuipcb.0t4ml.mongodb.net/?retryWrites=true&w=majority&appName=MeuIPCB';
+const MONGO_URI = process.env.MONGO_URI;
 
 let isConnected = false;
 
